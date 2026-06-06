@@ -74,7 +74,7 @@
   </defs>
 
   <style>
-    /* Jump animation - matching Claude's 0.5s timing */
+    /* Jump animation */
     .codex-body {
       animation: jump 0.5s ease-in-out infinite;
       transform-origin: center bottom;
