@@ -2,7 +2,7 @@
 #
 # This file is checked into the repository and provides shared defaults
 # for all team members. Personal overrides go in ~/.codex/config.toml
-# or use CLI flags (--model, --ask-for-approval, --config key=value).
+# or use CLI flags (--model, --approval-mode, --config key=value).
 #
 # Reference: https://developers.openai.com/codex/config-reference/
 
@@ -10,8 +10,9 @@
 # Core Settings
 ################################################################################
 
-# Primary model used by Codex for this project.
-model = "o4-mini"
+# Responsive default for shared docs/config maintenance. Use `codex -m gpt-5.5`
+# when a task needs the strongest current Codex model.
+model = "gpt-5.4-mini"
 
 # Sandbox mode controls file system and network access.
 # Options: "read-only", "workspace-write", "danger-full-access"
@@ -22,17 +23,14 @@ sandbox_mode = "workspace-write"
 approval_policy = "on-request"
 
 ################################################################################
-# Notifications
+# Features
 ################################################################################
 
-# Optional external command for end-user notifications.
-# The command receives a JSON payload on stdin with turn details.
-#
-# Examples:
-#   notify = ["terminal-notifier", "-title", "Codex", "-message"]
-#   notify = ["osascript", "-e", "display notification \"Codex done\" with title \"Codex\""]
-#
-# notify = ["terminal-notifier", "-title", "Codex", "-message", "Task complete"]
+# Enable lifecycle hooks from .codex/hooks.json. `codex_hooks` is deprecated;
+# the canonical feature key is `hooks`.
+[features]
+hooks = true
+# memories = true
 
 ################################################################################
 # MCP Servers
@@ -74,9 +72,6 @@ args = ["-y", "@upstash/context7-mcp@latest"]
 # Reset via /memories in the TUI or `codex debug clear-memories`.
 # See best-practice/codex-memory.md for the full reference.
 
-# [features]
-# memories = true
-
 # [memories]
 # use_memories                     = true
 # generate_memories                = true
@@ -86,44 +81,18 @@ args = ["-y", "@upstash/context7-mcp@latest"]
 # Profiles
 ################################################################################
 
-# Profiles let you switch between different configurations quickly.
-# Usage: codex --profile <name>
+# Profiles are no longer declared under [profiles.<name>] in config.toml.
+# Create separate files in CODEX_HOME instead, for example:
 #
-# Set a default profile by uncommenting:
-# profile = "development"
-
-# Conservative: Maximum safety for code review and auditing.
-# Read-only sandbox, asks before every action.
-[profiles.conservative]
-sandbox_mode = "read-only"
-approval_policy = "untrusted"
-
-# Development: Balanced safety for everyday coding.
-# Can write to workspace, auto-approves sandbox failures.
-[profiles.development]
-sandbox_mode = "workspace-write"
-approval_policy = "on-request"
-
-# Trusted: Full autonomy with a powerful model.
-# Writes to workspace, never asks for approval. Use with caution.
-[profiles.trusted]
-model = "o3"
-sandbox_mode = "workspace-write"
-approval_policy = "never"
-
-# CI: Optimized for continuous integration pipelines.
-# Non-interactive, cost-efficient model, no approval prompts.
-[profiles.ci]
-model = "o4-mini"
-sandbox_mode = "read-only"
-approval_policy = "never"
-
-# Review: Thorough code review with a powerful model.
-# Read-only for safety, asks the model to decide when to prompt.
-[profiles.review]
-model = "o3"
-sandbox_mode = "read-only"
-approval_policy = "on-request"
+#   ~/.codex/development.config.toml
+#   ~/.codex/conservative.config.toml
+#   ~/.codex/trusted-project.config.toml
+#
+# Then run:
+#
+#   codex --profile development
+#
+# See examples/profiles/ for copy-ready profile layers.
 
 ################################################################################
 # Agents
@@ -132,5 +101,5 @@ approval_policy = "on-request"
 # Agents are registered in config and can point to dedicated TOML role files.
 [agents.weather-agent]
 description = "Fetches temperature from Open-Meteo for Dubai and invokes weather-svg-creator skill."
-model = "o4-mini"
+model = "gpt-5.4-mini"
 config_file = "agents/weather-agent.toml"
