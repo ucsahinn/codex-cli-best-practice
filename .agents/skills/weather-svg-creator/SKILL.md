@@ -1,7 +1,6 @@
 ---
 name: weather-svg-creator
 description: Creates an SVG weather card showing the current temperature and writes it to orchestration-workflow/weather.svg and orchestration-workflow/output.md
-argument-hint: "[temperature]"
 ---
 
 # Weather SVG Creator Skill
