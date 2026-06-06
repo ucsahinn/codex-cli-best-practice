@@ -4,24 +4,21 @@ Hooks are an extensibility framework that inject custom scripts into the Codex a
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Codex CLI Best Practice</a></td>
+<td><a href="../">← Back to Codex CLI Operator Handbook</a></td>
 <td align="right"><img src="../!/codex-jumping.svg" alt="Codex" width="60" /></td>
 </tr>
 </table>
 
-> **Status:** Beta — under active development. Use `commandWindows` for Windows-specific command overrides.
+> **Status:** Experimental — under active development. Windows support temporarily disabled.
 
 ## Feature Flag
 
-Hooks require enabling in `config.toml` with the canonical feature key:
+Hooks require enabling in `config.toml`:
 
 ```toml
 [features]
-hooks = true
+codex_hooks = true
 ```
-
-`codex_hooks` still works as a deprecated alias, but new examples should use
-`hooks`.
 
 ## Discovery Locations
 
@@ -73,7 +70,6 @@ Hooks organize into three levels: **event → matcher group → hook handlers**
 | `timeout` / `timeoutSec` | 600s | Execution time limit in seconds |
 | `statusMessage` | — | Optional UI feedback during execution |
 | `matcher` | Match all | Regex to filter event firing (`"*"`, `""`, or omit for all) |
-| `commandWindows` / `command_windows` | — | Optional Windows-only command override |
 
 ## Runtime Behavior
 
@@ -231,17 +227,6 @@ For repo-local hooks, prefer git-root-based paths to avoid issues when Codex sta
 /usr/bin/python3 "$(git rev-parse --show-toplevel)/.codex/hooks/script.py"
 ```
 
-On Windows, add a `commandWindows` override instead of relying on `python3`,
-because the Windows Store alias can fail even when `python` is installed:
-
-```json
-{
-  "type": "command",
-  "command": "python3 .codex/hooks/scripts/hooks.py --hook Stop",
-  "commandWindows": "python .codex/hooks/scripts/hooks.py --hook Stop"
-}
-```
-
 ## Full Example
 
 ```json
@@ -254,7 +239,6 @@ because the Windows Store alias can fail even when `python` is installed:
           {
             "type": "command",
             "command": "python3 ~/.codex/hooks/session_start.py",
-            "commandWindows": "python %USERPROFILE%\\.codex\\hooks\\session_start.py",
             "statusMessage": "Loading session notes"
           }
         ]
@@ -267,7 +251,6 @@ because the Windows Store alias can fail even when `python` is installed:
           {
             "type": "command",
             "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/pre_tool_use_policy.py\"",
-            "commandWindows": "python .codex\\hooks\\pre_tool_use_policy.py",
             "statusMessage": "Checking Bash command"
           }
         ]
@@ -280,7 +263,6 @@ because the Windows Store alias can fail even when `python` is installed:
           {
             "type": "command",
             "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/post_tool_use_review.py\"",
-            "commandWindows": "python .codex\\hooks\\post_tool_use_review.py",
             "statusMessage": "Reviewing Bash output"
           }
         ]
@@ -291,8 +273,7 @@ because the Windows Store alias can fail even when `python` is installed:
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/user_prompt_submit.py\"",
-            "commandWindows": "python .codex\\hooks\\user_prompt_submit.py"
+            "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/user_prompt_submit.py\""
           }
         ]
       }
@@ -303,7 +284,6 @@ because the Windows Store alias can fail even when `python` is installed:
           {
             "type": "command",
             "command": "/usr/bin/python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/stop_continue.py\"",
-            "commandWindows": "python .codex\\hooks\\stop_continue.py",
             "timeout": 30
           }
         ]
@@ -319,8 +299,7 @@ because the Windows Store alias can fail even when `python` is installed:
 |---|---|
 | Relying on `PreToolUse` as a security boundary | Treat as a guardrail — the model can write scripts to bypass it |
 | Using relative paths in hook commands | Use `$(git rev-parse --show-toplevel)` for stability |
-| Missing the `[features]` flag | Always enable `hooks = true` in `config.toml` |
-| Using `python3` on Windows without an override | Add `commandWindows` with `python` or a verified Python launcher |
+| Missing the `[features]` flag | Always enable `codex_hooks = true` in `config.toml` |
 | Setting very long timeouts on blocking hooks | Keep timeouts short to avoid stalling the agent loop |
 | Assuming hooks can undo `PostToolUse` side effects | They can only replace the result, not reverse the action |
 | Not handling JSON stdin properly | Every hook receives JSON on stdin — parse it correctly |
