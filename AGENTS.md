@@ -1,70 +1,55 @@
 # AGENTS.md
 
-This file provides guidance to Codex CLI when working with code in this repository.
+This file provides durable working guidance for Codex CLI in this repository.
 
 ## What This Is
 
-A best practices reference repository for **Codex CLI** (v0.121.0+) and **Claude Code**, demonstrating the **Agent → Skill** orchestration pattern through a weather data system example. This is a documentation and configuration reference, not a traditional application codebase.
+This repo is a bilingual Codex CLI operator handbook. It documents how to choose between prompts, `AGENTS.md`, config, skills, agents, MCP, hooks, and release checklists while keeping the fork distinct from the upstream starter project.
 
-Fork maintained by @ucsahinn. Upstream maintained by Shayan Raees (@shanraisshan). Keep upstream attribution, but do not add personal podcast, sponsor, subscribe, or personality-branding sections from upstream unless the user explicitly asks.
+This is a documentation and configuration reference, not an application codebase.
 
-## Architecture
+## Key Surfaces
 
-The repo demonstrates four interconnected systems:
+- `README.md` - English-first welcome page with a Turkish bridge.
+- `README.tr.md` - Turkish onboarding and maintenance guide.
+- `.codex/config.toml` - project profiles, sandboxing, approval policy, MCP, and agent registration.
+- `.codex/agents/weather-agent.toml` - Istanbul weather demo agent.
+- `.agents/skills/weather-svg-creator/SKILL.md` - SVG weather card renderer skill.
+- `best-practice/` - focused Codex surface guides.
+- `docs/RESEARCH_NOTES.md` - current-source decisions.
+- `docs/RELEASE_CHECKLIST.md` - publish gates.
+- `scripts/validate-docs.mjs` - dependency-free docs validator.
 
-1. **Config** (`.codex/config.toml`) — TOML-based layered project config with shared sandbox/approval defaults, MCP server registration, feature flags, hooks, and agent definitions. Profile layers live as `$CODEX_HOME/<profile>.config.toml`; CLI flags override both.
+## Working Standards
 
-2. **Agents** (`.codex/agents/*.toml`) — Registered under `[agents.<name>]` in config.toml with dedicated role files. The weather-agent fetches temperature from Open-Meteo API and delegates rendering to a skill.
+- Prefer `rg` / `rg --files` for search.
+- Keep edits small, coherent, and tied to the requested Codex surface.
+- Preserve the fork identity: do not reintroduce upstream sponsor links, upstream star badges, or maintainer-specific first-viewport content.
+- Keep `AGENTS.md` concise; move detailed procedures into docs or skills.
+- Skill descriptions should be trigger conditions, not summaries.
+- Use official OpenAI Codex docs or the local OpenAI Docs skill before adding version-sensitive Codex claims.
+- Do not commit, push, tag, publish, or create releases unless the user explicitly asks.
 
-3. **Skills** (`.agents/skills/<name>/SKILL.md`) — Reusable instruction packages with YAML frontmatter (`name`, `description`). Discovered progressively from cwd up to `/etc/codex/skills`. Invoked via `/skills`, `$skill-name`, or auto-triggered by description match.
+## Verification
 
-4. **Hooks** — Event-driven Python scripts. Claude Code has 27 hooks (`.claude/settings.json` → `.claude/hooks/scripts/hooks.py`); Codex CLI has 5 (`.codex/hooks.json`). Hooks play audio feedback per event with cross-platform support (macOS/Linux/Windows).
+Run the narrowest relevant check first:
 
-### Orchestration Flow
-
+```bash
+npm run validate
 ```
-User Prompt → weather-agent (fetches temp from Open-Meteo)
-                → $weather-svg-creator skill (renders SVG card)
-                    → orchestration-workflow/weather.svg
-                    → orchestration-workflow/output.md
-```
 
-Run it: `codex` then prompt "Fetch the current weather for Dubai in Celsius and create the SVG weather card output using the repo."
+The validator checks required docs, local markdown links, and fork-facing README identity markers.
 
-## Key Directories
+## Git Convention
 
-- `best-practice/` — 8 comprehensive guides: config, agents-md, skills, subagents, hooks, mcp, marketplace, memory
-- `orchestration-workflow/` — Weather system example with flow diagram and generated outputs
-- `docs/SKILLS.md` — Skills system reference
-- `examples/` — Profile configs and CI/CD integration examples
-- `AGENTS.md` — Project guidance loaded hierarchically by Codex (cwd to git root, capped at 32 KiB)
+Use one file, one commit for documentation changes unless multiple files must stay atomic.
 
-## Configuration Quick Reference
+Example:
 
-**Profiles** (`codex --profile <name>`):
-| Profile | Model | Sandbox | Approval |
-|---------|-------|---------|----------|
-| conservative | gpt-5.4-mini | read-only | untrusted |
-| development | gpt-5.4-mini | workspace-write | on-request |
-| trusted-project | gpt-5.5 | danger-full-access | never |
-| ci | gpt-5.4-mini | read-only | never |
-| review | gpt-5.5 | read-only | on-request |
+- `git add README.md && git commit -m "Rewrite fork welcome page"`
+- `git add README.tr.md && git commit -m "Add Turkish operator guide"`
+- `git add docs/RELEASE_CHECKLIST.md && git commit -m "Add release checklist"`
 
-## Git Commit Convention
+## Release Boundary
 
-**One file, one commit** — do NOT bundle multiple file changes into a single commit. Each file gets its own commit with a descriptive message specific to that file's changes.
-
-For example, if `README.md`, `best-practice/codex-agents-md.md`, and a skill file all changed:
-- Commit 1: `git add README.md` → commit with README-specific message
-- Commit 2: `git add best-practice/codex-agents-md.md` → commit with agents-doc-specific message
-- Commit 3: `git add .agents/skills/weather-svg-creator/SKILL.md` → commit with skill-specific message
-
-This keeps git history clean and makes it easy to review, revert, or cherry-pick individual changes.
-
-## Content Guidelines
-
-When editing best-practice guides or documentation in this repo:
-- Keep AGENTS.md under 150 lines (32 KiB byte cap)
-- Skill descriptions should be triggers ("when should I fire?"), not summaries
-- Use profiles for safety switching; keep behavioral rules out of AGENTS.md when config.toml is deterministic
-- Skills should stay under 150 lines with progressive disclosure (core in SKILL.md, details in `references/`)
+Before publishing, follow `docs/RELEASE_CHECKLIST.md`. If `.git` is missing, local edits can be validated but push and release cannot be completed from this folder.
