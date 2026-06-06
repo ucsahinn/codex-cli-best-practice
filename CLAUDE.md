@@ -1,70 +1,46 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file gives Claude Code equivalent repository guidance.
 
 ## What This Is
 
-A best practices reference repository for **Codex CLI** (v0.121.0+) and **Claude Code**, demonstrating the **Agent → Skill** orchestration pattern through a weather data system example. This is a documentation and configuration reference, not a traditional application codebase.
+This repo is a bilingual Codex CLI operator handbook. It documents practical Codex surfaces: prompts, `AGENTS.md`, `.codex/config.toml`, skills, agents, MCP, hooks, memory, and release gates.
 
-Fork maintained by @ucsahinn. Upstream maintained by Shayan Raees (@shanraisshan). Keep upstream attribution, but do not add personal podcast, sponsor, subscribe, or personality-branding sections from upstream unless the user explicitly asks.
+This is a documentation/configuration reference, not a traditional application.
 
-## Architecture
+## Key Surfaces
 
-The repo demonstrates four interconnected systems:
+- `README.md` - English-first welcome page with Turkish bridge.
+- `README.tr.md` - Turkish onboarding and maintenance guide.
+- `.codex/config.toml` - Codex profiles, model defaults, sandboxing, approvals, MCP, and agent registration.
+- `.codex/agents/weather-agent.toml` - Istanbul weather demo agent.
+- `.agents/skills/weather-svg-creator/SKILL.md` - SVG weather card renderer skill.
+- `best-practice/` - topic guides for Codex config, skills, hooks, MCP, memory, agents, marketplace, and `AGENTS.md`.
+- `docs/RESEARCH_NOTES.md` - current-source decisions and refresh notes.
+- `docs/RELEASE_CHECKLIST.md` - release and publish checklist.
+- `scripts/validate-docs.mjs` - dependency-free docs validator.
 
-1. **Config** (`.codex/config.toml`) — TOML-based layered project config with shared sandbox/approval defaults, MCP server registration, feature flags, hooks, and agent definitions. Profile layers live as `$CODEX_HOME/<profile>.config.toml`; CLI flags override both.
+## Working Standards
 
-2. **Agents** (`.codex/agents/*.toml`) — Registered under `[agents.<name>]` in config.toml with dedicated role files. The weather-agent fetches temperature from Open-Meteo API and delegates rendering to a skill.
+- Use existing repository structure and naming.
+- Prefer targeted file reads and `rg` searches.
+- Keep the fork identity visible and do not restore upstream sponsor or star-badge surfaces.
+- Keep durable behavior in `AGENTS.md`; put detailed workflows in docs or skills.
+- Treat skills as reusable workflows with trigger-focused descriptions.
+- Verify current Codex claims against official OpenAI docs before adding version-sensitive details.
 
-3. **Skills** (`.agents/skills/<name>/SKILL.md`) — Reusable instruction packages with YAML frontmatter (`name`, `description`). Discovered progressively from cwd up to `/etc/codex/skills`. Invoked via `/skills`, `$skill-name`, or auto-triggered by description match.
+## Verification
 
-4. **Hooks** — Event-driven Python scripts. Claude Code has 27 hooks (`.claude/settings.json` → `.claude/hooks/scripts/hooks.py`); Codex CLI has 5 (`.codex/hooks.json`). Hooks play audio feedback per event with cross-platform support (macOS/Linux/Windows).
-
-### Orchestration Flow
-
+```bash
+npm run validate
 ```
-User Prompt → weather-agent (fetches temp from Open-Meteo)
-                → $weather-svg-creator skill (renders SVG card)
-                    → orchestration-workflow/weather.svg
-                    → orchestration-workflow/output.md
-```
 
-Run it: `codex` then prompt "Fetch the current weather for Dubai in Celsius and create the SVG weather card output using the repo."
+Run this before release, before PR review, and after changing markdown links or required handbook files.
 
-## Key Directories
+## Commit Convention
 
-- `best-practice/` — 8 comprehensive guides: config, agents-md, skills, subagents, hooks, mcp, marketplace, memory
-- `orchestration-workflow/` — Weather system example with flow diagram and generated outputs
-- `docs/SKILLS.md` — Skills system reference
-- `examples/` — Profile configs and CI/CD integration examples
-- `AGENTS.md` — Project guidance loaded hierarchically by Codex (cwd to git root, capped at 32 KiB)
+Use one file, one commit for documentation changes unless a generated artifact and its source must stay atomic.
 
-## Configuration Quick Reference
+## Release Boundary
 
-**Profiles** (`codex --profile <name>`):
-| Profile | Model | Sandbox | Approval |
-|---------|-------|---------|----------|
-| conservative | gpt-5.4-mini | read-only | untrusted |
-| development | gpt-5.4-mini | workspace-write | on-request |
-| trusted-project | gpt-5.5 | danger-full-access | never |
-| ci | gpt-5.4-mini | read-only | never |
-| review | gpt-5.5 | read-only | on-request |
-
-## Git Commit Convention
-
-**One file, one commit** — do NOT bundle multiple file changes into a single commit. Each file gets its own commit with a descriptive message specific to that file's changes.
-
-For example, if `README.md`, `best-practice/codex-agents-md.md`, and a skill file all changed:
-- Commit 1: `git add README.md` → commit with README-specific message
-- Commit 2: `git add best-practice/codex-agents-md.md` → commit with agents-doc-specific message
-- Commit 3: `git add .agents/skills/weather-svg-creator/SKILL.md` → commit with skill-specific message
-
-This keeps git history clean and makes it easy to review, revert, or cherry-pick individual changes.
-
-## Content Guidelines
-
-When editing best-practice guides or documentation in this repo:
-- Keep AGENTS.md under 150 lines (32 KiB byte cap)
-- Skill descriptions should be triggers ("when should I fire?"), not summaries
-- Use profiles for safety switching; keep behavioral rules out of AGENTS.md when config.toml is deterministic
-- Skills should stay under 150 lines with progressive disclosure (core in SKILL.md, details in `references/`)
+Follow `docs/RELEASE_CHECKLIST.md` before publishing. If this folder has no `.git` directory, push and release steps must be done from a real fork checkout.
