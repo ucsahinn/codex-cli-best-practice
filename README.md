@@ -83,8 +83,6 @@ Use external workflow repos as inspiration, not as source-of-truth for this fork
 
 [Prompting](#tips-prompting) · [Planning](#tips-planning) · [AGENTS.md](#tips-agentsmd) · [Agents](#tips-agents) · [Skills](#tips-skills) · [Hooks](#tips-hooks) · [Memories](#tips-memory) · [Workflows](#tips-workflows) · [Advanced](#tips-workflows-advanced) · [Git / PR](#tips-git-pr) · [Debugging](#tips-debugging) · [Utilities](#tips-utilities) · [Daily](#tips-daily)
 
-![Community](!/tags/community.svg)
-
 <a id="tips-prompting"></a>■ **Prompting (3)**
 
 | Tip |
