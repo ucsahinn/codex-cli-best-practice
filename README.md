@@ -29,7 +29,7 @@ from vibe coding to agentic engineering - practice makes codex perfect
 | [**Config**](https://developers.openai.com/codex/config-basic) | [`.codex/config.toml`](.codex/config.toml) | [![Best Practice](!/tags/best-practice.svg)](best-practice/codex-config.md) [![Implemented](!/tags/implemented.svg)](.codex/config.toml) TOML-based layered config system · profile files live at `$CODEX_HOME/<profile>.config.toml` and are selected with `--profile` · [Sandbox](https://developers.openai.com/codex/cli/features) · [Approval Policy](https://developers.openai.com/codex/cli/features) · [Advanced](https://developers.openai.com/codex/config-advanced) (`[features]`, `[shell_environment_policy]`, `[tui]`, model providers, granular approvals) · [Trust](https://developers.openai.com/codex/config-basic) system for project configs · `developer_instructions` · `model_instructions_file` for custom system prompts |
 | [**Rules**](https://developers.openai.com/codex/rules) | `.codex/rules/` | Starlark-based command execution policies via `prefix_rule()` — `allow`, `prompt`, `forbidden` decisions with exact-prefix matching · Test via `codex execpolicy check` · Rules work alongside granular `approval_policy` controls and user-managed approvals |
 | [**AGENTS.md**](https://developers.openai.com/codex/guides/agents-md) | [`AGENTS.md`](AGENTS.md) | [![Best Practice](!/tags/best-practice.svg)](best-practice/codex-agents-md.md) Project-level context for Codex CLI — hierarchical discovery from cwd to repo root, capped at 32 KiB (`project_doc_max_bytes`) · `AGENTS.override.md` for personal overrides |
-| [**Hooks**](https://developers.openai.com/codex/hooks) ![beta](!/tags/beta.svg) | [`.codex/hooks.json`](.codex/) | [![Best Practice](!/tags/best-practice.svg)](best-practice/codex-hooks.md) [![Implemented](!/tags/implemented.svg)](https://github.com/shanraisshan/codex-cli-hooks) User-defined shell scripts that inject into the agentic loop — logging, security scanning, validation, and custom automation · Enable with `[features].hooks = true`; Windows commands can use `commandWindows` |
+| [**Hooks**](https://developers.openai.com/codex/hooks) ![beta](!/tags/beta.svg) | [`.codex/hooks.json`](.codex/) | [![Best Practice](!/tags/best-practice.svg)](best-practice/codex-hooks.md) [![Implemented](!/tags/implemented.svg)](.codex/hooks.json) User-defined shell scripts that inject into the agentic loop — logging, security scanning, validation, and custom automation · Enable with `[features].hooks = true`; Windows commands can use `commandWindows` |
 | [**Speed**](https://developers.openai.com/codex/speed) | `config.toml` → `service_tier` | Fast Mode via `service_tier = "fast"` plus `[features].fast_mode = true` — toggle with `/fast on\|off\|status` · GPT-5.3-Codex-Spark for near-instant iteration (Pro subscribers) |
 | [**Code Review**](https://developers.openai.com/codex/cli/features) | `/review` | Review branches, uncommitted changes, or specific commits — configurable `review_model` in config.toml · Custom review instructions |
 | [**Sessions**](https://github.com/openai/codex/releases) ![new](!/tags/beta.svg) | `$CODEX_HOME/sessions/` · `/archive` | Session lifecycle management — resume or fork prior threads · **archive** via `/archive` (TUI) or `codex archive` / `codex unarchive` (CLI); archived threads are protected from resume/fork until restored (v0.137.0+) · **search local conversation history** with case-insensitive content matches + result previews (v0.135.0+) |
@@ -172,101 +172,54 @@ All major workflows converge on the same architectural pattern: **Research → P
 
 <a id="tips-git-pr"></a>■ **Git / PR (3)**
 
-| Tip | Source |
-|-----|--------|
-| keep PRs small and focused — one feature per PR, easier to review and revert | |
-| always squash merge PRs — clean linear history, one commit per feature, easy git revert and git bisect | |
-| commit often — as soon as a task is completed, commit | ![Shayan](!/tags/community-shayan.svg) |
+| Tip |
+|-----|
+| keep PRs small and focused — one feature per PR, easier to review and revert |
+| always squash merge PRs — clean linear history, one commit per feature, easy git revert and git bisect |
+| commit often — as soon as a task is completed, commit |
 
 <a id="tips-debugging"></a>■ **Debugging (5)**
 
-| Tip | Source |
-|-----|--------|
-| always ask Codex to run the terminal (you want to see logs of) as a background task for better debugging | |
-| use MCP ([Chrome DevTools](https://developer.chrome.com/blog/chrome-devtools-mcp), [Playwright](https://github.com/microsoft/playwright-mcp)) to let Codex see browser console logs on its own | |
-| make it a habit to take screenshots and share with Codex whenever you are stuck with any issue | ![Shayan](!/tags/community-shayan.svg) |
-| use a different model for QA — e.g. [Claude Code](https://github.com/shanraisshan/claude-code-best-practice) for plan and implementation review | |
-| agentic search (glob + grep) beats RAG — code drifts out of sync and permissions are complex | |
+| Tip |
+|-----|
+| ask Codex to run long-lived terminal commands as background tasks when logs matter |
+| use MCP ([Chrome DevTools](https://developer.chrome.com/blog/chrome-devtools-mcp), [Playwright](https://github.com/microsoft/playwright-mcp)) so Codex can inspect browser console logs |
+| use screenshots when visual state matters |
+| use a second review pass with a stronger model or a separate agent before merging risky changes |
+| agentic search (`rg`, glob, grep) beats stale RAG when code and permissions drift |
 
 <a id="tips-utilities"></a>■ **Utilities (4)**
 
-| Tip | Source |
-|-----|--------|
-| [iTerm](https://iterm2.com/)/[Ghostty](https://ghostty.org/)/[tmux](https://github.com/tmux/tmux) terminals instead of IDE ([VS Code](https://code.visualstudio.com/)/[Cursor](https://www.cursor.com/)) | |
-| [Wispr Flow](https://wisprflow.ai) for voice prompting (10x productivity) | |
-| [codex-cli-hooks](https://github.com/shanraisshan/codex-cli-hooks) for Codex feedback | ![Shayan](!/tags/community-shayan.svg) |
-| explore config.toml features like [profiles](https://developers.openai.com/codex/config-basic), [sandbox modes](https://developers.openai.com/codex/cli/features), and [MCP](https://developers.openai.com/codex/mcp) for a personalized experience | |
+| Tip |
+|-----|
+| use a terminal setup with readable scrollback and split panes for long Codex sessions |
+| keep hook feedback local and deterministic: sounds, logs, and validations should be optional |
+| explore config.toml features like [profiles](https://developers.openai.com/codex/config-basic), [sandbox modes](https://developers.openai.com/codex/cli/features), and [MCP](https://developers.openai.com/codex/mcp) for a personalized experience |
+| keep repo-local examples copy-ready for Windows, macOS, and Linux |
 
 <a id="tips-daily"></a>■ **Daily (2)**
 
-| Tip | Source |
-|-----|--------|
-| update Codex CLI daily | ![Shayan](!/tags/community-shayan.svg) |
-| start your day by reading the [changelog](https://github.com/openai/codex/releases) | ![Shayan](!/tags/community-shayan.svg) |
-
-![Codex](!/tags/codex.svg)
-
-| Article / Tweet | Source |
-|-----------------|--------|
-| How Codex is built — 90% self-built in Rust (Tibo, Pragmatic Engineer) \| 17 Feb 2026 | [![Tibo](!/tags/tibo.svg)](https://x.com/thsottiaux) |
-| Skills in Codex — standardizing .agents/skills across agents (Embiricos) \| Feb 2026 | [![Embiricos](!/tags/embiricos.svg)](https://x.com/embirico) |
-| Unrolling the Codex agent loop — how Codex works internally (Bolin) \| Jan 2026 | [Tweet](https://x.com/OpenAIDevs/status/2014794871962533970) |
-| AMA with Codex team — CLI, sandbox, agents (Embiricos, Fouad, Tibo + team) \| May 2025 | [Reddit](https://www.reddit.com/r/ChatGPT/comments/1ko3tp1/ama_with_openai_codex_team/) |
-| Codex CLI — open-source local coding agent, first look (Fouad + Romain) \| Apr 2025 | [Tweet](https://x.com/OpenAIDevs/status/1912556874211422572) |
+| Tip |
+|-----|
+| keep Codex CLI current, but read release notes before changing team defaults |
+| re-run `codex doctor` after config, profile, MCP, or hook changes |
 
 <p align="center">
   <img src="!/codex-jumping.svg" alt="section divider" width="60" height="50">
 </p>
 
-## 🎬 VIDEOS / PODCASTS
+## Fork Scope
 
-| Video / Podcast | Source | Link |
-|-----------------|--------|------|
-| The power user's guide to Codex — parallelizing workflows, planning, context engineering (Embiricos) \| 2026 \| How I AI | [![Embiricos](!/tags/embiricos.svg)](https://x.com/embirico) | [Podcast](https://open.spotify.com/episode/6RNqTaOb5ly3zgQCGB23fE) |
-| Scaffolding is coping not scaling, and other lessons from Codex (Tibo) \| 2026 \| Dev Interrupted | [![Tibo](!/tags/tibo.svg)](https://x.com/thsottiaux) | [Podcast](https://linearb.io/dev-interrupted/podcast/openai-codex-thibault-sottiaux-agentic-autonomy) |
-| How Codex team uses their coding agent (Tibo + Andrew) \| 18 Feb 2026 \| Every | [![Tibo](!/tags/tibo.svg)](https://x.com/thsottiaux) | [Podcast](https://every.to/podcast/transcript-how-openai-s-codex-team-uses-their-coding-agent) |
-| Dogfood — Codex team uses Codex to build Codex (Tibo) \| 24 Feb 2026 \| Stack Overflow | [![Tibo](!/tags/tibo.svg)](https://x.com/thsottiaux) | [Podcast](https://stackoverflow.blog/2026/02/24/dogfood-so-nutritious-it-s-building-the-future-of-sdlcs/) |
-| Why humans are AI's biggest bottleneck — Codex product vision (Embiricos) \| Feb 2026 \| Lenny's Podcast | [![Embiricos](!/tags/embiricos.svg)](https://x.com/embirico) | [Podcast](https://www.lennysnewsletter.com/p/why-humans-are-ais-biggest-bottleneck) |
-| OpenAI and Codex (Tibo + Ed Bayes) \| 29 Jan 2026 \| Software Engineering Daily | [![Tibo](!/tags/tibo.svg)](https://x.com/thsottiaux) | [Podcast](https://softwareengineeringdaily.com/2026/01/29/openai-and-codex-with-thibault-sottiaux-and-ed-bayes/) |
+This fork keeps upstream attribution but removes personal media, subscribe, sponsor, and personality-branding sections that belong to the original maintainer.
 
-<p align="center">
-  <img src="!/codex-jumping.svg" alt="section divider" width="60" height="50">
-</p>
+What this fork adds:
 
-## 🔔 SUBSCRIBE
+- Windows-first Codex hook fixes with `commandWindows`
+- Turkish + English usage docs
+- Current Codex profile-file guidance for `0.134.0+`
+- Copy-ready profile and CI examples
+- Cleaner Agent → Skill documentation for practical use
 
-| Source | Name | Badge |
-|--------|------|-------|
-| ![Reddit](https://img.shields.io/badge/-FF4500?style=flat&logo=reddit&logoColor=white) | [r/ChatGPT](https://www.reddit.com/r/ChatGPT/), [r/OpenAI](https://www.reddit.com/r/OpenAI/), [r/Codex](https://www.reddit.com/r/Codex/) | ![Codex](!/tags/codex.svg) |
-| ![X](https://img.shields.io/badge/-000?style=flat&logo=x&logoColor=white) | [OpenAI](https://x.com/OpenAI), [OpenAI Devs](https://x.com/OpenAIDevs), [Tibo](https://x.com/thsottiaux), [Embiricos](https://x.com/embirico), [Jason](https://x.com/jxnlco), [Romain](https://x.com/romainhuet), [Dominik](https://x.com/dkundel), [Fouad](https://x.com/fouadmatin), [Bolin](https://x.com/bolinfest) | ![Codex](!/tags/codex.svg) |
-| ![X](https://img.shields.io/badge/-000?style=flat&logo=x&logoColor=white) | [Jesse Kriss](https://x.com/obra) ([Superpowers](https://github.com/obra/superpowers)), [Garry Tan](https://x.com/garrytan) ([gstack](https://github.com/garrytan/gstack)), [Kieran Klaassen](https://x.com/kieranklaassen) ([Compound Eng](https://github.com/EveryInc/compound-engineering-plugin)), [Lex Christopherson](https://x.com/official_taches) ([GSD](https://github.com/gsd-build/get-shit-done)), [Yeachan Heo](https://x.com/bellman_ych) ([oh-my-codex](https://github.com/Yeachan-Heo/oh-my-codex)), [Andrej Karpathy](https://x.com/karpathy) | ![Community](!/tags/community.svg) |
-| ![YouTube](https://img.shields.io/badge/-F00?style=flat&logo=youtube&logoColor=white) | [OpenAI](https://www.youtube.com/@OpenAI) | ![Codex](!/tags/codex.svg) |
-| ![YouTube](https://img.shields.io/badge/-F00?style=flat&logo=youtube&logoColor=white) | [Lenny's Podcast](https://www.youtube.com/@LennysPodcast), [The Pragmatic Engineer](https://www.youtube.com/@pragmaticengineer) | ![Community](!/tags/community.svg) |
+## Attribution
 
-<p align="center">
-  <img src="!/codex-jumping.svg" alt="section divider" width="60" height="50">
-</p>
-
-<a href="https://github.com/shanraisshan/claude-code-best-practice#billion-dollar-questions"><img src="!/tags/billion-dollar-questions.svg" alt="Billion-Dollar Questions"></a>
-
-<p align="center">
-  <img src="!/codex-jumping.svg" alt="section divider" width="60" height="50">
-</p>
-
-## Other Repos
-
-<a href="https://github.com/shanraisshan/codex-cli-hooks"><img src="!/codex-speaking.svg" alt="Codex CLI Hooks" width="40" height="40" align="center"></a> <a href="https://github.com/shanraisshan/codex-cli-hooks"><strong>codex-cli-hooks</strong></a> · <a href="https://github.com/shanraisshan/claude-code-best-practice"><img src="!/claude-jumping.svg" alt="Claude Code" width="40" height="40" align="center"></a> <a href="https://github.com/shanraisshan/claude-code-best-practice"><strong>claude-code-best-practice</strong></a> · <a href="https://github.com/shanraisshan/claude-code-hooks"><img src="!/claude-speaking.svg" alt="Claude Code Hooks" width="40" height="40" align="center"></a> <a href="https://github.com/shanraisshan/claude-code-hooks"><strong>claude-code-hooks</strong></a>
-
----
-
-<a href="https://openai.com/form/codex-for-oss/"><img src="!/tags/codex-for-oss.svg" alt="Codex for Open Source" width="720"></a>
-
-<p align="center">
-  <img src="!/codex-jumping.svg" alt="section divider" width="60" height="50">
-</p>
-
-## <img src="!/tags/sponsor-heart.svg" width="22" height="22" align="center"> Sponsor My Work
-
-If you like my work, buy me a doodh patti 🍵 on
-
-<a href="https://buy.polar.sh/polar_cl_jOwGyidIfOUWcvUAyiQc5nvTjN51EePzqzyW40tvXIX"><img src="!/tags/polar.svg" alt="Polar" width="40" height="40" align="center"></a> <a href="https://buy.polar.sh/polar_cl_jOwGyidIfOUWcvUAyiQc5nvTjN51EePzqzyW40tvXIX"><strong>Polar</strong></a>
+This project is a maintained fork by [@ucsahinn](https://github.com/ucsahinn). The original project and historical foundation belong to [shanraisshan/codex-cli-best-practice](https://github.com/shanraisshan/codex-cli-best-practice).
