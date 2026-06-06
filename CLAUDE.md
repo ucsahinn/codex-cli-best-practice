@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A best practices reference repository for **Codex CLI** (v0.121.0+) and **Claude Code**, demonstrating the **Agent → Skill** orchestration pattern through a weather data system example. This is a documentation and configuration reference, not a traditional application codebase.
 
-Fork maintained by @ucsahinn. Upstream maintained by Shayan Raees (@shanraisshan). Companion repos: [claude-code-best-practice](https://github.com/shanraisshan/claude-code-best-practice), [codex-cli-hooks](https://github.com/shanraisshan/codex-cli-hooks), [claude-code-hooks](https://github.com/shanraisshan/claude-code-hooks).
+Fork maintained by @ucsahinn. Upstream maintained by Shayan Raees (@shanraisshan). Keep upstream attribution, but do not add personal podcast, sponsor, subscribe, or personality-branding sections from upstream unless the user explicitly asks.
 
 ## Architecture
 
