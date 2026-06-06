@@ -1,5 +1,5 @@
 # codex-cli-best-practice
-from vibe coding to agentic engineering - practice makes codex perfect
+Windows-first, bilingual Codex CLI best-practice fork for agentic engineering.
 
 ![updated with Codex CLI](https://img.shields.io/badge/updated_with_Codex_CLI-v0.137.0%20(Jun%2006%2C%202026)-white?style=flat&labelColor=555) <a href="https://github.com/ucsahinn/codex-cli-best-practice/stargazers"><img src="https://img.shields.io/github/stars/ucsahinn/codex-cli-best-practice?style=flat&label=%E2%98%85&labelColor=555&color=white" alt="GitHub Stars"></a>
 
@@ -7,7 +7,7 @@ from vibe coding to agentic engineering - practice makes codex perfect
 
 > Maintained fork by [@ucsahinn](https://github.com/ucsahinn). Upstream: [shanraisshan/codex-cli-best-practice](https://github.com/shanraisshan/codex-cli-best-practice).
 
-[![Best Practice](!/tags/best-practice.svg)](best-practice/) [![Implemented](!/tags/implemented.svg)](.codex/) [![Orchestration Workflow](!/tags/orchestration-workflow.svg)](orchestration-workflow/orchestration-workflow.md) [![Codex](!/tags/codex.svg)](https://developers.openai.com/codex/overview) [![Community](!/tags/community.svg)](#-tips-and-tricks) ![Click on these badges below to see the actual sources](!/tags/click-badges.svg)<br>
+[![Best Practice](!/tags/best-practice.svg)](best-practice/) [![Implemented](!/tags/implemented.svg)](.codex/) [![Orchestration Workflow](!/tags/orchestration-workflow.svg)](orchestration-workflow/orchestration-workflow.md) [![Codex](!/tags/codex.svg)](https://developers.openai.com/codex/overview)<br>
 <img src="!/tags/a.svg" height="14"> = Agents · <img src="!/tags/c.svg" height="14"> = Commands · <img src="!/tags/s.svg" height="14"> = Skills
 
 <p align="center">
@@ -33,7 +33,7 @@ from vibe coding to agentic engineering - practice makes codex perfect
 | [**Speed**](https://developers.openai.com/codex/speed) | `config.toml` → `service_tier` | Fast Mode via `service_tier = "fast"` plus `[features].fast_mode = true` — toggle with `/fast on\|off\|status` · GPT-5.3-Codex-Spark for near-instant iteration (Pro subscribers) |
 | [**Code Review**](https://developers.openai.com/codex/cli/features) | `/review` | Review branches, uncommitted changes, or specific commits — configurable `review_model` in config.toml · Custom review instructions |
 | [**Sessions**](https://github.com/openai/codex/releases) ![new](!/tags/beta.svg) | `$CODEX_HOME/sessions/` · `/archive` | Session lifecycle management — resume or fork prior threads · **archive** via `/archive` (TUI) or `codex archive` / `codex unarchive` (CLI); archived threads are protected from resume/fork until restored (v0.137.0+) · **search local conversation history** with case-insensitive content matches + result previews (v0.135.0+) |
-| **AI Terms** | | [![Best Practice](!/tags/best-practice.svg)](https://github.com/shanraisshan/claude-code-codex-cursor-gemini/blob/main/reports/ai-terms.md) Agentic Engineering · Context Engineering · Vibe Coding |
+| **AI Terms** | | Agentic Engineering · Context Engineering · Vibe Coding |
 | [**Best Practices**](https://developers.openai.com/codex/learn/best-practices) | | Official best practices · [Prompt Engineering](https://platform.openai.com/docs/guides/prompt-engineering) · [Codex Guides](https://developers.openai.com/codex/overview) |
 
 <p align="center">
@@ -61,29 +61,25 @@ codex
   <img src="!/codex-jumping.svg" alt="section divider" width="60" height="50">
 </p>
 
-## ⚙️ DEVELOPMENT WORKFLOWS
+## ⚙️ WORKFLOW PATTERNS
 
-All major workflows converge on the same architectural pattern: **Research → Plan → Execute → Review → Ship**
+All major workflows converge on the same operational loop: **Research → Plan → Execute → Review → Ship**.
 
-| Name | ★ | Workflow | <img src="!/tags/a.svg" height="14"> | <img src="!/tags/s.svg" height="14"> |
-|------|---|----------|---|---|
-| [Superpowers](https://github.com/obra/superpowers) | 218k | <img src="https://img.shields.io/badge/brainstorming-ddf4ff" alt="brainstorming" align="middle"> → <img src="https://img.shields.io/badge/writing--plans-ddf4ff" alt="writing-plans" align="middle"> → <img src="https://img.shields.io/badge/subagent--driven--development-ddf4ff" alt="subagent-driven-development" align="middle"> → <img src="https://img.shields.io/badge/test--driven--development-fff3b0" alt="test-driven-development" align="middle"> → <img src="https://img.shields.io/badge/requesting--code--review-fff3b0" alt="requesting-code-review" align="middle"> → <img src="https://img.shields.io/badge/finishing--a--development--branch-ddf4ff" alt="finishing-a-development-branch" align="middle"> | 5 | 14 |
-| [Spec Kit](https://github.com/github/spec-kit) | 108k | <img src="https://img.shields.io/badge/%2Fspeckit.constitution-ddf4ff" alt="/speckit.constitution" align="middle"> → <img src="https://img.shields.io/badge/%2Fspeckit.specify-ddf4ff" alt="/speckit.specify" align="middle"> → <img src="https://img.shields.io/badge/%2Fspeckit.plan-ddf4ff" alt="/speckit.plan" align="middle"> → <img src="https://img.shields.io/badge/%2Fspeckit.tasks-ddf4ff" alt="/speckit.tasks" align="middle"> → <img src="https://img.shields.io/badge/%2Fspeckit.implement-ddf4ff" alt="/speckit.implement" align="middle"> | 0 | 0 |
-| [gstack](https://github.com/garrytan/gstack) | 107k | <img src="https://img.shields.io/badge/%2Foffice--hours-ddf4ff" alt="/office-hours" align="middle"> → <img src="https://img.shields.io/badge/%2Fplan--ceo--review-ddf4ff" alt="/plan-ceo-review" align="middle"> → <img src="https://img.shields.io/badge/%2Fplan--eng--review-ddf4ff" alt="/plan-eng-review" align="middle"> → <img src="https://img.shields.io/badge/%2Fplan--design--review-ddf4ff" alt="/plan-design-review" align="middle"> → <img src="https://img.shields.io/badge/implement-ddf4ff" alt="implement" align="middle"> → <img src="https://img.shields.io/badge/%2Freview-ddf4ff" alt="/review" align="middle"> → <img src="https://img.shields.io/badge/%2Fqa-ddf4ff" alt="/qa" align="middle"> → <img src="https://img.shields.io/badge/%2Fship-ddf4ff" alt="/ship" align="middle"> → <img src="https://img.shields.io/badge/%2Fland--and--deploy-ddf4ff" alt="/land-and-deploy" align="middle"> | 0 | 41 |
-| [Get Shit Done](https://github.com/gsd-build/get-shit-done) | 64k | <img src="https://img.shields.io/badge/%2Fgsd--new--project-ddf4ff" alt="/gsd-new-project" align="middle"> → <img src="https://img.shields.io/badge/%2Fgsd--discuss--phase-ddf4ff" alt="/gsd-discuss-phase" align="middle"> → <img src="https://img.shields.io/badge/%2Fgsd--plan--phase-ddf4ff" alt="/gsd-plan-phase" align="middle"> → <img src="https://img.shields.io/badge/%2Fgsd--execute--phase-ddf4ff" alt="/gsd-execute-phase" align="middle"> → <img src="https://img.shields.io/badge/%2Fgsd--verify--work-fff3b0" alt="/gsd-verify-work" align="middle"> → <img src="https://img.shields.io/badge/%2Fgsd--ship-ddf4ff" alt="/gsd-ship" align="middle"> → <img src="https://img.shields.io/badge/%2Fgsd--complete--milestone-ddf4ff" alt="/gsd-complete-milestone" align="middle"> | 33 | 0 |
-| [oh-my-codex](https://github.com/Yeachan-Heo/oh-my-codex) | 30k | <img src="https://img.shields.io/badge/$deep--interview-ddf4ff" alt="$deep-interview" align="middle"> → <img src="https://img.shields.io/badge/$ralplan-ddf4ff" alt="$ralplan" align="middle"> → <img src="https://img.shields.io/badge/$ralph-ddf4ff" alt="$ralph" align="middle"> | 19 | 36 |
-| [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) | 20k | <img src="https://img.shields.io/badge/%2Fce--ideate-ddf4ff" alt="/ce-ideate" align="middle"> → <img src="https://img.shields.io/badge/%2Fce--brainstorm-ddf4ff" alt="/ce-brainstorm" align="middle"> → <img src="https://img.shields.io/badge/%2Fce--plan-ddf4ff" alt="/ce-plan" align="middle"> → <img src="https://img.shields.io/badge/%2Fce--work-ddf4ff" alt="/ce-work" align="middle"> → <img src="https://img.shields.io/badge/%2Fce--code--review-ddf4ff" alt="/ce-code-review" align="middle"> → <img src="https://img.shields.io/badge/%2Fce--compound-ddf4ff" alt="/ce-compound" align="middle"> → <img src="https://img.shields.io/badge/repeat-ddf4ff" alt="repeat" align="middle"> | 49 | 42 |
+| Pattern | Use When | Codex Surface |
+|---|---|---|
+| Explore → Plan → Patch → Verify | General repo work and bug fixes | Prompt, plan tool, shell, `apply_patch` |
+| Agent → Skill | A role fetches/organizes data and a reusable workflow renders output | `.codex/agents/` + `.agents/skills/` |
+| Review → Risk List → Tests | PR review, security review, release checks | `/review`, focused prompts, project scripts |
+| Profile Switch | Moving between audit, development, CI, and trusted automation | `$CODEX_HOME/<profile>.config.toml` |
+| Hook Guardrails | Deterministic local feedback, logging, or policy checks | `.codex/hooks.json` |
 
-> *Note: yellow tags are sub-loops — steps that repeat inside a parent step (e.g. per task, per story, or until a verify condition passes).*
-
-### Others
-- [Cross-Model (Claude Code + Codex) Workflow](https://github.com/shanraisshan/claude-code-best-practice/blob/main/development-workflows/cross-model-workflow/cross-model-workflow.md) [![Implemented](!/tags/implemented.svg)](https://github.com/shanraisshan/claude-code-best-practice/blob/main/development-workflows/cross-model-workflow/cross-model-workflow.md)
+Use external workflow repos as inspiration, not as source-of-truth for this fork. This repository keeps the checked-in examples small, current, and verifiable.
 
 <p align="center">
   <img src="!/codex-jumping.svg" alt="section divider" width="60" height="50">
 </p>
 
-## 💡 TIPS AND TRICKS (50)
+## 💡 TIPS AND TRICKS
 
 [Prompting](#tips-prompting) · [Planning](#tips-planning) · [AGENTS.md](#tips-agentsmd) · [Agents](#tips-agents) · [Skills](#tips-skills) · [Hooks](#tips-hooks) · [Memories](#tips-memory) · [Workflows](#tips-workflows) · [Advanced](#tips-workflows-advanced) · [Git / PR](#tips-git-pr) · [Debugging](#tips-debugging) · [Utilities](#tips-utilities) · [Daily](#tips-daily)
 
@@ -103,7 +99,7 @@ All major workflows converge on the same architectural pattern: **Research → P
 |-----|
 | use [/plan](https://developers.openai.com/codex/cli/slash-commands) when you want an explicit plan — Codex may also plan automatically for multi-step tasks |
 | always make a phase-wise gated plan, with each phase having multiple tests (unit, automation, integration) |
-| spin up a second Codex (or use [cross-model](https://github.com/shanraisshan/claude-code-best-practice/blob/main/development-workflows/cross-model-workflow/cross-model-workflow.md)) to review your plan as a staff engineer |
+| spin up a second Codex thread or reviewer agent to review your plan as a staff engineer |
 | write detailed specs and reduce ambiguity before handing work off — the more specific you are, the better the output |
 
 <a id="tips-agentsmd"></a>■ **AGENTS.md (5)**
