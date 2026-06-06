@@ -10,6 +10,10 @@ orchestration-workflow/output.md
 # Dependencies
 node_modules/
 
+# Local caches and scratch output
+.tmp/
+__pycache__/
+
 # OS files
 .DS_Store
 Thumbs.db
