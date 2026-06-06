@@ -1,0 +1,29 @@
+name: Documentation gap
+description: Report missing, stale, or unclear handbook content.
+title: "Docs: "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: gap
+    attributes:
+      label: Gap
+      description: What is missing, stale, or unclear?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected improvement
+      description: What should the handbook explain or change?
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language surface
+      options:
+        - English
+        - Turkce
+        - Both
+    validations:
+      required: true
