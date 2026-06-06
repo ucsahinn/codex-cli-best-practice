@@ -1,105 +1,80 @@
-# Codex CLI — Team-shared project configuration
+# Codex CLI Operator Handbook - project configuration
 #
-# This file is checked into the repository and provides shared defaults
-# for all team members. Personal overrides go in ~/.codex/config.toml
-# or use CLI flags (--model, --approval-mode, --config key=value).
+# Shared defaults for contributors using this repository. Personal overrides
+# belong in ~/.codex/config.toml or one-off CLI flags.
 #
-# Reference: https://developers.openai.com/codex/config-reference/
+# Current source notes live in docs/RESEARCH_NOTES.md.
 
 ################################################################################
 # Core Settings
 ################################################################################
 
-# Responsive default for shared docs/config maintenance. Use `codex -m gpt-5.5`
-# when a task needs the strongest current Codex model.
-model = "gpt-5.4-mini"
-
-# Sandbox mode controls file system and network access.
-# Options: "read-only", "workspace-write", "danger-full-access"
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
-
-# Approval policy controls when Codex asks before running commands.
-# Options: "untrusted", "on-request", "never"
 approval_policy = "on-request"
-
-################################################################################
-# Features
-################################################################################
-
-# Enable lifecycle hooks from .codex/hooks.json. `codex_hooks` is deprecated;
-# the canonical feature key is `hooks`.
-[features]
-hooks = true
-# memories = true
 
 ################################################################################
 # MCP Servers
 ################################################################################
 
-# MCP (Model Context Protocol) servers extend Codex with external tool access.
-# Define servers here so all team members share the same integrations.
-
 [mcp_servers.context7]
 enabled = true
 command = "npx"
 args = ["-y", "@upstash/context7-mcp@latest"]
-
-# --- Example: Streamable HTTP transport ---
-# [mcp_servers.remote-tools]
-# enabled = true
-# url = "https://mcp.example.com/sse"
-
-# --- Example: STDIO server with environment variables ---
-# [mcp_servers.database]
-# enabled = true
-# command = "db-mcp-server"
-# args = ["--connection-string", "$DATABASE_URL"]
-# env = { DATABASE_URL = "" }
-
-# --- Example: Parallel tool calls (v0.121.0+) ---
-# MCP tools are serialized by default. Opt in per server when tools are
-# safe to run concurrently (e.g. read-only lookups):
-# [mcp_servers.docs]
-# enabled = true
-# command = "docs-server"
-# supports_parallel_tool_calls = true
-
-################################################################################
-# Memories (v0.119.0+)
-################################################################################
-
-# Cross-session memory pipeline — off by default. Enable and tune here.
-# Reset via /memories in the TUI or `codex debug clear-memories`.
-# See best-practice/codex-memory.md for the full reference.
-
-# [memories]
-# use_memories                     = true
-# generate_memories                = true
-# no_memories_if_mcp_or_web_search = false
+supports_parallel_tool_calls = true
 
 ################################################################################
 # Profiles
 ################################################################################
 
-# Profiles are no longer declared under [profiles.<name>] in config.toml.
-# Create separate files in CODEX_HOME instead, for example:
-#
-#   ~/.codex/development.config.toml
-#   ~/.codex/conservative.config.toml
-#   ~/.codex/trusted-project.config.toml
-#
-# Then run:
-#
-#   codex --profile development
-#
-# See examples/profiles/ for copy-ready profile layers.
+[profiles.conservative]
+model = "gpt-5.5"
+model_reasoning_effort = "low"
+sandbox_mode = "read-only"
+approval_policy = "untrusted"
+
+[profiles.development]
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[profiles.deep-research]
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[profiles.trusted]
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+approval_policy = "never"
+
+[profiles.ci]
+model = "gpt-5.5"
+model_reasoning_effort = "low"
+sandbox_mode = "read-only"
+approval_policy = "never"
+
+[profiles.review]
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+approval_policy = "on-request"
 
 ################################################################################
 # Agents
 ################################################################################
 
-# Agents are registered in config and can point to dedicated TOML role files.
+[agents]
+max_threads = 6
+max_depth = 1
+job_max_runtime_seconds = 1800
+
 [agents.weather-agent]
-description = "Fetches temperature from Open-Meteo for Dubai and invokes weather-svg-creator skill."
-model = "gpt-5.4-mini"
+description = "Fetches Istanbul temperature from Open-Meteo and invokes the weather SVG skill."
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
 config_file = "agents/weather-agent.toml"
