@@ -33,6 +33,8 @@ Eger `npm run validate` hata verirse once linkleri, zorunlu dosyalari ve README 
 | MCP | Canli veya versiyon hassas dis kaynak | `.codex/config.toml` |
 | Hook | Yasam dongusu otomasyonu | `.codex/hooks.json` |
 | Release checklist | Yayin kapilari | `docs/RELEASE_CHECKLIST.md` |
+| Release notlari | Ilk release metni | `docs/RELEASE_NOTES_v0.1.0.md` |
+| SSS | Sik sorulan kararlar | `docs/FAQ.md` |
 | Katki | Degisiklik kurallari | `CONTRIBUTING.md` |
 | Guvenlik | Secret ve disclosure notlari | `SECURITY.md` |
 | Roadmap | Siradaki isler | `docs/ROADMAP.md` |
