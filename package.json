@@ -1,0 +1,10 @@
+{
+  "name": "codex-cli-operator-handbook",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-docs.mjs",
+    "lint:docs": "node scripts/validate-docs.mjs"
+  }
+}
