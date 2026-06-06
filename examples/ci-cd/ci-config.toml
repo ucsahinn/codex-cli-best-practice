@@ -1,15 +1,28 @@
 # CI-specific Codex CLI configuration
 #
-# This config is optimized for automated pipeline execution:
-# - Fast, efficient model for cost control
-# - Full sandbox for maximum isolation
-# - Full-auto approval with scoped allow-list
-# - No network access (full sandbox blocks it)
-#
-# Usage:
-#   cp examples/ci-cd/ci-config.toml ~/.codex/ci.config.toml
-#   codex --profile ci exec "your prompt here"
+# This profile is optimized for non-interactive documentation checks and
+# read-only analysis. Replace the model value if your CI account uses a
+# different approved model.
 
-model = "gpt-5.4-mini"
+model = "gpt-5.5"
+model_reasoning_effort = "low"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[profiles.ci]
+model = "gpt-5.5"
+model_reasoning_effort = "low"
 approval_policy = "never"
 sandbox_mode = "read-only"
+
+[profiles.review]
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+approval_policy = "untrusted"
+sandbox_mode = "read-only"
+
+[profiles.development]
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
