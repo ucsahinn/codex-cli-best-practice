@@ -1,19 +1,14 @@
 # Development Profile
 #
-# Balanced configuration for day-to-day local development:
-# - Workspace writes are allowed
-# - The model can ask when it needs approval
-# - Network blocked (no accidental data exfiltration)
-#
-# This is the recommended default for most developers.
+# Balanced configuration for everyday local documentation and code work.
 
-model = "gpt-5.4-mini"
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
 # Usage:
 #   codex --profile development
 #
-# Copy to ~/.codex/development.config.toml, then run:
-#   codex --profile development
-# Override with --profile conservative when reviewing unfamiliar code.
+# If this model is not enabled for your account, keep the profile shape and
+# replace only the model value.
