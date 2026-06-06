@@ -1,6 +1,6 @@
 # codex-cli-best-practice
 
-vibe coding'den agentic engineering'e — pratik Codex'i keskinleştirir.
+Windows-first, Türkçe + İngilizce Codex CLI best-practice fork'u.
 
 [English](README.md) · [Türkçe](README.tr.md)
 
