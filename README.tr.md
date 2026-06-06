@@ -102,6 +102,18 @@ python -m json.tool .codex/hooks.json
 - Commit/push öncesi `git status --short`, explicit stage, `git diff --cached` ve secret scan/pre-commit kontrolü yap.
 - Bu repo özelinde **one file, one commit** kuralını koru.
 
+## Fork Kapsamı
+
+Bu fork, upstream emeğini açıkça kredilendirir ama orijinal maintainer'a ait kişisel podcast, sponsor, subscribe ve kişisel marka bölümlerini taşımaz.
+
+Bu fork'un farkı:
+
+- Windows-first Codex hook düzeltmeleri
+- Türkçe + İngilizce kullanım dokümanları
+- Codex `0.134.0+` profile-file formatına uyum
+- Kopyalanabilir profile ve CI örnekleri
+- Pratik Agent → Skill workflow anlatımı
+
 ## Kaynaklar
 
 - [Codex Config Basics](https://developers.openai.com/codex/config-basic)
