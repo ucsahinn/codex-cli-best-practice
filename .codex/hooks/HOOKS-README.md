@@ -13,22 +13,31 @@ Codex CLI provides **5 hooks** via hooks.json:
 | 4 | `Stop` | `stop` | `hooks.json` | Runs when the session ends — plays sound |
 | 5 | `UserPromptSubmit` | `UserPromptSubmit` | `hooks.json` | Runs when the user submits a prompt — plays sound |
 
-> Hooks 1 and 4 require **Codex CLI v0.114.0+** with the hooks engine enabled.
-> Hooks 2 and 3 require **Codex CLI v0.117.0+** with the hooks engine enabled.
-> Hook 5 requires **Codex CLI v0.116.0+** with the hooks engine enabled:
+> Hooks require the hooks engine enabled:
 > ```bash
-> codex -c features.codex_hooks=true
+> codex -c features.hooks=true
 > ```
 
 ### How Hooks Are Called
 
-All hooks (hooks.json) are called with `--hook` flag:
-```
+All hooks (hooks.json) are called with `--hook` flag. POSIX uses `python3`:
+
+```bash
 python3 .codex/hooks/scripts/hooks.py --hook SessionStart
 python3 .codex/hooks/scripts/hooks.py --hook PreToolUse
 python3 .codex/hooks/scripts/hooks.py --hook PostToolUse
 python3 .codex/hooks/scripts/hooks.py --hook Stop
 python3 .codex/hooks/scripts/hooks.py --hook UserPromptSubmit
+```
+
+Windows uses the `commandWindows` override with `python`:
+
+```powershell
+python .codex/hooks/scripts/hooks.py --hook SessionStart
+python .codex/hooks/scripts/hooks.py --hook PreToolUse
+python .codex/hooks/scripts/hooks.py --hook PostToolUse
+python .codex/hooks/scripts/hooks.py --hook Stop
+python .codex/hooks/scripts/hooks.py --hook UserPromptSubmit
 ```
 
 ### SessionStart Context Injection
@@ -49,7 +58,7 @@ Before using hooks, ensure you have **Python 3** installed on your system.
 
 #### All Platforms (Windows, macOS, Linux)
 - **Python 3**: Required for running the hook script
-- Verify installation: `python3 --version`
+- Verify installation: `python --version` on Windows, `python3 --version` on macOS/Linux
 
 **Installation Instructions:**
 - **Windows**: Download from [python.org](https://www.python.org/downloads/) or install via `winget install Python.Python.3`
@@ -78,42 +87,68 @@ There are **two** configuration files:
   "hooks": {
     "SessionStart": [
       {
-        "type": "shell",
-        "command": "python3 .codex/hooks/scripts/hooks.py --hook SessionStart",
-        "statusMessage": "Initializing session hooks...",
-        "timeout": 10
+        "matcher": "^(startup|resume|clear)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/scripts/hooks.py --hook SessionStart",
+            "commandWindows": "python .codex/hooks/scripts/hooks.py --hook SessionStart",
+            "statusMessage": "Initializing session hooks...",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PreToolUse": [
       {
-        "type": "shell",
-        "command": "python3 .codex/hooks/scripts/hooks.py --hook PreToolUse",
-        "statusMessage": "Running pre-tool-use hook...",
-        "timeout": 10
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/scripts/hooks.py --hook PreToolUse",
+            "commandWindows": "python .codex/hooks/scripts/hooks.py --hook PreToolUse",
+            "statusMessage": "Running pre-tool-use hook...",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PostToolUse": [
       {
-        "type": "shell",
-        "command": "python3 .codex/hooks/scripts/hooks.py --hook PostToolUse",
-        "statusMessage": "Running post-tool-use hook...",
-        "timeout": 10
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/scripts/hooks.py --hook PostToolUse",
+            "commandWindows": "python .codex/hooks/scripts/hooks.py --hook PostToolUse",
+            "statusMessage": "Running post-tool-use hook...",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "Stop": [
       {
-        "type": "shell",
-        "command": "python3 .codex/hooks/scripts/hooks.py --hook Stop",
-        "statusMessage": "Running session stop hook...",
-        "timeout": 10
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/scripts/hooks.py --hook Stop",
+            "commandWindows": "python .codex/hooks/scripts/hooks.py --hook Stop",
+            "statusMessage": "Running session stop hook...",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
       {
-        "type": "shell",
-        "command": "python3 .codex/hooks/scripts/hooks.py --hook UserPromptSubmit",
-        "statusMessage": "Running user prompt submit hook...",
-        "timeout": 10
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/scripts/hooks.py --hook UserPromptSubmit",
+            "commandWindows": "python .codex/hooks/scripts/hooks.py --hook UserPromptSubmit",
+            "statusMessage": "Running user prompt submit hook...",
+            "timeout": 10
+          }
+        ]
       }
     ]
   }
@@ -177,6 +212,12 @@ When logging is enabled (`"disableLogging": false`), hook events are logged to `
 Run the test suite:
 ```bash
 python3 -m unittest tests.test_hooks -v
+```
+
+On Windows:
+
+```powershell
+python -m unittest tests.test_hooks -v
 ```
 
 ## Voice
