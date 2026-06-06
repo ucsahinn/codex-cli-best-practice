@@ -12,7 +12,7 @@
 #
 # NOT recommended for: untrusted repos, CI pipelines, security reviews.
 
-model = "o3"
+model = "gpt-5.5"
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
@@ -23,4 +23,5 @@ sandbox_mode = "danger-full-access"
 # - Review changes with `git diff` before pushing
 #
 # Usage:
+#   cp examples/profiles/trusted-project.toml ~/.codex/trusted-project.config.toml
 #   codex --profile trusted-project
