@@ -37,19 +37,19 @@
   <!-- Arrow 1: User -> Agent -->
   <line x1="303" y1="190" x2="368" y2="190" stroke="#666" stroke-width="2.5" marker-end="url(#arrow)"/>
 
-  <!-- Agent Box (same size as Claude Code: 240x90) -->
+  <!-- Agent Box -->
   <rect x="378" y="145" width="240" height="90" rx="8" fill="#2BA5A5" stroke="#1E8F8F" stroke-width="2.5"/>
   <text x="498" y="179" text-anchor="middle" fill="white" font-family="system-ui" font-size="16" font-weight="bold">Agent</text>
   <text x="498" y="207" text-anchor="middle" fill="white" font-family="system-ui" font-size="12" opacity="0.9">agents/weather-agent</text>
   <!-- Agent description -->
   <text x="498" y="265" text-anchor="middle" fill="#888" font-family="system-ui" font-size="11">Fetches temperature from</text>
-  <text x="498" y="280" text-anchor="middle" fill="#888" font-family="system-ui" font-size="11">Open-Meteo API for Dubai</text>
+  <text x="498" y="280" text-anchor="middle" fill="#888" font-family="system-ui" font-size="11">Open-Meteo API for Istanbul</text>
 
   <!-- Arrow 2: Agent -> Skill -->
   <line x1="623" y1="190" x2="688" y2="190" stroke="#666" stroke-width="2.5" marker-end="url(#arrow)"/>
   <text x="655" y="180" text-anchor="middle" fill="#666" font-family="system-ui" font-size="11">Skill</text>
 
-  <!-- SVG Creator Skill Box (same size as Claude Code: 280x90) -->
+  <!-- SVG Creator Skill Box -->
   <rect x="698" y="145" width="280" height="90" rx="8" fill="#9B59B6" stroke="#8E44AD" stroke-width="2.5"/>
   <text x="838" y="179" text-anchor="middle" fill="white" font-family="system-ui" font-size="16" font-weight="bold">Skill</text>
   <text x="838" y="207" text-anchor="middle" fill="white" font-family="system-ui" font-size="12" opacity="0.9">skills/weather-svg-creator</text>
