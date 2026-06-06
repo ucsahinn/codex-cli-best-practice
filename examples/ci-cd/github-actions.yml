@@ -8,7 +8,7 @@
 #
 # Prerequisites:
 # - OPENAI_API_KEY secret configured in repository settings
-# - .codex/config.toml with a [profiles.ci] section in the repository
+# - examples/ci-cd/ci-config.toml copied to ~/.codex/ci.config.toml in each job
 
 name: Codex CI
 
@@ -40,6 +40,11 @@ jobs:
 
       - name: Install Codex CLI
         run: npm install -g @openai/codex
+
+      - name: Prepare Codex CI profile
+        run: |
+          mkdir -p ~/.codex
+          cp examples/ci-cd/ci-config.toml ~/.codex/ci.config.toml
 
       - name: Run PR Review
         run: |
@@ -74,6 +79,12 @@ jobs:
         if: steps.tests.outcome == 'failure'
         run: npm install -g @openai/codex
 
+      - name: Prepare Codex CI profile
+        if: steps.tests.outcome == 'failure'
+        run: |
+          mkdir -p ~/.codex
+          cp examples/ci-cd/ci-config.toml ~/.codex/ci.config.toml
+
       - name: Analyze test failures
         if: steps.tests.outcome == 'failure'
         run: |
@@ -103,6 +114,11 @@ jobs:
 
       - name: Install Codex CLI
         run: npm install -g @openai/codex
+
+      - name: Prepare Codex CI profile
+        run: |
+          mkdir -p ~/.codex
+          cp examples/ci-cd/ci-config.toml ~/.codex/ci.config.toml
 
       - name: Check documentation
         run: |
