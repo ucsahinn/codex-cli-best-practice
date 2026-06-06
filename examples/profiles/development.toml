@@ -7,12 +7,13 @@
 #
 # This is the recommended default for most developers.
 
-model = "o4-mini"
+model = "gpt-5.4-mini"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
 # Usage:
 #   codex --profile development
 #
-# Recommended as the project default in .codex/config.toml.
+# Copy to ~/.codex/development.config.toml, then run:
+#   codex --profile development
 # Override with --profile conservative when reviewing unfamiliar code.
