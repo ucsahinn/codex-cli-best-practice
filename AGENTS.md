@@ -6,13 +6,13 @@ This file provides guidance to Codex CLI when working with code in this reposito
 
 A best practices reference repository for **Codex CLI** (v0.121.0+) and **Claude Code**, demonstrating the **Agent → Skill** orchestration pattern through a weather data system example. This is a documentation and configuration reference, not a traditional application codebase.
 
-Maintained by Shayan Raees (@shanraisshan). Companion repos: [claude-code-best-practice](https://github.com/shanraisshan/claude-code-best-practice), [codex-cli-hooks](https://github.com/shanraisshan/codex-cli-hooks), [claude-code-hooks](https://github.com/shanraisshan/claude-code-hooks).
+Fork maintained by @ucsahinn. Upstream maintained by Shayan Raees (@shanraisshan). Companion repos: [claude-code-best-practice](https://github.com/shanraisshan/claude-code-best-practice), [codex-cli-hooks](https://github.com/shanraisshan/codex-cli-hooks), [claude-code-hooks](https://github.com/shanraisshan/claude-code-hooks).
 
 ## Architecture
 
 The repo demonstrates four interconnected systems:
 
-1. **Config** (`.codex/config.toml`) — TOML-based layered config with 5 profiles (conservative, development, trusted, ci, review), MCP server registration, and agent definitions. Project-level overrides user-level (`~/.codex/config.toml`); CLI flags override both.
+1. **Config** (`.codex/config.toml`) — TOML-based layered project config with shared sandbox/approval defaults, MCP server registration, feature flags, hooks, and agent definitions. Profile layers live as `$CODEX_HOME/<profile>.config.toml`; CLI flags override both.
 
 2. **Agents** (`.codex/agents/*.toml`) — Registered under `[agents.<name>]` in config.toml with dedicated role files. The weather-agent fetches temperature from Open-Meteo API and delegates rendering to a skill.
 
@@ -24,7 +24,7 @@ The repo demonstrates four interconnected systems:
 
 ```
 User Prompt → weather-agent (fetches temp from Open-Meteo)
-                → /weather-svg-creator skill (renders SVG card)
+                → $weather-svg-creator skill (renders SVG card)
                     → orchestration-workflow/weather.svg
                     → orchestration-workflow/output.md
 ```
@@ -44,11 +44,11 @@ Run it: `codex` then prompt "Fetch the current weather for Dubai in Celsius and 
 **Profiles** (`codex --profile <name>`):
 | Profile | Model | Sandbox | Approval |
 |---------|-------|---------|----------|
-| conservative | o4-mini | read-only | untrusted |
-| development | o4-mini | workspace-write | on-request |
-| trusted | o3 | workspace-write | never |
-| ci | o4-mini | read-only | never |
-| review | o3 | read-only | on-request |
+| conservative | gpt-5.4-mini | read-only | untrusted |
+| development | gpt-5.4-mini | workspace-write | on-request |
+| trusted-project | gpt-5.5 | danger-full-access | never |
+| ci | gpt-5.4-mini | read-only | never |
+| review | gpt-5.5 | read-only | on-request |
 
 ## Git Commit Convention
 
