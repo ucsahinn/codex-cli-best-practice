@@ -28,7 +28,7 @@ config_file = "agents/data-analyst.toml"
 
 ```toml
 # .codex/agents/data-analyst.toml
-model = "gpt-5.4-mini"
+model = "gpt-5.5"
 mcp_servers = ["filesystem", "github"]
 ```
 
