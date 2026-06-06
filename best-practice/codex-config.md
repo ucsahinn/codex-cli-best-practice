@@ -1,10 +1,10 @@
 # Best Practice: Config
 
-A comprehensive guide to Codex CLI's TOML-based configuration system — covering config hierarchy, profile files, sandbox modes, approval policies, hooks, MCP, and project-scoped config boundaries.
+A practical guide to Codex CLI's TOML-based configuration system: hierarchy, profiles, sandbox modes, approval policies, MCP, and project agents.
 
 <table width="100%">
 <tr>
-<td><a href="../">← Back to Codex CLI Best Practice</a></td>
+<td><a href="../">← Back to Codex CLI Operator Handbook</a></td>
 <td align="right"><img src="../!/codex-jumping.svg" alt="Codex" width="60" /></td>
 </tr>
 </table>
@@ -15,67 +15,48 @@ Settings apply in order of precedence (highest to lowest):
 
 | Priority | Location | Scope | Purpose |
 |----------|----------|-------|---------|
-| 1 | CLI flags / `--config key=value` | Invocation | One-off overrides for a single run |
-| 2 | `.codex/config.toml` | Project | Trusted repo defaults, hooks, MCP, agents |
-| 3 | `$CODEX_HOME/<profile>.config.toml` | Profile | Named personal safety/model layers selected with `--profile` |
-| 4 | `~/.codex/config.toml` | User | Personal defaults across projects |
-| 5 | `/etc/codex/config.toml` | System | Organization or machine defaults |
-| 6 | Built-in defaults | Runtime | Codex fallback behavior |
+| 1 | CLI flags / `-c key=value` | Invocation | One-off overrides for a single run |
+| 2 | `.codex/config.toml` | Project | Team-shared defaults, profiles, MCP, agents |
+| 3 | `~/.codex/config.toml` | Global | Personal defaults across projects |
 
 ## Core Configuration
 
 ```toml
 # .codex/config.toml
-model = "gpt-5.4-mini"
+model = "gpt-5.5"
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
 ```
+
+Use the current model approved for your account. This fork's project config uses `gpt-5.5` at refresh time, but the profile shape matters more than the exact model string.
 
 ## Profiles
 
-Profiles are separate files next to `~/.codex/config.toml`. Do not put active
-`[profiles.<name>]` tables in project `.codex/config.toml`; current Codex
-ignores them in project config and no longer reads legacy profile tables from
-user config.
-
-Create one top-level TOML file per profile:
+Named presets under `[profiles.<name>]` — switch with `codex --profile <name>`:
 
 ```toml
-# ~/.codex/conservative.config.toml
-model = "gpt-5.4-mini"
+[profiles.conservative]
 sandbox_mode = "read-only"
 approval_policy = "untrusted"
-```
 
-```toml
-# ~/.codex/development.config.toml
-model = "gpt-5.4-mini"
+[profiles.development]
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
-```
 
-```toml
-# ~/.codex/trusted-project.config.toml
+[profiles.ci]
 model = "gpt-5.5"
-sandbox_mode = "danger-full-access"
+model_reasoning_effort = "low"
+sandbox_mode = "read-only"
+approval_policy = "never"
+
+[profiles.trusted]
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
 approval_policy = "never"
 ```
 
-Switch with:
-
-```bash
-codex --profile development
-codex exec --profile conservative "review this diff"
-```
-
-Keep repo-local examples under `examples/profiles/`, but copy them to
-`$CODEX_HOME/<profile>.config.toml` before using them with `--profile`.
-
-## Project Config Boundaries
-
-Project-scoped `.codex/config.toml` is for trusted repo defaults. Do not use it
-for machine-local provider, auth, notification, profile-selection, or telemetry
-settings. Put those in user-level config/profile files instead.
+Set a default profile with `profile = "conservative"` at the top level.
 
 ## Sandbox Modes
 
@@ -93,25 +74,12 @@ settings. Put those in user-level config/profile files instead.
 | `on-request` | Model decides when it should ask | Everyday development |
 | `never` | Never asks; failures come straight back to the model | Non-interactive runs and tightly controlled automation |
 
-## Hooks
-
-Enable lifecycle hooks with the canonical feature key:
-
-```toml
-[features]
-hooks = true
-```
-
-`codex_hooks` still works as a deprecated alias, but new examples should use
-`hooks`.
-
 ## Memories (v0.119.0+)
 
 Enable the cross-session memory pipeline:
 
 ```toml
 [features]
-hooks = true
 memories = true
 
 [memories]
@@ -191,5 +159,4 @@ codex -c model=\"gpt-5.5\" -c approval_policy=\"never\" exec "summarize this dif
 - Treating `never` as a general-purpose local default
 - Using `danger-full-access` and `never` together without a real containment boundary
 - Hardcoding secrets instead of using `$ENV_VAR` expansion
-- Keeping legacy `[profiles.<name>]` tables in `.codex/config.toml`
-- Mixing unrelated concerns into one profile instead of creating focused profile files
+- Mixing unrelated concerns into one profile instead of creating focused profiles
