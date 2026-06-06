@@ -1,125 +1,115 @@
-# codex-cli-best-practice
+# Codex CLI Operator Handbook - Turkce Rehber
 
-Windows-first, Türkçe + İngilizce Codex CLI best-practice fork'u.
+Bu dosya, repoyu Turkce kullanan ekipler icin hazirlanan pratik baslangic rehberidir. Ana sayfa iki dilli kisa giris sunar; bu dosya ise karar alma, dogrulama ve release akislarini daha acik anlatir.
 
-[English](README.md) · [Türkçe](README.tr.md)
+## Amac
 
-> [@ucsahinn](https://github.com/ucsahinn) tarafından bakımı yapılan fork. Upstream: [shanraisshan/codex-cli-best-practice](https://github.com/shanraisshan/codex-cli-best-practice).
+Bu fork artik sadece upstream repo kopyasi gibi davranmaz. Hedef:
 
-Bu repo, **Codex CLI** ve **Claude Code** için güncel bir best-practice referansıdır. Geleneksel bir uygulama değil; yapılandırma, ajan, skill, hook, MCP ve workflow desenlerini gösteren dokümantasyon + örnek konfigürasyon deposudur.
+- Codex CLI yuzeylerini anlasilir hale getirmek.
+- `AGENTS.md`, skill, agent, config, MCP, hook ve release kararlarini ayirmak.
+- Turkce ve Ingilizce dokumantasyonu ayni kalite seviyesinde tutmak.
+- Her degisikligin dogrulanabilir olmasini saglamak.
+- Release oncesi kontrol listesini repo icinde tutmak.
 
-## Ne Gösteriyor?
+## Ilk Calistirma
 
-| Sistem | Konum | Amaç |
+```bash
+npm run validate
+codex --profile development
+```
+
+Eger `npm run validate` hata verirse once linkleri, zorunlu dosyalari ve README kimligini duzelt.
+
+## Codex Yuzeyleri
+
+| Yuzey | Ne zaman kullanilir? | Dosya |
 |---|---|---|
-| Config | `.codex/config.toml` | Proje kapsamlı model, sandbox, approval, MCP, feature flag, hook ve ajan ayarları |
-| Agents | `.codex/agents/*.toml` | Belirli rollere ayrılmış Codex ajanları |
-| Skills | `.agents/skills/<name>/SKILL.md` | Tekrarlanabilir görev akışları ve domain talimatları |
-| Hooks | `.codex/hooks.json` + `.codex/hooks/scripts/` | Session, prompt ve tool lifecycle noktalarında deterministik otomasyon |
-| Guides | `best-practice/` | Config, AGENTS.md, skills, subagents, hooks, MCP, marketplace ve memory rehberleri |
-| Workflow | `orchestration-workflow/` | Agent → Skill deseninin hava durumu SVG örneği |
+| Prompt | Tek seferlik talimat | Aktif konusma |
+| `AGENTS.md` | Kalici repo kurallari | `AGENTS.md` |
+| Config | Model, sandbox, approval, MCP | `.codex/config.toml` |
+| Skill | Tekrar kullanilabilir is akisi | `.agents/skills/<name>/SKILL.md` |
+| Agent | Uzmanlasmis rol | `.codex/agents/<name>.toml` |
+| MCP | Canli veya versiyon hassas dis kaynak | `.codex/config.toml` |
+| Hook | Yasam dongusu otomasyonu | `.codex/hooks.json` |
+| Release checklist | Yayin kapilari | `docs/RELEASE_CHECKLIST.md` |
+| Katki | Degisiklik kurallari | `CONTRIBUTING.md` |
+| Guvenlik | Secret ve disclosure notlari | `SECURITY.md` |
+| Roadmap | Siradaki isler | `docs/ROADMAP.md` |
 
-## Hızlı Kullanım
+## Onerilen Calisma Akisi
 
-```bash
-codex
-```
+1. `rg` ile mevcut dosyalari ve tekrar eden metinleri ara.
+2. Davranisin hangi Codex yuzeyinde yasamasi gerektigini sec.
+3. Kucuk ama tam bir degisiklik yap.
+4. `npm run validate` calistir.
+5. Diff'i oku.
+6. Commit ve release icin checklist kullan.
 
-Ardından şu prompt'u ver:
+## Agent-Skill Demo
+
+Bu repodaki demo Istanbul hava durumunu kullanir:
 
 ```text
-Fetch the current weather for Dubai in Celsius and create the SVG weather card output using the repo.
+Kullanici promptu
+  -> weather-agent
+    -> Open-Meteo ile Istanbul sicakligi
+    -> weather-svg-creator skill
+      -> weather.svg
+      -> output.md
 ```
 
-Beklenen akış:
+Deneme promptu:
 
 ```text
-User Prompt
-  → weather-agent Open-Meteo'dan sıcaklığı alır
-  → $weather-svg-creator SVG kartı üretir
-  → orchestration-workflow/weather.svg yazılır
-  → orchestration-workflow/output.md yazılır
+Istanbul icin guncel hava durumunu Celsius olarak getir ve repo icindeki SVG hava kartini olustur.
 ```
 
-## Güncel Codex Notları
+## Config Profilleri
 
-- Profile ayarları artık `.codex/config.toml` içinde `[profiles.<name>]` olarak tutulmaz.
-- Profile dosyaları `$CODEX_HOME/<profile>.config.toml` konumunda durur ve `codex --profile <name>` ile seçilir.
-- Proje config'i `.codex/config.toml`, güvenilen projelerde yüklenir; provider/auth/telemetry/profile seçimi gibi makineye özel anahtarlar proje config'inde yok sayılır.
-- Hooks için kanonik feature flag `[features].hooks = true`; eski `codex_hooks` adı deprecated alias olarak kalmıştır.
-- JSON hook config'lerinde Windows için `commandWindows` kullanılabilir. Bu repo Windows'ta `python`, POSIX sistemlerde `python3` kullanır.
-- Skills custom slash command değildir; `/skills`, `$skill-name` veya description match ile tetiklenir.
+`.codex/config.toml` icindeki profiller:
 
-## Profile Örnekleri
+| Profil | Amac |
+|---|---|
+| `conservative` | Okuma, denetim, riskli repo inceleme |
+| `development` | Gunluk yazma ve dokuman duzenleme |
+| `deep-research` | Daha fazla akil yurutme isteyen arastirma |
+| `trusted` | Sadece guvenli, sinirli ve bilincli kullan |
+| `ci` | Non-interactive kontrol |
+| `review` | Diff ve PR inceleme |
 
-Örnek dosyalar `examples/profiles/` altındadır. Gerçek kullanım için ilgili dosyayı `$CODEX_HOME` içine kopyala:
+Model erisimi hesaba gore degisebilir. Eger profil modelini calistiramiyorsan ayni profilde sadece `model` satirini kendi erisimin olan modelle degistir.
+
+## Release Hazirligi
+
+Bu klasorde `.git` yoksa push ve release calismaz. Gercek fork checkout'una gecmeden yayin adimina gecme.
+
+Minimum lokal kontrol:
 
 ```bash
-# macOS / Linux
-cp examples/profiles/development.toml ~/.codex/development.config.toml
-codex --profile development
+npm run validate
+git status --short
+git diff -- README.md README.tr.md docs .codex .agents .github scripts package.json CHANGELOG.md
 ```
 
-PowerShell:
+Tag ornegi:
 
-```powershell
-Copy-Item .\examples\profiles\development.toml $env:USERPROFILE\.codex\development.config.toml
-codex --profile development
+```bash
+git tag v0.1.0
+git push origin main --tags
 ```
 
-Önerilen kullanım:
+GitHub Release metni icin [CHANGELOG.md](CHANGELOG.md) ve [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) kullan.
 
-| Profile | Model | Sandbox | Approval | Kullanım |
-|---|---|---|---|---|
-| `development` | `gpt-5.4-mini` | `workspace-write` | `on-request` | Günlük geliştirme |
-| `conservative` | `gpt-5.4-mini` | `read-only` | `untrusted` | Yeni repo, audit, review |
-| `trusted-project` | `gpt-5.5` | `danger-full-access` | `never` | Sadece tamamen güvenilen, branch ile korunan otomasyon |
+## Bakim Kurallari
 
-## Hook Sorun Giderme
+- Upstream sponsor, star, maintainer veya kisisel linklerini karşılama sayfasina geri ekleme.
+- Dinamik Codex iddialarini resmi manual veya OpenAI docs ile yenile.
+- Skill aciklamalarini ozet gibi degil, tetikleyici kosul gibi yaz.
+- `AGENTS.md` dosyasini kisa tut.
+- Release oncesinde validator calismadan tag olusturma.
+- Katki, guvenlik ve release belgelerini README ile birlikte guncelle.
 
-Windows'ta `python3` Microsoft Store alias'ı bazen hook'ları `exit code 1` ile düşürür. Bu fork'ta `.codex/hooks.json` içinde `commandWindows` alanları `python` kullanır.
+## Lisans
 
-Elle test:
-
-```powershell
-python .codex/hooks/scripts/hooks.py --hook UserPromptSubmit
-python .codex/hooks/scripts/hooks.py --hook Stop
-python .codex/hooks/scripts/hooks.py --hook SessionStart
-```
-
-JSON doğrulama:
-
-```powershell
-python -m json.tool .codex/hooks.json
-```
-
-## Repo Bakım Standardı
-
-- Önce `rg` / `rg --files` ile incele.
-- Gereksiz yerleri değil, kök sebebi düzelt.
-- Dokümanları resmi Codex docs ile uyumlu tut.
-- Hook, config ve skill örneklerini çalışır durumda bırak.
-- Commit/push öncesi `git status --short`, explicit stage, `git diff --cached` ve secret scan/pre-commit kontrolü yap.
-- Bu repo özelinde **one file, one commit** kuralını koru.
-
-## Fork Kapsamı
-
-Bu fork, upstream emeğini açıkça kredilendirir ama orijinal maintainer'a ait kişisel podcast, sponsor, subscribe ve kişisel marka bölümlerini taşımaz.
-
-Bu fork'un farkı:
-
-- Windows-first Codex hook düzeltmeleri
-- Türkçe + İngilizce kullanım dokümanları
-- Codex `0.134.0+` profile-file formatına uyum
-- Kopyalanabilir profile ve CI örnekleri
-- Pratik Agent → Skill workflow anlatımı
-
-## Kaynaklar
-
-- [Codex Config Basics](https://developers.openai.com/codex/config-basic)
-- [Codex Advanced Config](https://developers.openai.com/codex/config-advanced)
-- [Codex Config Reference](https://developers.openai.com/codex/config-reference)
-- [Codex Hooks](https://developers.openai.com/codex/hooks)
-- [Codex Skills](https://developers.openai.com/codex/skills)
-- [Codex Models](https://developers.openai.com/codex/models)
-- [Codex Speed](https://developers.openai.com/codex/speed)
+Bu fork bagimsiz dokumantasyon ve operator rehberi katmani ekler. Orijinal MIT lisans soyu [LICENSE](LICENSE) dosyasinda korunur.
