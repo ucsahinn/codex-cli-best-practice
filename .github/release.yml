@@ -1,0 +1,17 @@
+changelog:
+  categories:
+    - title: Handbook
+      labels:
+        - documentation
+        - handbook
+    - title: Configuration
+      labels:
+        - config
+        - codex
+    - title: Validation
+      labels:
+        - ci
+        - validation
+    - title: Other Changes
+      labels:
+        - "*"
