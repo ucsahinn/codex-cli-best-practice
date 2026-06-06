@@ -77,7 +77,9 @@ The workflow writes:
 | Weather skill | `.agents/skills/weather-svg-creator/SKILL.md` | Creates the SVG card and markdown report |
 | Best practices | `best-practice/` | Focused guides for config, skills, hooks, MCP, memory, agents, and marketplace |
 | Release checklist | `docs/RELEASE_CHECKLIST.md` | Local, git, tag, release, and post-release gates |
+| Release notes | `docs/RELEASE_NOTES_v0.1.0.md` | Ready-to-paste first GitHub Release body |
 | Research log | `docs/RESEARCH_NOTES.md` | Current-source decisions used by this fork |
+| FAQ | `docs/FAQ.md` | Common Codex surface choices |
 | Contributing | `CONTRIBUTING.md` | Contribution rules for docs, skills, agents, and releases |
 | Security | `SECURITY.md` | Secret handling and responsible disclosure notes |
 | Roadmap | `docs/ROADMAP.md` | Next improvements for the fork edition |
@@ -189,6 +191,8 @@ Olusan dosyalar:
 | Codex yuzeylerini sec | `AGENTS.md`, `.codex/config.toml`, `.agents/skills/` |
 | Release hazirla | `docs/RELEASE_CHECKLIST.md` |
 | Kaynak kararlarini denetle | `docs/RESEARCH_NOTES.md` |
+| SSS oku | `docs/FAQ.md` |
+| Release metnini hazirla | `docs/RELEASE_NOTES_v0.1.0.md` |
 | Katki kurallarini oku | `CONTRIBUTING.md` |
 | Guvenlik notlarini oku | `SECURITY.md` |
 | Siradaki isleri gor | `docs/ROADMAP.md` |
