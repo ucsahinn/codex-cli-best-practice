@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
-  <rect width="400" height="200" rx="12" fill="#1a1a2e"/>
-  <text x="200" y="50" text-anchor="middle" fill="#e0e0e0" font-family="system-ui" font-size="16">Dubai, UAE</text>
-  <text x="200" y="110" text-anchor="middle" fill="white" font-family="system-ui" font-size="48" font-weight="bold">29.1°C</text>
-  <text x="200" y="150" text-anchor="middle" fill="#888" font-family="system-ui" font-size="12">Mar 17, 2026 13:20 +04</text>
-  <text x="200" y="185" text-anchor="middle" fill="#555" font-family="system-ui" font-size="10">Weather data from Open-Meteo API</text>
+  <rect width="400" height="200" rx="10" fill="#101827"/>
+  <text x="200" y="48" text-anchor="middle" fill="#dbeafe" font-family="system-ui" font-size="16">Istanbul, Turkey</text>
+  <text x="200" y="112" text-anchor="middle" fill="#ffffff" font-family="system-ui" font-size="50" font-weight="700">--°C</text>
+  <text x="200" y="150" text-anchor="middle" fill="#93c5fd" font-family="system-ui" font-size="12">Codex Agent to Skill Demo</text>
+  <text x="200" y="180" text-anchor="middle" fill="#64748b" font-family="system-ui" font-size="10">Weather data from Open-Meteo</text>
 </svg>
