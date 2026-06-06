@@ -1,22 +1,13 @@
 # Conservative Profile
 #
-# Maximum safety configuration for:
-# - Untrusted repositories
-# - Security-sensitive projects
-# - New users learning Codex CLI
-# - Code review and auditing
-#
-# Every action requires explicit approval. No file changes persist.
-# This is the safest possible configuration.
+# Maximum safety for unfamiliar repositories, audits, and reviews.
 
-model = "gpt-5.4-mini"
+model = "gpt-5.5"
+model_reasoning_effort = "low"
 approval_policy = "untrusted"
 sandbox_mode = "read-only"
 
-# Read-only sandbox prevents file changes and blocks network access.
-#
 # Usage:
 #   codex --profile conservative
 #
-# Copy to ~/.codex/conservative.config.toml, then run:
-#   codex --profile conservative
+# Read-only sandboxing prevents workspace edits and keeps network blocked.
