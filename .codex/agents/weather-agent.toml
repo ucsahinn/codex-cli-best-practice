@@ -1,6 +1,6 @@
 name = "weather-agent"
 description = "Fetches current temperature from Open-Meteo API for Dubai and invokes the weather-svg-creator skill to create an SVG weather card."
-model = "o4-mini"
+model = "gpt-5.4-mini"
 
 developer_instructions = """
 You are a weather agent that fetches temperature data and creates a visual weather card.
@@ -25,10 +25,10 @@ Extract `current.temperature_2m` from the JSON response.
 
 ### Step 3: Invoke SVG Creator Skill
 
-Invoke the /weather-svg-creator skill with the temperature data. The skill will create the SVG weather card and write output files.
+Invoke the `$weather-svg-creator` skill with the temperature data. The skill will create the SVG weather card and write output files.
 
 ## Critical Requirements
 
-1. Do not create the SVG yourself — always invoke /weather-svg-creator.
+1. Do not create the SVG yourself — always invoke the `weather-svg-creator` skill.
 2. Return a final summary showing: temperature, unit, SVG location, and output file location.
 """
