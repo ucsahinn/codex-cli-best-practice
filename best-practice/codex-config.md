@@ -1,6 +1,6 @@
 # Best Practice: Config
 
-A comprehensive guide to Codex CLI's TOML-based configuration system — covering config hierarchy, profiles, sandbox modes, and approval policies.
+A comprehensive guide to Codex CLI's TOML-based configuration system — covering config hierarchy, profile files, sandbox modes, approval policies, hooks, MCP, and project-scoped config boundaries.
 
 <table width="100%">
 <tr>
@@ -15,43 +15,67 @@ Settings apply in order of precedence (highest to lowest):
 
 | Priority | Location | Scope | Purpose |
 |----------|----------|-------|---------|
-| 1 | CLI flags / `-c key=value` | Invocation | One-off overrides for a single run |
-| 2 | `.codex/config.toml` | Project | Team-shared defaults, profiles, MCP, agents |
-| 3 | `~/.codex/config.toml` | Global | Personal defaults across projects |
+| 1 | CLI flags / `--config key=value` | Invocation | One-off overrides for a single run |
+| 2 | `.codex/config.toml` | Project | Trusted repo defaults, hooks, MCP, agents |
+| 3 | `$CODEX_HOME/<profile>.config.toml` | Profile | Named personal safety/model layers selected with `--profile` |
+| 4 | `~/.codex/config.toml` | User | Personal defaults across projects |
+| 5 | `/etc/codex/config.toml` | System | Organization or machine defaults |
+| 6 | Built-in defaults | Runtime | Codex fallback behavior |
 
 ## Core Configuration
 
 ```toml
 # .codex/config.toml
-model = "o4-mini"
+model = "gpt-5.4-mini"
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
 ```
 
 ## Profiles
 
-Named presets under `[profiles.<name>]` — switch with `codex --profile <name>`:
+Profiles are separate files next to `~/.codex/config.toml`. Do not put active
+`[profiles.<name>]` tables in project `.codex/config.toml`; current Codex
+ignores them in project config and no longer reads legacy profile tables from
+user config.
+
+Create one top-level TOML file per profile:
 
 ```toml
-[profiles.conservative]
+# ~/.codex/conservative.config.toml
+model = "gpt-5.4-mini"
 sandbox_mode = "read-only"
 approval_policy = "untrusted"
+```
 
-[profiles.development]
+```toml
+# ~/.codex/development.config.toml
+model = "gpt-5.4-mini"
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
+```
 
-[profiles.ci]
-model = "o4-mini"
-sandbox_mode = "read-only"
-approval_policy = "never"
-
-[profiles.trusted]
+```toml
+# ~/.codex/trusted-project.config.toml
+model = "gpt-5.5"
 sandbox_mode = "danger-full-access"
 approval_policy = "never"
 ```
 
-Set a default profile with `profile = "conservative"` at the top level.
+Switch with:
+
+```bash
+codex --profile development
+codex exec --profile conservative "review this diff"
+```
+
+Keep repo-local examples under `examples/profiles/`, but copy them to
+`$CODEX_HOME/<profile>.config.toml` before using them with `--profile`.
+
+## Project Config Boundaries
+
+Project-scoped `.codex/config.toml` is for trusted repo defaults. Do not use it
+for machine-local provider, auth, notification, profile-selection, or telemetry
+settings. Put those in user-level config/profile files instead.
 
 ## Sandbox Modes
 
@@ -69,12 +93,25 @@ Set a default profile with `profile = "conservative"` at the top level.
 | `on-request` | Model decides when it should ask | Everyday development |
 | `never` | Never asks; failures come straight back to the model | Non-interactive runs and tightly controlled automation |
 
+## Hooks
+
+Enable lifecycle hooks with the canonical feature key:
+
+```toml
+[features]
+hooks = true
+```
+
+`codex_hooks` still works as a deprecated alias, but new examples should use
+`hooks`.
+
 ## Memories (v0.119.0+)
 
 Enable the cross-session memory pipeline:
 
 ```toml
 [features]
+hooks = true
 memories = true
 
 [memories]
@@ -145,7 +182,7 @@ config_file = "agents/backend-dev.toml"
 ## One-Off Overrides
 
 ```bash
-codex -c model=\"o3\" -c approval_policy=\"never\" exec "summarize this diff"
+codex -c model=\"gpt-5.5\" -c approval_policy=\"never\" exec "summarize this diff"
 ```
 
 ## Anti-Patterns
@@ -154,4 +191,5 @@ codex -c model=\"o3\" -c approval_policy=\"never\" exec "summarize this diff"
 - Treating `never` as a general-purpose local default
 - Using `danger-full-access` and `never` together without a real containment boundary
 - Hardcoding secrets instead of using `$ENV_VAR` expansion
-- Mixing unrelated concerns into one profile instead of creating focused profiles
+- Keeping legacy `[profiles.<name>]` tables in `.codex/config.toml`
+- Mixing unrelated concerns into one profile instead of creating focused profile files
