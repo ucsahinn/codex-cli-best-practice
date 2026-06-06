@@ -8,7 +8,7 @@
 #
 # Prerequisites:
 # - OPENAI_API_KEY secret configured in repository settings
-# - examples/ci-cd/ci-config.toml copied to ~/.codex/ci.config.toml in each job
+# - .codex/config.toml with a [profiles.ci] section in the repository
 
 name: Codex CI
 
@@ -36,15 +36,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "22"
 
       - name: Install Codex CLI
         run: npm install -g @openai/codex
-
-      - name: Prepare Codex CI profile
-        run: |
-          mkdir -p ~/.codex
-          cp examples/ci-cd/ci-config.toml ~/.codex/ci.config.toml
 
       - name: Run PR Review
         run: |
@@ -65,25 +60,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "22"
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Validate documentation
+        run: npm run validate
 
-      - name: Run tests
+      - name: Run tests when present
         id: tests
-        run: npm test 2>&1 | tee test-output.txt
+        run: |
+          if npm run | grep -q " test"; then
+            npm test 2>&1 | tee test-output.txt
+          else
+            echo "No npm test script configured." | tee test-output.txt
+          fi
         continue-on-error: true
 
       - name: Install Codex CLI
         if: steps.tests.outcome == 'failure'
         run: npm install -g @openai/codex
-
-      - name: Prepare Codex CI profile
-        if: steps.tests.outcome == 'failure'
-        run: |
-          mkdir -p ~/.codex
-          cp examples/ci-cd/ci-config.toml ~/.codex/ci.config.toml
 
       - name: Analyze test failures
         if: steps.tests.outcome == 'failure'
@@ -110,21 +104,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-
-      - name: Install Codex CLI
-        run: npm install -g @openai/codex
-
-      - name: Prepare Codex CI profile
-        run: |
-          mkdir -p ~/.codex
-          cp examples/ci-cd/ci-config.toml ~/.codex/ci.config.toml
+          node-version: "22"
 
       - name: Check documentation
-        run: |
-          codex --profile ci exec \
-            "Check whether README.md, best-practice/, and reports/ use the \
-             current Codex CLI schema. List any stale paths, commands, or \
-             configuration keys."
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: npm run validate
