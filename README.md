@@ -21,7 +21,7 @@
 
 This fork is rebuilt as an independent Codex CLI reference kit. The welcome page, operating model, Turkish guide, release checklist, validation script, and CI guard are no longer a mirror of the upstream starter repository.
 
-## Start Here
+## 🧭 Start Here
 
 | Need | Open |
 |---|---|
@@ -32,9 +32,9 @@ This fork is rebuilt as an independent Codex CLI reference kit. The welcome page
 | Release and publish flow | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
 | Local validation | `npm run validate` |
 
-## English
+## 🇬🇧 English
 
-### What This Repository Is
+### 🎯 What This Repository Is
 
 This repository turns Codex CLI setup into a small operating system for engineering work:
 
@@ -46,7 +46,7 @@ This repository turns Codex CLI setup into a small operating system for engineer
 - `orchestration-workflow/` demonstrates an Agent to Skill workflow with a live weather card.
 - `scripts/validate-docs.mjs` checks the docs before a release.
 
-### Quick Start
+### ⚡ Quick Start
 
 ```bash
 npm run validate
@@ -64,7 +64,7 @@ The workflow writes:
 - `orchestration-workflow/weather.svg`
 - `orchestration-workflow/output.md`
 
-### Repository Map
+### 📁 Repository Map
 
 | Surface | Path | Why it exists |
 |---|---|---|
@@ -85,7 +85,7 @@ The workflow writes:
 | Roadmap | `docs/ROADMAP.md` | Next improvements for the fork edition |
 | CI guard | `.github/workflows/docs-guard.yml` | Runs docs validation on pull requests and pushes |
 
-### Operating Loop
+### ⚙️ Operating Loop
 
 Use this loop for real work in the repo:
 
@@ -96,7 +96,7 @@ Use this loop for real work in the repo:
 5. Review the diff before commit or release.
 6. Use the release checklist before publishing a tag.
 
-### Codex Surface Rules
+### 🧩 Codex Surface Rules
 
 | Put it in | When it should live there |
 |---|---|
@@ -109,7 +109,7 @@ Use this loop for real work in the repo:
 | Hook | Reviewed lifecycle automation around tool use or session events |
 | Release checklist | Manual publish gates that must stay visible |
 
-### Built-In Demo
+### 🧪 Built-In Demo
 
 The demo intentionally stays small: one agent fetches data, one skill renders output.
 
@@ -128,7 +128,7 @@ Why this matters:
 - It gives contributors a concrete agent/skill example without a full application.
 - It provides a quick smoke test for Codex CLI, network access, and file output.
 
-### Validation
+### ✅ Validation
 
 ```bash
 npm run validate
@@ -136,7 +136,7 @@ npm run validate
 
 The validation script checks required handbook files, verifies local markdown links, and guards the fork identity in the welcome page. It has no third-party dependencies.
 
-### Release Flow
+### 🚀 Release Flow
 
 Use [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) before tagging. The short version:
 
@@ -148,13 +148,13 @@ git diff -- README.md README.tr.md docs .codex .agents .github scripts package.j
 
 Then commit intentionally, tag, push, and create the GitHub Release from a real git checkout. This local folder currently needs `.git` metadata before push/release commands can run.
 
-## Turkce
+## 🇹🇷 Turkce
 
-### Bu Repo Ne?
+### 🎯 Bu Repo Ne?
 
 Bu fork, Codex CLI kullanan ekipler icin iki dilli bir operator rehberi olarak yeniden duzenlendi. Amac sadece "ayar dosyalari ornegi" vermek degil; Codex ile nasil planlanir, nasil dogrulanir, hangi bilginin hangi yuzeyde tutulacagi nasil secilir ve release oncesi ne kontrol edilir sorularini tek yerde cevaplamak.
 
-### Hizli Baslangic
+### ⚡ Hizli Baslangic
 
 ```bash
 npm run validate
@@ -172,7 +172,7 @@ Olusan dosyalar:
 - `orchestration-workflow/weather.svg`
 - `orchestration-workflow/output.md`
 
-### Bu Forkta Neler Degisti?
+### 🧩 Bu Forkta Neler Degisti?
 
 - Karşılama sayfası bastan yazildi.
 - Turkce tam rehber eklendi: [README.tr.md](README.tr.md).
@@ -182,7 +182,7 @@ Olusan dosyalar:
 - Sponsor/upstream odakli GitHub yuzeyi temizlendi.
 - Bagimliliksiz docs validator ve GitHub Actions kontrolu eklendi.
 
-### Nereden Baslamali?
+### 🧭 Nereden Baslamali?
 
 | Is | Dosya |
 |---|---|
@@ -197,7 +197,7 @@ Olusan dosyalar:
 | Guvenlik notlarini oku | `SECURITY.md` |
 | Siradaki isleri gor | `docs/ROADMAP.md` |
 
-### Yayina Cikmadan Once
+### 🚀 Yayina Cikmadan Once
 
 Bu klasor su anda git checkout degilse push veya release yapilamaz. Once fork reposunun gercek checkout'u gerekir. Sonra:
 
@@ -210,6 +210,6 @@ git push origin main --tags
 
 Release notlarini [CHANGELOG.md](CHANGELOG.md) ve [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) uzerinden hazirla.
 
-## Credits And License
+## ⚖️ Credits And License
 
 This is an independent fork edition. The original MIT license lineage is preserved in [LICENSE](LICENSE). New handbook, Turkish onboarding, release checklist, validation workflow, and fork-specific documentation are maintained in this repository.

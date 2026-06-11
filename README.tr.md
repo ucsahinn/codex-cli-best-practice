@@ -2,7 +2,7 @@
 
 Bu dosya, repoyu Turkce kullanan ekipler icin hazirlanan pratik baslangic rehberidir. Ana sayfa iki dilli kisa giris sunar; bu dosya ise karar alma, dogrulama ve release akislarini daha acik anlatir.
 
-## Amac
+## 🎯 Amac
 
 Bu fork artik sadece upstream repo kopyasi gibi davranmaz. Hedef:
 
@@ -12,7 +12,7 @@ Bu fork artik sadece upstream repo kopyasi gibi davranmaz. Hedef:
 - Her degisikligin dogrulanabilir olmasini saglamak.
 - Release oncesi kontrol listesini repo icinde tutmak.
 
-## Ilk Calistirma
+## ⚡ Ilk Calistirma
 
 ```bash
 npm run validate
@@ -21,7 +21,7 @@ codex --profile development
 
 Eger `npm run validate` hata verirse once linkleri, zorunlu dosyalari ve README kimligini duzelt.
 
-## Codex Yuzeyleri
+## 🧩 Codex Yuzeyleri
 
 | Yuzey | Ne zaman kullanilir? | Dosya |
 |---|---|---|
@@ -39,7 +39,7 @@ Eger `npm run validate` hata verirse once linkleri, zorunlu dosyalari ve README 
 | Guvenlik | Secret ve disclosure notlari | `SECURITY.md` |
 | Roadmap | Siradaki isler | `docs/ROADMAP.md` |
 
-## Onerilen Calisma Akisi
+## ⚙️ Onerilen Calisma Akisi
 
 1. `rg` ile mevcut dosyalari ve tekrar eden metinleri ara.
 2. Davranisin hangi Codex yuzeyinde yasamasi gerektigini sec.
@@ -48,7 +48,7 @@ Eger `npm run validate` hata verirse once linkleri, zorunlu dosyalari ve README 
 5. Diff'i oku.
 6. Commit ve release icin checklist kullan.
 
-## Agent-Skill Demo
+## 🧪 Agent-Skill Demo
 
 Bu repodaki demo Istanbul hava durumunu kullanir:
 
@@ -67,7 +67,7 @@ Deneme promptu:
 Istanbul icin guncel hava durumunu Celsius olarak getir ve repo icindeki SVG hava kartini olustur.
 ```
 
-## Config Profilleri
+## 🛠️ Config Profilleri
 
 `.codex/config.toml` icindeki profiller:
 
@@ -82,7 +82,7 @@ Istanbul icin guncel hava durumunu Celsius olarak getir ve repo icindeki SVG hav
 
 Model erisimi hesaba gore degisebilir. Eger profil modelini calistiramiyorsan ayni profilde sadece `model` satirini kendi erisimin olan modelle degistir.
 
-## Release Hazirligi
+## 🚀 Release Hazirligi
 
 Bu klasorde `.git` yoksa push ve release calismaz. Gercek fork checkout'una gecmeden yayin adimina gecme.
 
@@ -103,7 +103,7 @@ git push origin main --tags
 
 GitHub Release metni icin [CHANGELOG.md](CHANGELOG.md) ve [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) kullan.
 
-## Bakim Kurallari
+## 🧭 Bakim Kurallari
 
 - Upstream sponsor, star, maintainer veya kisisel linklerini karşılama sayfasina geri ekleme.
 - Dinamik Codex iddialarini resmi manual veya OpenAI docs ile yenile.
@@ -112,6 +112,6 @@ GitHub Release metni icin [CHANGELOG.md](CHANGELOG.md) ve [docs/RELEASE_CHECKLIS
 - Release oncesinde validator calismadan tag olusturma.
 - Katki, guvenlik ve release belgelerini README ile birlikte guncelle.
 
-## Lisans
+## ⚖️ Lisans
 
 Bu fork bagimsiz dokumantasyon ve operator rehberi katmani ekler. Orijinal MIT lisans soyu [LICENSE](LICENSE) dosyasinda korunur.
