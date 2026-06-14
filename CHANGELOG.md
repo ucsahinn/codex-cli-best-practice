@@ -1,5 +1,25 @@
 # Changelog
 
+## v0.1.1 - Public Readiness Upgrade
+
+### Added
+
+- Added public-readiness, Windows, agent-security, and v0.1.1 release notes.
+- Added a pull request template with validation, security, and bilingual-doc checks.
+- Added stronger validation coverage for JSON files, local-only paths, hook logs, mojibake, and stale Codex config keys.
+
+### Changed
+
+- Rebuilt `README.md` and `README.tr.md` with clearer EN/TR onboarding, emoji-led navigation, safety defaults, and release flow.
+- Updated Codex config examples around safer approval defaults, explicit hooks feature flag, and disabled-by-default external MCP examples.
+- Refreshed release, research, security, contributing, hook, marketplace, memory, and roadmap documentation against current Codex guidance.
+- Hardened GitHub Actions docs guard with syntax checks and a Gitleaks job.
+
+### Security
+
+- Ignored local hook override files and generated hook logs.
+- Replaced broad shared Claude permissions with a conservative read/docs-oriented example.
+
 ## v0.1.0 - Fork Edition
 
 ### Added

@@ -1,215 +1,161 @@
 # Codex CLI Operator Handbook
 
-> A bilingual field guide for running Codex CLI as a disciplined, reviewable, and shippable engineering system.
+> 🚀 A bilingual, fork-first field guide for running Codex CLI with clear instructions, safer defaults, reusable skills, reviewed hooks, and repeatable release checks.
 
 ![Codex CLI](https://img.shields.io/badge/Codex_CLI-operator_handbook-111827?style=flat&labelColor=0f172a)
 ![Language](https://img.shields.io/badge/language-EN_%2B_TR-0f766e?style=flat)
 ![Docs](https://img.shields.io/badge/docs-validated-2563eb?style=flat)
-![Release](https://img.shields.io/badge/release-ready_checklist-7c3aed?style=flat)
+![Security](https://img.shields.io/badge/security-secret_scan_required-b91c1c?style=flat)
 
 <p align="center">
   <img src="!/codex-speaking.svg" alt="Codex CLI operator handbook mascot" width="132" height="132">
 </p>
 
 <p align="center">
-  <a href="#english">English</a> ·
-  <a href="#turkce">Turkce</a> ·
-  <a href="README.tr.md">TR full guide</a> ·
-  <a href="docs/RELEASE_CHECKLIST.md">Release checklist</a> ·
-  <a href="docs/RESEARCH_NOTES.md">Research notes</a>
+  <a href="#english">🇬🇧 English</a> ·
+  <a href="#turkce">🇹🇷 Turkce</a> ·
+  <a href="README.tr.md">📘 TR full guide</a> ·
+  <a href="docs/RELEASE_CHECKLIST.md">🚢 Release checklist</a> ·
+  <a href="docs/RESEARCH_NOTES.md">🔎 Research notes</a>
 </p>
 
-This fork is rebuilt as an independent Codex CLI reference kit. The welcome page, operating model, Turkish guide, release checklist, validation script, and CI guard are no longer a mirror of the upstream starter repository.
+This public fork is maintained as an independent Codex best-practices repository. It keeps upstream MIT license attribution, but the handbook, bilingual onboarding, validation, security notes, release flow, and fork-facing identity are owned here.
 
-## Start Here
+## 🧭 Start Here
 
 | Need | Open |
 |---|---|
 | First 5 minutes | [Quick start](#quick-start) |
 | Turkish onboarding | [README.tr.md](README.tr.md) |
-| What each folder does | [Repository map](#repository-map) |
-| Current Codex source notes | [docs/RESEARCH_NOTES.md](docs/RESEARCH_NOTES.md) |
-| Release and publish flow | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
+| Which Codex surface to use | [Codex surface map](#codex-surface-map) |
+| Current source decisions | [docs/RESEARCH_NOTES.md](docs/RESEARCH_NOTES.md) |
+| Release and publish gate | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
+| Public readiness checklist | [docs/PUBLIC_READINESS.md](docs/PUBLIC_READINESS.md) |
 | Local validation | `npm run validate` |
 
-## English
+## 🇬🇧 English
 
-### What This Repository Is
+### 🎯 What This Repository Is
 
-This repository turns Codex CLI setup into a small operating system for engineering work:
+This repo is a practical operating handbook for Codex CLI users who want repeatable engineering workflows instead of one-off prompts. It explains where to put durable instructions, how to keep automation reviewable, how to package reusable skills, and how to verify a public release without leaking local state.
 
-- `AGENTS.md` keeps durable project instructions short, explicit, and reviewable.
-- `.codex/config.toml` defines safety profiles, MCP servers, model defaults, and project agents.
-- `.agents/skills/` stores reusable workflows with progressive disclosure.
-- `.codex/agents/` stores task-specific agent role files.
-- `best-practice/` explains each Codex surface with practical rules and anti-patterns.
-- `orchestration-workflow/` demonstrates an Agent to Skill workflow with a live weather card.
-- `scripts/validate-docs.mjs` checks the docs before a release.
+It is intentionally a documentation and configuration reference, not an application codebase.
 
-### Quick Start
+### ⚡ Quick Start
 
 ```bash
 npm run validate
 codex --profile development
 ```
 
-Try the included orchestration demo:
+Try the included agent-to-skill demo:
 
 ```text
 Fetch the current weather for Istanbul in Celsius and create the SVG weather card output using the repo.
 ```
 
-The workflow writes:
+Expected outputs:
 
 - `orchestration-workflow/weather.svg`
-- `orchestration-workflow/output.md`
+- `orchestration-workflow/output.md` (ignored because it is generated)
 
-### Repository Map
+### 🧩 Codex Surface Map
 
-| Surface | Path | Why it exists |
+| Surface | Use it for | Repo example |
 |---|---|---|
-| Welcome page | `README.md` | English-first project entry point with Turkish bridge |
-| Turkish guide | `README.tr.md` | Copy-paste friendly Turkish onboarding |
-| Project instructions | `AGENTS.md` | Durable Codex working rules for this repo |
-| Claude compatibility | `CLAUDE.md` | Equivalent guidance for Claude Code users |
-| Codex config | `.codex/config.toml` | Shared profiles, MCP registration, and agent registration |
-| Weather agent | `.codex/agents/weather-agent.toml` | Fetches Istanbul weather and delegates rendering |
-| Weather skill | `.agents/skills/weather-svg-creator/SKILL.md` | Creates the SVG card and markdown report |
-| Best practices | `best-practice/` | Focused guides for config, skills, hooks, MCP, memory, agents, and marketplace |
-| Release checklist | `docs/RELEASE_CHECKLIST.md` | Local, git, tag, release, and post-release gates |
-| Release notes | `docs/RELEASE_NOTES_v0.1.0.md` | Ready-to-paste first GitHub Release body |
-| Research log | `docs/RESEARCH_NOTES.md` | Current-source decisions used by this fork |
-| FAQ | `docs/FAQ.md` | Common Codex surface choices |
-| Contributing | `CONTRIBUTING.md` | Contribution rules for docs, skills, agents, and releases |
-| Security | `SECURITY.md` | Secret handling and responsible disclosure notes |
-| Roadmap | `docs/ROADMAP.md` | Next improvements for the fork edition |
-| CI guard | `.github/workflows/docs-guard.yml` | Runs docs validation on pull requests and pushes |
+| Prompt | One-off task constraints | Current user request |
+| `AGENTS.md` | Durable project rules and verification commands | [AGENTS.md](AGENTS.md) |
+| `.codex/config.toml` | Profiles, sandboxing, approvals, MCP, hooks, agents | [.codex/config.toml](.codex/config.toml) |
+| Skill | Reusable workflow with progressive disclosure | [.agents/skills/weather-svg-creator/SKILL.md](.agents/skills/weather-svg-creator/SKILL.md) |
+| Subagent | Explicit specialist role for bounded work | [.codex/agents/weather-agent.toml](.codex/agents/weather-agent.toml) |
+| MCP | Live docs, private tools, external context | [best-practice/codex-mcp.md](best-practice/codex-mcp.md) |
+| Hook | Reviewed lifecycle automation, never the only security boundary | [best-practice/codex-hooks.md](best-practice/codex-hooks.md) |
+| Release checklist | Manual publish gates | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
 
-### Operating Loop
+### 📁 Repository Map
 
-Use this loop for real work in the repo:
+| Area | Path | Purpose |
+|---|---|---|
+| Welcome | `README.md` | English-first public entry point with Turkish bridge |
+| Turkish guide | `README.tr.md` | Full Turkish onboarding and maintenance guide |
+| Agent rules | `AGENTS.md`, `CLAUDE.md` | Codex and Claude-compatible operating guidance |
+| Codex config | `.codex/` | Profiles, agents, hooks, hook scripts, examples |
+| Skills | `.agents/skills/` | Reusable Codex workflows |
+| Best practices | `best-practice/` | Focused Codex surface guides |
+| Examples | `examples/` | Profile and CI examples |
+| Docs | `docs/` | FAQ, roadmap, research notes, release notes, readiness checks |
+| Validation | `scripts/validate-docs.mjs` | Dependency-free repository guard |
+| GitHub | `.github/` | Docs guard workflow, issue template, release form, PR template |
 
-1. Inspect the current tree with `rg` and targeted file reads.
-2. Pick the narrowest Codex surface that owns the behavior.
-3. Change docs, config, skills, or agents in the smallest coherent patch.
-4. Run `npm run validate`.
-5. Review the diff before commit or release.
-6. Use the release checklist before publishing a tag.
+### 🛡️ Safety Defaults
 
-### Codex Surface Rules
+- Keep secrets in environment variables or trusted local config, never in repo docs.
+- Treat sandboxing and approvals as separate controls.
+- Keep broad filesystem or network access out of shared examples.
+- Use hooks as guardrails, not as the primary enforcement boundary.
+- Keep local overrides in ignored files such as `AGENTS.override.md`, `.codex/config.local.toml`, and `.codex/hooks/config/*.local.json`.
+- Run `gitleaks detect --redact --no-banner --verbose` before tags and releases.
 
-| Put it in | When it should live there |
-|---|---|
-| Prompt | One-off task constraints |
-| `AGENTS.md` | Repo conventions, verification commands, safety rules |
-| `.codex/config.toml` | Profiles, sandboxing, model defaults, MCP servers, hooks |
-| Skill | Reusable workflow that should trigger by name or description |
-| Agent | Specialized role that can own part of a larger task |
-| MCP | Live external context, private tools, or version-sensitive docs |
-| Hook | Reviewed lifecycle automation around tool use or session events |
-| Release checklist | Manual publish gates that must stay visible |
-
-### Built-In Demo
-
-The demo intentionally stays small: one agent fetches data, one skill renders output.
-
-```text
-User prompt
-  -> weather-agent
-    -> Open-Meteo current temperature for Istanbul
-    -> weather-svg-creator skill
-      -> weather.svg
-      -> output.md
-```
-
-Why this matters:
-
-- It shows how to keep data fetching and rendering separate.
-- It gives contributors a concrete agent/skill example without a full application.
-- It provides a quick smoke test for Codex CLI, network access, and file output.
-
-### Validation
+### ✅ Validation
 
 ```bash
 npm run validate
+git diff --check
+gitleaks detect --redact --no-banner --verbose
 ```
 
-The validation script checks required handbook files, verifies local markdown links, and guards the fork identity in the welcome page. It has no third-party dependencies.
+The validator checks required files, README identity markers, local markdown links, common mojibake sequences, JSON syntax, committed local-only paths, stale Codex keys, and generated hook-log leaks.
 
-### Release Flow
+### 🚢 Release Flow
 
-Use [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) before tagging. The short version:
+Use [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) before publishing. The short version:
 
 ```bash
 npm run validate
+git diff --check
+gitleaks detect --redact --no-banner --verbose
 git status --short
-git diff -- README.md README.tr.md docs .codex .agents .github scripts package.json CHANGELOG.md
 ```
 
-Then commit intentionally, tag, push, and create the GitHub Release from a real git checkout. This local folder currently needs `.git` metadata before push/release commands can run.
+Then commit intentionally, push the branch, tag the release, create the GitHub Release from the matching release notes, and verify the public page, links, Actions run, and release asset state.
 
-## Turkce
+## 🇹🇷 Turkce
 
-### Bu Repo Ne?
+### 🎯 Bu Repo Ne?
 
-Bu fork, Codex CLI kullanan ekipler icin iki dilli bir operator rehberi olarak yeniden duzenlendi. Amac sadece "ayar dosyalari ornegi" vermek degil; Codex ile nasil planlanir, nasil dogrulanir, hangi bilginin hangi yuzeyde tutulacagi nasil secilir ve release oncesi ne kontrol edilir sorularini tek yerde cevaplamak.
+Bu fork, Codex CLI kullananlar için iki dilli bir operator rehberi. Amacı sadece ayar dosyası örneği vermek değil; prompt, `AGENTS.md`, config, skill, subagent, MCP, hook ve release checklist arasında doğru kararı vermeyi öğretmek.
 
-### Hizli Baslangic
+### ⚡ Hızlı Başlangıç
 
 ```bash
 npm run validate
 codex --profile development
 ```
 
-Demo icin Codex'e sunu yaz:
+Demo için Codex'e şunu yaz:
 
 ```text
 Istanbul icin guncel hava durumunu Celsius olarak getir ve repo icindeki SVG hava kartini olustur.
 ```
 
-Olusan dosyalar:
+### 🧩 Nereden Başlamalı?
 
-- `orchestration-workflow/weather.svg`
-- `orchestration-workflow/output.md`
-
-### Bu Forkta Neler Degisti?
-
-- Karşılama sayfası bastan yazildi.
-- Turkce tam rehber eklendi: [README.tr.md](README.tr.md).
-- Release ve publish kontrol listesi eklendi.
-- Resmi Codex manual ve OpenAI latest-model bilgisinden karar notlari cikarildi.
-- Istanbul odakli agent-skill demosu hazirlandi.
-- Sponsor/upstream odakli GitHub yuzeyi temizlendi.
-- Bagimliliksiz docs validator ve GitHub Actions kontrolu eklendi.
-
-### Nereden Baslamali?
-
-| Is | Dosya |
+| İş | Dosya |
 |---|---|
-| Repo mantigini anla | `README.md` |
-| Turkce kullan | `README.tr.md` |
-| Codex yuzeylerini sec | `AGENTS.md`, `.codex/config.toml`, `.agents/skills/` |
-| Release hazirla | `docs/RELEASE_CHECKLIST.md` |
-| Kaynak kararlarini denetle | `docs/RESEARCH_NOTES.md` |
-| SSS oku | `docs/FAQ.md` |
-| Release metnini hazirla | `docs/RELEASE_NOTES_v0.1.0.md` |
-| Katki kurallarini oku | `CONTRIBUTING.md` |
-| Guvenlik notlarini oku | `SECURITY.md` |
-| Siradaki isleri gor | `docs/ROADMAP.md` |
+| Repo mantığını öğren | `README.md` |
+| Türkçe rehber | `README.tr.md` |
+| Kalıcı talimatlar | `AGENTS.md` |
+| Codex profilleri | `.codex/config.toml` |
+| Skill yazımı | `docs/SKILLS.md`, `best-practice/codex-skills.md` |
+| Hook kullanımı | `best-practice/codex-hooks.md`, `.codex/hooks/HOOKS-README.md` |
+| Windows notları | `docs/WINDOWS.md` |
+| Release hazırlığı | `docs/RELEASE_CHECKLIST.md` |
+| Public hazır mı? | `docs/PUBLIC_READINESS.md` |
 
-### Yayina Cikmadan Once
+### 🛡️ Kısa Güvenlik Notu
 
-Bu klasor su anda git checkout degilse push veya release yapilamaz. Once fork reposunun gercek checkout'u gerekir. Sonra:
+Token, cookie, private key, lokal auth dosyası, kişisel hook config'i veya log dosyası commitlenmez. Release öncesi validation, diff check ve Gitleaks birlikte çalıştırılır.
 
-```bash
-npm run validate
-git status --short
-git tag v0.1.0
-git push origin main --tags
-```
+## ⚖️ Credits And License
 
-Release notlarini [CHANGELOG.md](CHANGELOG.md) ve [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) uzerinden hazirla.
-
-## Credits And License
-
-This is an independent fork edition. The original MIT license lineage is preserved in [LICENSE](LICENSE). New handbook, Turkish onboarding, release checklist, validation workflow, and fork-specific documentation are maintained in this repository.
+This is an independent fork edition. The original MIT license lineage is preserved in [LICENSE](LICENSE). Fork-specific handbook content, Turkish onboarding, release discipline, validation workflow, and public-readiness docs are maintained in this repository.

@@ -177,7 +177,7 @@ Edit `.codex/hooks/config/hooks-config.json`:
 - `disablePostToolUseHook`: Set to `true` to disable the post-tool-use sound
 - `disableStopHook`: Set to `true` to disable the session stop sound
 - `disableUserPromptSubmitHook`: Set to `true` to disable the user prompt submit sound
-- `disableLogging`: Set to `true` to disable logging hook events to `.codex/hooks/logs/hooks-log.jsonl`
+- `disableLogging`: Set to `true` to disable logging hook events under the hook logs directory.
 
 ### Configuration Fallback
 
@@ -205,7 +205,7 @@ Create or edit `.codex/hooks/config/hooks-config.local.json` for personal prefer
 
 ### Logging
 
-When logging is enabled (`"disableLogging": false`), hook events are logged to `.codex/hooks/logs/hooks-log.jsonl` in JSON Lines format. Each entry contains the full JSON payload received from Codex CLI.
+When logging is enabled (`"disableLogging": false`), hook events are logged as JSON Lines under the hook logs directory. Treat those files as local diagnostics because entries can contain command text, working directories, or prompt context.
 
 ## Testing
 

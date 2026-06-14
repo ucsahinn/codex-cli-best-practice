@@ -3,6 +3,9 @@ AGENTS.override.md
 
 # Local Codex config (personal settings)
 .codex/config.local.toml
+.codex/hooks/config/*.local.json
+.codex/hooks/logs/*
+!.codex/hooks/logs/.gitkeep
 
 # Generated workflow output
 orchestration-workflow/output.md
@@ -12,7 +15,9 @@ node_modules/
 
 # Local caches and scratch output
 .tmp/
+.serena/
 __pycache__/
+*.log
 
 # OS files
 .DS_Store

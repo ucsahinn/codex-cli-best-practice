@@ -18,6 +18,9 @@ This is a documentation/configuration reference, not a traditional application.
 - `best-practice/` - topic guides for Codex config, skills, hooks, MCP, memory, agents, marketplace, and `AGENTS.md`.
 - `docs/RESEARCH_NOTES.md` - current-source decisions and refresh notes.
 - `docs/RELEASE_CHECKLIST.md` - release and publish checklist.
+- `docs/PUBLIC_READINESS.md` - public repository readiness gate.
+- `docs/AGENT_SECURITY.md` - shared safety guidance for agentic automation.
+- `docs/WINDOWS.md` - Windows setup and troubleshooting notes.
 - `scripts/validate-docs.mjs` - dependency-free docs validator.
 
 ## Working Standards
@@ -28,11 +31,14 @@ This is a documentation/configuration reference, not a traditional application.
 - Keep durable behavior in `AGENTS.md`; put detailed workflows in docs or skills.
 - Treat skills as reusable workflows with trigger-focused descriptions.
 - Verify current Codex claims against official OpenAI docs before adding version-sensitive details.
+- Treat `.claude/settings.json` as a conservative shared example. Personal broad permissions belong in ignored local settings, not in committed repo config.
 
 ## Verification
 
 ```bash
 npm run validate
+git diff --check
+gitleaks detect --redact --no-banner --verbose
 ```
 
 Run this before release, before PR review, and after changing markdown links or required handbook files.
@@ -43,4 +49,4 @@ Use one file, one commit for documentation changes unless a generated artifact a
 
 ## Release Boundary
 
-Follow `docs/RELEASE_CHECKLIST.md` before publishing. If this folder has no `.git` directory, push and release steps must be done from a real fork checkout.
+Follow `docs/RELEASE_CHECKLIST.md` before publishing, and verify the public GitHub state after push, tag, and release.

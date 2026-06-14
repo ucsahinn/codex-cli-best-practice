@@ -16,14 +16,25 @@ Thanks for improving this Codex CLI operator handbook. Keep contributions small,
 - Prefer concise examples over long theory.
 - Do not add personal sponsor links, private tokens, screenshots, logs, or generated archives.
 - Do not add dependencies unless the validator or docs workflow genuinely needs them.
+- Do not commit local hook config, generated hook logs, local paths, screenshots, archives, or authentication files.
+- Keep public examples conservative: no broad network/filesystem permissions as shared defaults.
 
 ## Validation
 
 ```bash
 npm run validate
+git diff --check
+gitleaks detect --redact --no-banner --verbose
 ```
 
 Run validation before opening a pull request or publishing a release.
+
+## Pull Requests
+
+- Use `.github/PULL_REQUEST_TEMPLATE.md`.
+- Link the source or official docs when changing version-sensitive Codex behavior.
+- Keep English and Turkish onboarding aligned when changing first-run guidance.
+- Run the same checks listed in `docs/RELEASE_CHECKLIST.md` before requesting release review.
 
 ## Commit Style
 

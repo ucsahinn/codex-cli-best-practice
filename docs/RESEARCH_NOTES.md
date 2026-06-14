@@ -1,49 +1,47 @@
 # Research Notes
 
-These notes record the current-source decisions used while rebuilding this fork. They are intentionally short so future maintainers can refresh the claims without reading the whole repository.
+Checked on 2026-06-14. Refresh these notes before each public release because Codex behavior, plugin commands, hooks, models, and config keys can change.
 
-## Sources Checked
+## Source Map
 
-| Source | How it was used |
-|---|---|
-| OpenAI Codex manual | Refreshed with the local OpenAI Docs skill helper on 2026-06-06. Used for Codex surfaces, CLI behavior, customization, skills, MCP, hooks, plugins, memories, and subagents. |
-| `https://developers.openai.com/api/docs/guides/latest-model.md` | Used for current model guidance. The fetched page identified `gpt-5.5` as the latest model at refresh time. |
-| Context7 `/openai/codex` | Used as a secondary docs index for Codex CLI configuration and repository examples. |
+| Source | Type | Confidence | Outdated risk | What it supports | Repo impact |
+|---|---|---:|---:|---|---|
+| OpenAI Codex customization docs | Official docs | High | Medium | `AGENTS.md`, skills, MCP, memories, and config are separate instruction/context layers | Keep surface map explicit and avoid putting every rule in README |
+| OpenAI Codex config reference | Official docs | High | Medium | Project/user config boundaries, profiles, sandbox, approvals, MCP, features | Keep `.codex/config.toml` conservative and comment volatile examples |
+| OpenAI Codex security and approvals docs | Official docs | High | Medium | Sandbox and approvals are separate controls; network is restricted unless configured | Document safe profiles and release gates |
+| OpenAI Codex skills docs | Official docs | High | Medium | Skills use progressive disclosure through `SKILL.md` metadata and supporting files | Keep skill descriptions trigger-focused |
+| OpenAI Codex plugins docs | Official docs | High | Medium | Plugins can distribute skills, MCP, hooks, commands, and assets | Keep plugin guidance separate from skill guidance |
+| OpenAI Codex hooks docs | Official docs | High | High | Hooks are enabled with `features.hooks`, support lifecycle events, and may use `commandWindows` | Keep examples on the current hooks feature key |
+| OpenAI Codex subagents docs | Official docs | High | Medium | Subagents are explicit specialist delegations and inherit session controls | Describe auto-routing as local policy, not Codex default |
+| OpenAI Codex Windows docs | Official docs | High | Medium | Native Windows and WSL2 have different sandbox and command behavior | Add Windows-specific troubleshooting |
+| OpenAI latest-model guide | Official docs | High | High | Current model guidance and prompt/eval emphasis | Use model names as refreshable examples, not permanent claims |
+| OWASP Top 10 for LLM Applications | Security reference | High | Medium | Prompt injection, sensitive information disclosure, tool misuse, supply-chain risks | Add agent-security and secret-handling guidance |
+| OpenSSF Scorecard / GitHub security patterns | Security reference | Medium | Medium | CI, branch, release, and dependency hygiene expectations | Add CI secret scan and public-readiness checklist |
+| Public Codex and agent-skill examples | Public repos/examples | Medium | High | Useful repo layout and packaging patterns, not authority | Use only as patterns; do not copy incompatible content |
 
 ## Stable Decisions
 
-- Keep durable repo behavior in `AGENTS.md`, not in the README.
+- Keep durable repo behavior in `AGENTS.md`, not only in prompts.
 - Keep execution controls in `.codex/config.toml`: sandbox mode, approval policy, model defaults, profiles, MCP servers, hooks, and agent registration.
-- Use skills for reusable workflows. A skill description should answer "when should this fire?" rather than market the skill.
-- Use agents for specialized roles that can own a bounded task or demo workflow.
-- Use MCP for live context or version-sensitive documentation instead of copying volatile facts into prompts.
+- Use skills for reusable workflows. A skill description should answer when it should fire.
+- Use subagents for explicit specialist delegation. Any automatic routing in this repo is a local operating policy.
+- Use MCP for live context or version-sensitive documentation instead of copying volatile facts into static prompts.
 - Use hooks for reviewed lifecycle automation, not as the primary security boundary.
 - Use release checklists for publish gates because push, tag, and release creation are side-effectful.
-
-## Model Guidance
-
-The current OpenAI docs fetch named `gpt-5.5` as the latest model and emphasized outcome-first prompts, success criteria, tool descriptions, reasoning effort tuning, and concise output controls. This repo therefore uses `gpt-5.5` in current examples but keeps model references easy to replace for accounts that do not have that model enabled.
+- Keep Windows examples practical: prefer `commandWindows`, PowerShell-friendly checks, and explicit Python command differences.
 
 ## Claims To Refresh Before A Release
 
-- Current Codex CLI slash commands.
-- Current plugin and marketplace behavior.
-- Current hooks maturity and feature flag requirements.
+- Current Codex CLI slash commands and plugin commands.
+- Current hook events and feature flag names.
 - Current memory configuration keys.
+- Current Windows sandbox notes.
 - Latest model name and reasoning-effort recommendations.
 - Any version-specific references in `best-practice/`.
 
-## What Was Intentionally Removed From The Welcome Page
+## Intentionally Out Of Scope
 
-- Upstream star badges and repository-specific sponsor links.
-- Personal upstream community credit badges in the first viewport.
-- Long external reading lists that make the fork look like a mirror.
-- Release-specific claims that require daily updates.
-
-## Refresh Command
-
-```bash
-node C:\Users\ulasc\.codex\skills\.system\openai-docs\scripts\fetch-codex-manual.mjs
-```
-
-If that helper is unavailable, use the OpenAI Developer Docs MCP server or the official Codex manual page as the fallback source.
+- Benchmarks not run by this repository.
+- Fake user feedback, GitHub stats, or support guarantees.
+- Private or incompatible repo content.
+- Auto-release workflows that publish without human approval.

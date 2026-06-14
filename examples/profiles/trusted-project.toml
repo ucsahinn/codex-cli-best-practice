@@ -4,7 +4,7 @@
 
 model = "gpt-5.5"
 model_reasoning_effort = "high"
-approval_policy = "never"
+approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
 # Usage:
@@ -13,5 +13,6 @@ sandbox_mode = "workspace-write"
 # Safety notes:
 # - Use only on branches with a clean git safety net.
 # - Review `git diff` before any commit or push.
+# - Use `approval_policy = "never"` only for tightly constrained automation.
 # - Use `danger-full-access` only when a task truly requires unrestricted
 #   filesystem or network access and the user explicitly approves that risk.

@@ -13,6 +13,8 @@ Security-sensitive review applies to:
 - `.github/workflows/`
 - `scripts/`
 - Release instructions in `docs/RELEASE_CHECKLIST.md`
+- Public readiness instructions in `docs/PUBLIC_READINESS.md`
+- Shared Claude compatibility settings in `.claude/settings.json`
 
 ## Reporting
 
@@ -24,6 +26,15 @@ If you find a security issue in this fork, open a private advisory or contact th
 - If a secret-like value appears in history, treat it as compromised and rotate it first.
 - Keep `.codex/config.toml` examples free of literal credentials.
 - Prefer environment variable placeholders for examples.
+- Keep `.codex/hooks/config/*.local.json`, generated hook logs, and personal agent state out of git.
+- Do not add broad shared permissions such as unrestricted shell, write, or web access unless the risk is explicitly reviewed.
+
+## Agent And Hook Safety
+
+- Hooks are guardrails, not a security boundary. A model with write access can alter scripts unless the surrounding sandbox and review process prevent it.
+- Shared MCP examples should be disabled by default when they install or execute external packages.
+- Approval policies and sandbox modes must be reviewed together. `approval_policy = "never"` is appropriate for constrained non-interactive jobs, not as a default for broad local editing.
+- Public CI examples should avoid sending untrusted pull request code to write-capable automation unless that behavior is intentionally reviewed.
 
 ## Release Safety
 
@@ -32,6 +43,8 @@ Before publishing a tag or GitHub Release:
 ```bash
 npm run validate
 git status --short
+git diff --check
+gitleaks detect --redact --no-banner --verbose
 ```
 
 Use `docs/RELEASE_CHECKLIST.md` for the full release gate.

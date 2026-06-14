@@ -6,8 +6,8 @@
 
 model = "gpt-5.5"
 model_reasoning_effort = "low"
-approval_policy = "on-request"
-sandbox_mode = "workspace-write"
+approval_policy = "never"
+sandbox_mode = "read-only"
 
 [profiles.ci]
 model = "gpt-5.5"

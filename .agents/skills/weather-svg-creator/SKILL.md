@@ -6,7 +6,7 @@ argument-hint: "[city] [temperature] [unit]"
 
 # Weather SVG Creator
 
-Create the visual output for the repository's Agent to Skill demo.
+Create the visual output for the repository's agent-to-skill demo.
 
 ## Inputs
 

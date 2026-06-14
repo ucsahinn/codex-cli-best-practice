@@ -18,6 +18,9 @@ This is a documentation and configuration reference, not an application codebase
 - `best-practice/` - focused Codex surface guides.
 - `docs/RESEARCH_NOTES.md` - current-source decisions.
 - `docs/RELEASE_CHECKLIST.md` - publish gates.
+- `docs/PUBLIC_READINESS.md` - public repository readiness gate.
+- `docs/AGENT_SECURITY.md` - agent, hook, MCP, and secret-handling guardrails.
+- `docs/WINDOWS.md` - Windows setup and troubleshooting notes.
 - `scripts/validate-docs.mjs` - dependency-free docs validator.
 
 ## Working Standards
@@ -36,9 +39,11 @@ Run the narrowest relevant check first:
 
 ```bash
 npm run validate
+git diff --check
+gitleaks detect --redact --no-banner --verbose
 ```
 
-The validator checks required docs, local markdown links, and fork-facing README identity markers.
+The validator checks required docs, local markdown links, JSON syntax, fork-facing README identity markers, local-only paths, generated hook-log leaks, and common mojibake sequences.
 
 ## Git Convention
 
@@ -52,4 +57,4 @@ Example:
 
 ## Release Boundary
 
-Before publishing, follow `docs/RELEASE_CHECKLIST.md`. If `.git` is missing, local edits can be validated but push and release cannot be completed from this folder.
+Before publishing, follow `docs/RELEASE_CHECKLIST.md` and `docs/PUBLIC_READINESS.md`. Commit, push, tag, and release only after explicit user approval.

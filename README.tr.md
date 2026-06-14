@@ -1,117 +1,99 @@
-# Codex CLI Operator Handbook - Turkce Rehber
+# Codex CLI Operator Handbook - Türkçe Rehber
 
-Bu dosya, repoyu Turkce kullanan ekipler icin hazirlanan pratik baslangic rehberidir. Ana sayfa iki dilli kisa giris sunar; bu dosya ise karar alma, dogrulama ve release akislarini daha acik anlatir.
+> 🚀 Codex CLI için fork-first, iki dilli, güvenli ve release'e hazır operator rehberi.
 
-## Amac
+[← English README](README.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Araştırma notları](docs/RESEARCH_NOTES.md) · [Public readiness](docs/PUBLIC_READINESS.md)
 
-Bu fork artik sadece upstream repo kopyasi gibi davranmaz. Hedef:
+## 🎯 Bu Repo Ne?
 
-- Codex CLI yuzeylerini anlasilir hale getirmek.
-- `AGENTS.md`, skill, agent, config, MCP, hook ve release kararlarini ayirmak.
-- Turkce ve Ingilizce dokumantasyonu ayni kalite seviyesinde tutmak.
-- Her degisikligin dogrulanabilir olmasini saglamak.
-- Release oncesi kontrol listesini repo icinde tutmak.
+Bu repo, Codex CLI ile çalışan kişiler ve ekipler için pratik bir başvuru setidir. Hangi bilginin promptta kalacağını, hangisinin `AGENTS.md` dosyasına taşınacağını, ne zaman skill yazılacağını, MCP'nin nerede anlamlı olduğunu, hook'ların nasıl güvenli tutulacağını ve release öncesi nelerin doğrulanacağını tek yerde toplar.
 
-## Ilk Calistirma
+Bu bir uygulama kod tabanı değildir. Dokümantasyon, config, örnek workflow, hook ve release disiplini reposudur.
+
+## ⚡ İlk 5 Dakika
 
 ```bash
 npm run validate
 codex --profile development
 ```
 
-Eger `npm run validate` hata verirse once linkleri, zorunlu dosyalari ve README kimligini duzelt.
-
-## Codex Yuzeyleri
-
-| Yuzey | Ne zaman kullanilir? | Dosya |
-|---|---|---|
-| Prompt | Tek seferlik talimat | Aktif konusma |
-| `AGENTS.md` | Kalici repo kurallari | `AGENTS.md` |
-| Config | Model, sandbox, approval, MCP | `.codex/config.toml` |
-| Skill | Tekrar kullanilabilir is akisi | `.agents/skills/<name>/SKILL.md` |
-| Agent | Uzmanlasmis rol | `.codex/agents/<name>.toml` |
-| MCP | Canli veya versiyon hassas dis kaynak | `.codex/config.toml` |
-| Hook | Yasam dongusu otomasyonu | `.codex/hooks.json` |
-| Release checklist | Yayin kapilari | `docs/RELEASE_CHECKLIST.md` |
-| Release notlari | Ilk release metni | `docs/RELEASE_NOTES_v0.1.0.md` |
-| SSS | Sik sorulan kararlar | `docs/FAQ.md` |
-| Katki | Degisiklik kurallari | `CONTRIBUTING.md` |
-| Guvenlik | Secret ve disclosure notlari | `SECURITY.md` |
-| Roadmap | Siradaki isler | `docs/ROADMAP.md` |
-
-## Onerilen Calisma Akisi
-
-1. `rg` ile mevcut dosyalari ve tekrar eden metinleri ara.
-2. Davranisin hangi Codex yuzeyinde yasamasi gerektigini sec.
-3. Kucuk ama tam bir degisiklik yap.
-4. `npm run validate` calistir.
-5. Diff'i oku.
-6. Commit ve release icin checklist kullan.
-
-## Agent-Skill Demo
-
-Bu repodaki demo Istanbul hava durumunu kullanir:
-
-```text
-Kullanici promptu
-  -> weather-agent
-    -> Open-Meteo ile Istanbul sicakligi
-    -> weather-svg-creator skill
-      -> weather.svg
-      -> output.md
-```
-
-Deneme promptu:
+Demo prompt:
 
 ```text
 Istanbul icin guncel hava durumunu Celsius olarak getir ve repo icindeki SVG hava kartini olustur.
 ```
 
-## Config Profilleri
+Beklenen çıktı:
 
-`.codex/config.toml` icindeki profiller:
+- `orchestration-workflow/weather.svg`
+- `orchestration-workflow/output.md` (üretilen dosya olduğu için ignore edilir)
 
-| Profil | Amac |
-|---|---|
-| `conservative` | Okuma, denetim, riskli repo inceleme |
-| `development` | Gunluk yazma ve dokuman duzenleme |
-| `deep-research` | Daha fazla akil yurutme isteyen arastirma |
-| `trusted` | Sadece guvenli, sinirli ve bilincli kullan |
-| `ci` | Non-interactive kontrol |
-| `review` | Diff ve PR inceleme |
+## 🧩 Codex Yüzeyleri
 
-Model erisimi hesaba gore degisebilir. Eger profil modelini calistiramiyorsan ayni profilde sadece `model` satirini kendi erisimin olan modelle degistir.
+| Yüzey | Ne zaman kullanılır? | Bu repodaki örnek |
+|---|---|---|
+| Prompt | Tek seferlik istek ve sınırlar | Güncel kullanıcı isteği |
+| `AGENTS.md` | Kalıcı repo kuralları, doğrulama, güvenlik çizgileri | [AGENTS.md](AGENTS.md) |
+| `.codex/config.toml` | Profil, sandbox, approval, MCP, hook ve agent kayıtları | [.codex/config.toml](.codex/config.toml) |
+| Skill | Tekrar kullanılacak iş akışı | [.agents/skills/weather-svg-creator/SKILL.md](.agents/skills/weather-svg-creator/SKILL.md) |
+| Subagent | Açıkça çağrılan uzman rol | [.codex/agents/weather-agent.toml](.codex/agents/weather-agent.toml) |
+| MCP | Güncel doküman, dış bağlam, private tool | [best-practice/codex-mcp.md](best-practice/codex-mcp.md) |
+| Hook | İncelenmiş lifecycle otomasyonu | [best-practice/codex-hooks.md](best-practice/codex-hooks.md) |
+| Release checklist | Yayına çıkmadan önceki kapılar | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
 
-## Release Hazirligi
+## 📁 Repo Haritası
 
-Bu klasorde `.git` yoksa push ve release calismaz. Gercek fork checkout'una gecmeden yayin adimina gecme.
+| Alan | Yol | Amaç |
+|---|---|---|
+| Karşılama | `README.md` | İngilizce ana sayfa ve Türkçe köprü |
+| Türkçe rehber | `README.tr.md` | Türkçe onboarding ve bakım akışı |
+| Agent kuralları | `AGENTS.md`, `CLAUDE.md` | Codex ve Claude uyumlu çalışma kuralları |
+| Codex config | `.codex/` | Profiller, agent, hook ve hook scriptleri |
+| Skill'ler | `.agents/skills/` | Tekrar kullanılabilir Codex iş akışları |
+| Best practice | `best-practice/` | Her Codex yüzeyi için kısa rehber |
+| Örnekler | `examples/` | Profil ve CI örnekleri |
+| Dokümanlar | `docs/` | SSS, roadmap, araştırma, release ve public readiness |
+| Validasyon | `scripts/validate-docs.mjs` | Bağımlılıksız repo kontrolü |
+| GitHub | `.github/` | Workflow, issue template, PR template ve release formu |
 
-Minimum lokal kontrol:
+## 🛡️ Güvenlik İlkeleri
+
+- Token, cookie, private key, lokal auth dosyası ve environment dump commitlenmez.
+- Kişisel override dosyaları repo dışında veya ignore edilen dosyalarda kalır.
+- Hook güvenlik duvarı değildir; sadece yardımcı guardrail'dir.
+- Sandbox ve approval ayrı kontrollerdir, birbirinin yerine geçmez.
+- `danger-full-access` ve `approval_policy = "never"` birlikte public örneklerde normal varsayılan gibi sunulmaz.
+- Release öncesi `npm run validate`, `git diff --check` ve Gitleaks çalıştırılır.
+
+## ✅ Doğrulama
 
 ```bash
 npm run validate
-git status --short
-git diff -- README.md README.tr.md docs .codex .agents .github scripts package.json CHANGELOG.md
+git diff --check
+gitleaks detect --redact --no-banner --verbose
 ```
 
-Tag ornegi:
+Validator şunları kontrol eder:
 
-```bash
-git tag v0.1.0
-git push origin main --tags
-```
+- Zorunlu dosyalar var mı?
+- README fork kimliğini ve TR/EN köprülerini taşıyor mu?
+- Markdown iç linkleri çözülüyor mu?
+- JSON dosyaları parse ediliyor mu?
+- Mojibake, lokal path, stale Codex key veya hook log sızıntısı var mı?
 
-GitHub Release metni icin [CHANGELOG.md](CHANGELOG.md) ve [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) kullan.
+## 🚢 Release Akışı
 
-## Bakim Kurallari
+1. `docs/RELEASE_CHECKLIST.md` dosyasını uygula.
+2. `CHANGELOG.md` ve ilgili `docs/RELEASE_NOTES_*.md` dosyasını güncelle.
+3. Validation, diff check ve secret scan'i çalıştır.
+4. Sadece amaçlanan dosyaları stage et.
+5. Commit, push, tag ve GitHub Release adımlarını aynı tag üzerinden doğrula.
+6. Public README, release sayfası, Actions sonucu ve linkleri tarayıcıdan kontrol et.
 
-- Upstream sponsor, star, maintainer veya kisisel linklerini karşılama sayfasina geri ekleme.
-- Dinamik Codex iddialarini resmi manual veya OpenAI docs ile yenile.
-- Skill aciklamalarini ozet gibi degil, tetikleyici kosul gibi yaz.
-- `AGENTS.md` dosyasini kisa tut.
-- Release oncesinde validator calismadan tag olusturma.
-- Katki, guvenlik ve release belgelerini README ile birlikte guncelle.
+## 🤝 Katkı
 
-## Lisans
+Katkı yaparken yeni iddiaları kaynaksız ekleme. Codex davranışı sürüme göre değişebildiği için resmi OpenAI/Codex dokümanlarını veya repo içindeki güncel araştırma notlarını esas al. Türkçe ve İngilizce rehberlerin niyeti aynı kalmalı; birebir çeviri şart değil, kullanıcı akışı aynı olmalı.
 
-Bu fork bagimsiz dokumantasyon ve operator rehberi katmani ekler. Orijinal MIT lisans soyu [LICENSE](LICENSE) dosyasinda korunur.
+## ⚖️ Lisans
+
+Bu bağımsız fork sürümü upstream MIT lisans çizgisini korur. Fork'a özgü rehber, Türkçe içerik, validasyon, güvenlik ve release dokümanları bu repoda sürdürülür.

@@ -14,13 +14,16 @@ model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
 
+[features]
+hooks = true
+
 ################################################################################
 # MCP Servers
 ################################################################################
 
 [mcp_servers.context7]
-enabled = true
-command = "npx"
+enabled = false
+command = "npx.cmd"
 args = ["-y", "@upstash/context7-mcp@latest"]
 supports_parallel_tool_calls = true
 
@@ -50,7 +53,7 @@ approval_policy = "on-request"
 model = "gpt-5.5"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
-approval_policy = "never"
+approval_policy = "on-request"
 
 [profiles.ci]
 model = "gpt-5.5"

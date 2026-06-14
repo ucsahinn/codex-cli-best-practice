@@ -12,21 +12,68 @@ const requiredFiles = [
   "CONTRIBUTING.md",
   "SECURITY.md",
   "CHANGELOG.md",
+  ".github/PULL_REQUEST_TEMPLATE.md",
   ".github/release.yml",
+  ".github/workflows/docs-guard.yml",
   "docs/FAQ.md",
   "docs/ROADMAP.md",
+  "docs/PUBLIC_READINESS.md",
+  "docs/AGENT_SECURITY.md",
+  "docs/WINDOWS.md",
   "docs/RELEASE_NOTES_v0.1.0.md",
+  "docs/RELEASE_NOTES_v0.1.1.md",
   "docs/RESEARCH_NOTES.md",
   "docs/RELEASE_CHECKLIST.md",
   ".codex/config.toml",
+  ".codex/hooks.json",
   ".codex/agents/weather-agent.toml",
   ".agents/skills/weather-svg-creator/SKILL.md",
 ];
 
+const ignoredDirectories = new Set([
+  ".git",
+  ".serena",
+  ".tmp",
+  "node_modules",
+  "__pycache__",
+]);
+
 const failures = [];
+
+function toRelative(absolute) {
+  return path.relative(root, absolute).replaceAll(path.sep, "/");
+}
 
 function exists(relativePath) {
   return fs.existsSync(path.join(root, relativePath));
+}
+
+function isInsideRoot(target) {
+  const relative = path.relative(root, target);
+  return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
+}
+
+function listFiles(directory, predicate) {
+  const entries = fs.readdirSync(directory, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const absolute = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      if (ignoredDirectories.has(entry.name)) {
+        continue;
+      }
+      files.push(...listFiles(absolute, predicate));
+      continue;
+    }
+
+    if (entry.isFile() && predicate(entry.name, absolute)) {
+      files.push(toRelative(absolute));
+    }
+  }
+
+  return files;
 }
 
 for (const file of requiredFiles) {
@@ -35,8 +82,14 @@ for (const file of requiredFiles) {
   }
 }
 
-const readmePath = path.join(root, "README.md");
-const readme = fs.readFileSync(readmePath, "utf8");
+const allTextFiles = listFiles(root, (name) =>
+  /\.(md|json|toml|yml|yaml|js|svg)$/i.test(name)
+);
+
+const markdownFiles = allTextFiles.filter((file) => file.endsWith(".md"));
+const jsonFiles = allTextFiles.filter((file) => file.endsWith(".json"));
+
+const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
 
 for (const marker of ["#english", "#turkce", "README.tr.md", "docs/RELEASE_CHECKLIST.md"]) {
   if (!readme.includes(marker)) {
@@ -44,37 +97,55 @@ for (const marker of ["#english", "#turkce", "README.tr.md", "docs/RELEASE_CHECK
   }
 }
 
-const blockedReadmeMarkers = [
+const blockedMarkers = [
   "shanraisshan/codex-cli-best-practice",
   "Sponsor My Work",
   "buy.polar.sh",
+  "codex-cli-best-practice-main",
+  "C:\\Users\\ulasc",
+  "features.codex_hooks",
+  ".codex/hooks/logs/hooks-log.jsonl",
+  "WebFetch(domain:*)",
+  "Bash(*)",
+  "Edit(*)",
+  "Write(*)",
+  "NotebookEdit(*)",
 ];
 
-for (const marker of blockedReadmeMarkers) {
-  if (readme.includes(marker)) {
-    failures.push(`README.md still contains upstream marker: ${marker}`);
-  }
-}
+const mojibakeMarkers = [
+  "Â",
+  "Ã",
+  "â€™",
+  "â€œ",
+  "â€",
+  "ðŸ",
+  "ÅŸ",
+  "Ä±",
+  "ÄŸ",
+];
 
-function listMarkdownFiles(directory) {
-  const entries = fs.readdirSync(directory, { withFileTypes: true });
-  const files = [];
+for (const file of allTextFiles) {
+  const content = fs.readFileSync(path.join(root, file), "utf8");
 
-  for (const entry of entries) {
-    const absolute = path.join(directory, entry.name);
-    const relative = path.relative(root, absolute).replaceAll(path.sep, "/");
-
-    if (entry.isDirectory()) {
-      if ([".git", "node_modules", ".serena"].includes(entry.name)) {
-        continue;
-      }
-      files.push(...listMarkdownFiles(absolute));
-    } else if (entry.isFile() && entry.name.endsWith(".md")) {
-      files.push(relative);
+  for (const marker of blockedMarkers) {
+    if (content.includes(marker)) {
+      failures.push(`${file} contains blocked marker: ${marker}`);
     }
   }
 
-  return files;
+  for (const marker of mojibakeMarkers) {
+    if (content.includes(marker)) {
+      failures.push(`${file} contains likely mojibake marker: ${marker}`);
+    }
+  }
+}
+
+for (const file of jsonFiles) {
+  try {
+    JSON.parse(fs.readFileSync(path.join(root, file), "utf8"));
+  } catch (error) {
+    failures.push(`${file} is not valid JSON: ${error.message}`);
+  }
 }
 
 function normalizeLocalHref(href) {
@@ -104,7 +175,7 @@ function normalizeLocalHref(href) {
 
 const markdownLinkPattern = /!?\[[^\]]*]\(([^)]+)\)/g;
 
-for (const file of listMarkdownFiles(root)) {
+for (const file of markdownFiles) {
   const absolute = path.join(root, file);
   const content = fs.readFileSync(absolute, "utf8").replace(/```[\s\S]*?```/g, "");
   const directory = path.dirname(absolute);
@@ -117,8 +188,17 @@ for (const file of listMarkdownFiles(root)) {
     }
 
     const target = path.resolve(directory, href);
-    if (!target.startsWith(root) || !fs.existsSync(target)) {
+    if (!isInsideRoot(target) || !fs.existsSync(target)) {
       failures.push(`${file} has unresolved local link: ${match[1]}`);
+    }
+  }
+}
+
+const hookLogDirectory = path.join(root, ".codex", "hooks", "logs");
+if (fs.existsSync(hookLogDirectory)) {
+  for (const file of fs.readdirSync(hookLogDirectory)) {
+    if (file !== ".gitkeep") {
+      failures.push(`Generated hook log must not be committed: .codex/hooks/logs/${file}`);
     }
   }
 }
