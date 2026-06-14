@@ -7,7 +7,7 @@ Checked on 2026-06-14. Refresh these notes before each public release because Co
 | Source | Type | Confidence | Outdated risk | What it supports | Repo impact |
 |---|---|---:|---:|---|---|
 | OpenAI Codex customization docs | Official docs | High | Medium | `AGENTS.md`, skills, MCP, memories, and config are separate instruction/context layers | Keep surface map explicit and avoid putting every rule in README |
-| OpenAI Codex config reference | Official docs | High | Medium | Project/user config boundaries, profiles, sandbox, approvals, MCP, features | Keep `.codex/config.toml` conservative and comment volatile examples |
+| OpenAI Codex config reference | Official docs | High | Medium | Project/user config boundaries, user-level profiles, sandbox, approvals, MCP, features | Keep `.codex/config.toml` conservative and keep named profile examples in `examples/profiles/` |
 | OpenAI Codex security and approvals docs | Official docs | High | Medium | Sandbox and approvals are separate controls; network is restricted unless configured | Document safe profiles and release gates |
 | OpenAI Codex skills docs | Official docs | High | Medium | Skills use progressive disclosure through `SKILL.md` metadata and supporting files | Keep skill descriptions trigger-focused |
 | OpenAI Codex plugins docs | Official docs | High | Medium | Plugins can distribute skills, MCP, hooks, commands, and assets | Keep plugin guidance separate from skill guidance |

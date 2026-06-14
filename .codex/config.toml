@@ -28,46 +28,6 @@ args = ["-y", "@upstash/context7-mcp@latest"]
 supports_parallel_tool_calls = true
 
 ################################################################################
-# Profiles
-################################################################################
-
-[profiles.conservative]
-model = "gpt-5.5"
-model_reasoning_effort = "low"
-sandbox_mode = "read-only"
-approval_policy = "untrusted"
-
-[profiles.development]
-model = "gpt-5.5"
-model_reasoning_effort = "medium"
-sandbox_mode = "workspace-write"
-approval_policy = "on-request"
-
-[profiles.deep-research]
-model = "gpt-5.5"
-model_reasoning_effort = "high"
-sandbox_mode = "workspace-write"
-approval_policy = "on-request"
-
-[profiles.trusted]
-model = "gpt-5.5"
-model_reasoning_effort = "high"
-sandbox_mode = "workspace-write"
-approval_policy = "on-request"
-
-[profiles.ci]
-model = "gpt-5.5"
-model_reasoning_effort = "low"
-sandbox_mode = "read-only"
-approval_policy = "never"
-
-[profiles.review]
-model = "gpt-5.5"
-model_reasoning_effort = "high"
-sandbox_mode = "read-only"
-approval_policy = "on-request"
-
-################################################################################
 # Agents
 ################################################################################
 

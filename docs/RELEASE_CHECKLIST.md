@@ -92,7 +92,7 @@ If the default branch is not `main`, replace it with the real branch name.
 
 ## 7. GitHub Release
 
-Create the release from the pushed tag using [docs/RELEASE_NOTES_v0.1.1.md](RELEASE_NOTES_v0.1.1.md).
+Create the release from the pushed tag using the matching versioned release notes, such as [docs/RELEASE_NOTES_v0.1.2.md](RELEASE_NOTES_v0.1.2.md).
 
 Suggested title:
 

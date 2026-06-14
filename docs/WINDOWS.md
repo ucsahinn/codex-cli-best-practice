@@ -11,15 +11,15 @@ python --version
 git status --short
 ```
 
-## Codex Profiles
+## Codex Startup
 
-Use the normal development profile for local editing:
+From this repository, start Codex normally so the project guidance and shared config can be discovered:
 
 ```powershell
-codex --profile development
+codex
 ```
 
-Use `read-only` style profiles for review, research, and CI-like checks.
+Named `--profile` arguments are user-level profile files in Codex. If you want named local presets, copy a file from `examples/profiles/` into your Codex home using the naming convention your installed Codex version expects.
 
 ## Hooks
 

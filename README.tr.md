@@ -14,7 +14,7 @@ Bu bir uygulama kod tabanı değildir. Dokümantasyon, config, örnek workflow, 
 
 ```bash
 npm run validate
-codex --profile development
+codex
 ```
 
 Demo prompt:
@@ -34,7 +34,7 @@ Beklenen çıktı:
 |---|---|---|
 | Prompt | Tek seferlik istek ve sınırlar | Güncel kullanıcı isteği |
 | `AGENTS.md` | Kalıcı repo kuralları, doğrulama, güvenlik çizgileri | [AGENTS.md](AGENTS.md) |
-| `.codex/config.toml` | Profil, sandbox, approval, MCP, hook ve agent kayıtları | [.codex/config.toml](.codex/config.toml) |
+| `.codex/config.toml` | Project defaults, sandbox, approval, MCP, hook ve agent kayıtları | [.codex/config.toml](.codex/config.toml) |
 | Skill | Tekrar kullanılacak iş akışı | [.agents/skills/weather-svg-creator/SKILL.md](.agents/skills/weather-svg-creator/SKILL.md) |
 | Subagent | Açıkça çağrılan uzman rol | [.codex/agents/weather-agent.toml](.codex/agents/weather-agent.toml) |
 | MCP | Güncel doküman, dış bağlam, private tool | [best-practice/codex-mcp.md](best-practice/codex-mcp.md) |

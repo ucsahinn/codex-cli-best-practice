@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.1.2 - Profile And Anchor Fixes
+
+### Fixed
+
+- Replaced README quick-start `codex --profile development` commands with clone-safe `codex` commands.
+- Added explicit README anchors for emoji-prefixed navigation targets.
+- Extended validation to check same-document fragments and raw HTML `href` / `src` references.
+- Moved named profile guidance out of the project config claim path and clarified that `--profile` is user-level.
+
+### Notes
+
+- `v0.1.1` was tagged before final reviewer findings were applied. Publish `v0.1.2` as the public release.
+
 ## v0.1.1 - Public Readiness Upgrade
 
 ### Added

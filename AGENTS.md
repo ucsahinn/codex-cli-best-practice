@@ -12,7 +12,7 @@ This is a documentation and configuration reference, not an application codebase
 
 - `README.md` - English-first welcome page with a Turkish bridge.
 - `README.tr.md` - Turkish onboarding and maintenance guide.
-- `.codex/config.toml` - project profiles, sandboxing, approval policy, MCP, and agent registration.
+- `.codex/config.toml` - project defaults, sandboxing, approval policy, MCP, hooks, and agent registration.
 - `.codex/agents/weather-agent.toml` - Istanbul weather demo agent.
 - `.agents/skills/weather-svg-creator/SKILL.md` - SVG weather card renderer skill.
 - `best-practice/` - focused Codex surface guides.

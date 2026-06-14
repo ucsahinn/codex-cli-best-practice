@@ -22,6 +22,7 @@ const requiredFiles = [
   "docs/WINDOWS.md",
   "docs/RELEASE_NOTES_v0.1.0.md",
   "docs/RELEASE_NOTES_v0.1.1.md",
+  "docs/RELEASE_NOTES_v0.1.2.md",
   "docs/RESEARCH_NOTES.md",
   "docs/RELEASE_CHECKLIST.md",
   ".codex/config.toml",
@@ -148,10 +149,10 @@ for (const file of jsonFiles) {
   }
 }
 
-function normalizeLocalHref(href) {
+function normalizeLocalReference(href) {
   let normalized = href.trim();
 
-  if (!normalized || normalized.startsWith("#")) {
+  if (!normalized) {
     return null;
   }
 
@@ -163,17 +164,74 @@ function normalizeLocalHref(href) {
     normalized = normalized.slice(1, -1);
   }
 
-  normalized = normalized.split("#")[0];
+  const [withoutFragment, fragment = ""] = normalized.split("#");
+  normalized = withoutFragment;
   normalized = normalized.split("?")[0];
 
-  if (!normalized) {
-    return null;
-  }
-
-  return decodeURIComponent(normalized);
+  return {
+    pathPart: normalized ? decodeURIComponent(normalized) : "",
+    fragment: fragment ? decodeURIComponent(fragment) : "",
+  };
 }
 
 const markdownLinkPattern = /!?\[[^\]]*]\(([^)]+)\)/g;
+const htmlReferencePattern = /\b(?:href|src)=["']([^"']+)["']/g;
+
+function githubLikeSlug(text) {
+  return text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/<[^>]+>/g, "")
+    .replace(/[^\p{Letter}\p{Number}\s-]/gu, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+function hasFragmentTarget(target, fragment) {
+  if (!fragment) {
+    return true;
+  }
+
+  const content = fs.readFileSync(target, "utf8");
+  if (
+    content.includes(`id="${fragment}"`) ||
+    content.includes(`id='${fragment}'`) ||
+    content.includes(`name="${fragment}"`) ||
+    content.includes(`name='${fragment}'`)
+  ) {
+    return true;
+  }
+
+  const headingPattern = /^#{1,6}\s+(.+)$/gm;
+  let match;
+  while ((match = headingPattern.exec(content)) !== null) {
+    if (githubLikeSlug(match[1]) === fragment) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function checkLocalReference(file, directory, rawHref) {
+  const reference = normalizeLocalReference(rawHref);
+  if (!reference) {
+    return;
+  }
+
+  const target = reference.pathPart
+    ? path.resolve(directory, reference.pathPart)
+    : path.join(root, file);
+
+  if (!isInsideRoot(target) || !fs.existsSync(target)) {
+    failures.push(`${file} has unresolved local reference: ${rawHref}`);
+    return;
+  }
+
+  if (reference.fragment && !hasFragmentTarget(target, reference.fragment)) {
+    failures.push(`${file} has unresolved local fragment: ${rawHref}`);
+  }
+}
 
 for (const file of markdownFiles) {
   const absolute = path.join(root, file);
@@ -182,15 +240,11 @@ for (const file of markdownFiles) {
   let match;
 
   while ((match = markdownLinkPattern.exec(content)) !== null) {
-    const href = normalizeLocalHref(match[1]);
-    if (!href) {
-      continue;
-    }
+    checkLocalReference(file, directory, match[1]);
+  }
 
-    const target = path.resolve(directory, href);
-    if (!isInsideRoot(target) || !fs.existsSync(target)) {
-      failures.push(`${file} has unresolved local link: ${match[1]}`);
-    }
+  while ((match = htmlReferencePattern.exec(content)) !== null) {
+    checkLocalReference(file, directory, match[1]);
   }
 }
 

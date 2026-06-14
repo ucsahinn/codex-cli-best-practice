@@ -33,6 +33,8 @@ This public fork is maintained as an independent Codex best-practices repository
 | Public readiness checklist | [docs/PUBLIC_READINESS.md](docs/PUBLIC_READINESS.md) |
 | Local validation | `npm run validate` |
 
+<a id="english"></a>
+
 ## 🇬🇧 English
 
 ### 🎯 What This Repository Is
@@ -41,11 +43,13 @@ This repo is a practical operating handbook for Codex CLI users who want repeata
 
 It is intentionally a documentation and configuration reference, not an application codebase.
 
+<a id="quick-start"></a>
+
 ### ⚡ Quick Start
 
 ```bash
 npm run validate
-codex --profile development
+codex
 ```
 
 Try the included agent-to-skill demo:
@@ -59,13 +63,15 @@ Expected outputs:
 - `orchestration-workflow/weather.svg`
 - `orchestration-workflow/output.md` (ignored because it is generated)
 
+<a id="codex-surface-map"></a>
+
 ### 🧩 Codex Surface Map
 
 | Surface | Use it for | Repo example |
 |---|---|---|
 | Prompt | One-off task constraints | Current user request |
 | `AGENTS.md` | Durable project rules and verification commands | [AGENTS.md](AGENTS.md) |
-| `.codex/config.toml` | Profiles, sandboxing, approvals, MCP, hooks, agents | [.codex/config.toml](.codex/config.toml) |
+| `.codex/config.toml` | Project defaults, sandboxing, approvals, MCP, hooks, agents | [.codex/config.toml](.codex/config.toml) |
 | Skill | Reusable workflow with progressive disclosure | [.agents/skills/weather-svg-creator/SKILL.md](.agents/skills/weather-svg-creator/SKILL.md) |
 | Subagent | Explicit specialist role for bounded work | [.codex/agents/weather-agent.toml](.codex/agents/weather-agent.toml) |
 | MCP | Live docs, private tools, external context | [best-practice/codex-mcp.md](best-practice/codex-mcp.md) |
@@ -79,7 +85,7 @@ Expected outputs:
 | Welcome | `README.md` | English-first public entry point with Turkish bridge |
 | Turkish guide | `README.tr.md` | Full Turkish onboarding and maintenance guide |
 | Agent rules | `AGENTS.md`, `CLAUDE.md` | Codex and Claude-compatible operating guidance |
-| Codex config | `.codex/` | Profiles, agents, hooks, hook scripts, examples |
+| Codex config | `.codex/` | Project defaults, agents, hooks, hook scripts, examples |
 | Skills | `.agents/skills/` | Reusable Codex workflows |
 | Best practices | `best-practice/` | Focused Codex surface guides |
 | Examples | `examples/` | Profile and CI examples |
@@ -119,6 +125,8 @@ git status --short
 
 Then commit intentionally, push the branch, tag the release, create the GitHub Release from the matching release notes, and verify the public page, links, Actions run, and release asset state.
 
+<a id="turkce"></a>
+
 ## 🇹🇷 Turkce
 
 ### 🎯 Bu Repo Ne?
@@ -129,7 +137,7 @@ Bu fork, Codex CLI kullananlar için iki dilli bir operator rehberi. Amacı sade
 
 ```bash
 npm run validate
-codex --profile development
+codex
 ```
 
 Demo için Codex'e şunu yaz:
@@ -145,7 +153,7 @@ Istanbul icin guncel hava durumunu Celsius olarak getir ve repo icindeki SVG hav
 | Repo mantığını öğren | `README.md` |
 | Türkçe rehber | `README.tr.md` |
 | Kalıcı talimatlar | `AGENTS.md` |
-| Codex profilleri | `.codex/config.toml` |
+| Codex ayarları | `.codex/config.toml` |
 | Skill yazımı | `docs/SKILLS.md`, `best-practice/codex-skills.md` |
 | Hook kullanımı | `best-practice/codex-hooks.md`, `.codex/hooks/HOOKS-README.md` |
 | Windows notları | `docs/WINDOWS.md` |
