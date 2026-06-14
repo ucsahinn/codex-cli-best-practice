@@ -12,8 +12,14 @@
 </p>
 
 <p align="center">
+  🌐 <strong>Languages:</strong>
+  🇩🇪 Deutsch ·
+  🇪🇸 Español ·
   <a href="#english">🇬🇧 English</a> ·
-  <a href="#turkce">🇹🇷 Turkce</a> ·
+  🇧🇷 Português (Brasil) ·
+  <a href="#turkce">🇹🇷 Türkçe</a> ·
+  🇫🇷 French
+  <br>
   <a href="README.tr.md">📘 TR full guide</a> ·
   <a href="docs/RELEASE_CHECKLIST.md">🚢 Release checklist</a> ·
   <a href="docs/RESEARCH_NOTES.md">🔎 Research notes</a>
