@@ -1,5 +1,14 @@
 # Codex CLI Operator Handbook - Türkçe Rehber
 
+<p align="center">
+  <a href="README.de.md">🇩🇪 Deutsch</a> ·
+  <a href="README.es.md">🇪🇸 Español</a> ·
+  <a href="README.md">🇬🇧 English</a> ·
+  <a href="README.pt-BR.md">🇧🇷 Português (Brasil)</a> ·
+  <a href="README.tr.md">🇹🇷 Türkçe</a> ·
+  <a href="README.fr.md">🇫🇷 French</a>
+</p>
+
 > 🚀 Codex CLI için fork-first, iki dilli, güvenli ve release'e hazır operator rehberi.
 
 [← English README](README.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Araştırma notları](docs/RESEARCH_NOTES.md) · [Public readiness](docs/PUBLIC_READINESS.md)

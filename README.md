@@ -13,12 +13,12 @@
 
 <p align="center">
   🌐 <strong>Languages:</strong>
-  🇩🇪 Deutsch ·
-  🇪🇸 Español ·
+  <a href="README.de.md">🇩🇪 Deutsch</a> ·
+  <a href="README.es.md">🇪🇸 Español</a> ·
   <a href="#english">🇬🇧 English</a> ·
-  🇧🇷 Português (Brasil) ·
+  <a href="README.pt-BR.md">🇧🇷 Português (Brasil)</a> ·
   <a href="#turkce">🇹🇷 Türkçe</a> ·
-  🇫🇷 French
+  <a href="README.fr.md">🇫🇷 French</a>
   <br>
   <a href="README.tr.md">📘 TR full guide</a> ·
   <a href="docs/RELEASE_CHECKLIST.md">🚢 Release checklist</a> ·
