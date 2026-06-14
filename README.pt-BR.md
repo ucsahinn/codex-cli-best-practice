@@ -1,63 +1,151 @@
-# Codex CLI Operator Handbook
+# &#129504; Codex CLI Operator Handbook - README completa em português do Brasil
 
-<p align="center">
-  <a href="README.de.md">&#127465;&#127466; Deutsch</a> ? <a href="README.es.md">&#127466;&#127480; Espa&ntilde;ol</a> ? <a href="README.md">&#127468;&#127463; English</a> ? <a href="README.pt-BR.md">&#127463;&#127479; Portugu&ecirc;s (Brasil)</a> ? <a href="README.tr.md">&#127481;&#127479; T&uuml;rk&ccedil;e</a> ? <a href="README.fr.md">&#127467;&#127479; French</a>
-</p>
+[&#127468;&#127463; English](README.md) | [&#127465;&#127466; Deutsch](README.de.md) | [&#127466;&#127480; Español](README.es.md) | [&#127463;&#127479; Português (Brasil)](README.pt-BR.md) | [&#127481;&#127479; Türkçe](README.tr.md) | [&#127467;&#127479; Français](README.fr.md)
 
-Handbook fork-first para operar o Codex CLI: escolha de superficies, defaults seguros, skills, MCP, hooks, subagents, fixes Windows e checks de release.
+> Este arquivo é uma porta de entrada completa em português do Brasil, não um resumo curto. Ele cobre objetivo, limites, uso, validação, segurança e publicação.
+>
+> README canônico em inglês: [README.md](README.md)
 
-## Por que este repositorio existe
+Public handbook for operating Codex CLI with safer config, agents, skills, MCP, hooks and release hygiene.
 
-Handbook fork-first para operar o Codex CLI: escolha de superficies, defaults seguros, skills, MCP, hooks, subagents, fixes Windows e checks de release.
+Comece pelo README canônico quando precisar da descrição em inglês mais atual. Use esta página para ler o mesmo contrato operacional em português do Brasil.
 
-Esta pagina localizada e mantida para que leitores entendam o repositorio sem depender apenas de uma etiqueta curta de idioma. A referencia canonica profunda continua em README.md; esta pagina traz contexto suficiente para escolher a entrada, o limite de seguranca e a verificacao correta.
+## Estado e sinais de confiança
 
-## Para quem e
+|Área | Detalhe|
+|--- | ---|
+|Status | Public repository: ucsahinn/codex-cli-best-practice|
+|Fonte da verdade | [README canônico em inglês](README.md)|
+|Usuários | Codex CLI users building a safer local setup.; Teams writing durable AGENTS.md and config contracts.|
+|Validação | Docs links resolve locally.; Examples are stored as examples, not active secrets.|
+|Segurança | Documents Codex surfaces instead of hiding them in ad-hoc prompts.; Separates AGENTS.md, config.toml, skills, MCP, hooks, memory and marketplaces.|
 
-Operadores de Codex, maintainers e equipes que preferem workflows repetiveis em vez de prompts soltos.
+## O que este repositório é
 
-## Comeco rapido
+- A practical Codex CLI operating guide.
+- A repository of best-practice notes for AGENTS.md, MCP, config, hooks, memory, skills, subagents and marketplaces.
+- A public reference for Windows-friendly Codex setup decisions.
+- A validation-backed docs repo that avoids unsupported commands and stale links.
 
-| Se voce precisa... | Abra |
-| --- | --- |
-| Canonical README | [README.md](README.md) |
-| Turkish full guide | [README.tr.md](README.tr.md) |
-| Codex skills | [best-practice/codex-skills.md](best-practice/codex-skills.md) |
-| Codex MCP | [best-practice/codex-mcp.md](best-practice/codex-mcp.md) |
-| Windows notes | [docs/WINDOWS.md](docs/WINDOWS.md) |
-| Release checklist | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
+## O que ele não é
 
-## Mapa do repositorio
+- Not the official Codex manual.
+- Not a replacement for official OpenAI documentation.
+- Not a place for account tokens or private MCP credentials.
+- Not a guarantee that every future Codex flag keeps the same behavior.
 
-- AGENTS.md - durable repo guidance
-- best-practice/ - Codex surface guides
-- docs/ - release, security and Windows notes
-- examples/ - profile and CI examples
-- orchestration-workflow/ - runnable example workflow
-- scripts/validate-docs.mjs - documentation validator
+## Para quem é
 
-## Validacao e higiene de release
+- Codex CLI users building a safer local setup.
+- Teams writing durable AGENTS.md and config contracts.
+- Maintainers reviewing skill or plugin distribution decisions.
+- Users who want examples before changing global Codex settings.
 
-Antes de commit ou publicacao, revise links, Markdown, validacao existente do repo e Gitleaks.
+## Início rápido
 
-Caminho recomendado de release/readiness:
+1. Clone ou atualize o repositório.
+2. Leia README, segurança e mapa de documentação.
+3. Execute as validações adequadas.
+4. Stage somente os arquivos alterados de forma explícita.
+5. Antes de push ou release, revise remoto, segredos e links novamente.
 
-1. Revise o README relevante e os documentos linkados.
-2. Execute a validacao do repositorio quando existir um comando.
-3. Verifique links Markdown e assets locais.
-4. Execute Gitleaks ou o secret scan configurado.
-5. Verifique origin/main depois do push antes de afirmar que a publicacao terminou.
+## Guia de decisão
 
-## Limite de seguranca e escopo publico
+- Need durable repo instructions -> AGENTS.md.
+- Need local model, sandbox or MCP settings -> config.toml.
+- Need reusable workflow -> skill.
+- Need external live context -> MCP connector.
+- Need reviewed lifecycle automation -> hooks.
 
-Nao armazenar segredos em config, hooks, rules ou docs. Conectores autenticados ficam desativados ate que uma tarefa concreta precise deles.
+## Mapa do repositório
 
-## Contribuicao e manutencao
+|Caminho | Por que importa|
+|--- | ---|
+|[best-practice/](best-practice/) | topic-by-topic Codex guidance|
+|[docs/](docs/) | FAQ, Windows notes, public readiness and release checklists|
+|[examples/profiles/](examples/profiles/) | sample config profiles|
+|[examples/ci-cd/](examples/ci-cd/) | CI examples|
+|[scripts/validate-docs.mjs](scripts/validate-docs.mjs) | docs and link validator|
+|[AGENTS.md](AGENTS.md) | repo working agreement|
 
-Mantenha as paginas localizadas alinhadas com o README canonico quando escopo, passos de instalacao, regras de release ou limites de seguranca mudarem. Nao adicione afirmacoes sem respaldo no repositorio, docs live do produto ou evidencia publica de release.
+## Fluxo de trabalho
 
-## Padrao de completude
+1. Read the surface map before changing setup.
+2. Prefer official docs and local config evidence for version-sensitive claims.
+3. Keep examples copy-pasteable but conservative.
+4. Validate docs and links after every public wording change.
+5. Run secret scans before push.
 
-Este README localizado nao e uma nota curta. Ele explica proposito, entrada, superficies do repositorio, validacao, limite de seguranca e referencias canonicas.
+## Comandos e validação
 
-Referencia canonica: [README.md](README.md).
+Execute estes comandos somente depois de clonar o repositório e entender o que eles verificam ou escrevem.
+
+```powershell
+npm run validate
+node scripts/validate-docs.mjs
+git diff --check
+gitleaks dir . --no-banner --redact
+```
+
+## Lista de verificação
+
+- Docs links resolve locally.
+- Examples are stored as examples, not active secrets.
+- Security notes do not overpromise sandboxing.
+- Release notes and changelog remain aligned with visible changes.
+- Remote HEAD is verified after push.
+
+## Limite de segurança
+
+- Documents Codex surfaces instead of hiding them in ad-hoc prompts.
+- Separates AGENTS.md, config.toml, skills, MCP, hooks, memory and marketplaces.
+- Includes examples and a docs validator.
+- Keeps upstream attribution and public fork boundaries visible.
+
+Public-safe rule: do not add secrets, tokens, cookies, private keys, private prompts, customer data, local-only auth files, generated logs, archives or build outputs unless the canonical README explicitly says they belong in the public repo.
+
+## Higiene de release e publicação
+
+- Docs-only changes still need diff review and validation.
+- Do not publish config containing real tokens.
+- Keep release notes in docs/ when versioned documentation changes.
+- Verify GitHub Actions after push when workflows exist.
+
+## Manutenção
+
+- Keep this localized README aligned with README.md when the repo contract changes.
+- Prefer factual repo links over marketing claims.
+- Do not invent install commands, metrics, users, releases or support promises.
+- If a command is version-sensitive, re-check it before documenting it.
+- When a localized file cannot be updated fully, leave a clear note instead of a partial translation.
+
+## Caminho de contribuição
+
+- Open a focused change against the smallest set of files.
+- Read AGENTS.md or CONTRIBUTING.md when present before editing.
+- Run the repo validation commands listed above.
+- Review staged diffs explicitly before commit.
+- Use security disclosure paths instead of public issues for sensitive reports.
+
+## Definição de concluído
+
+Concluído significa: conteúdo completo, links corretos, limites de segurança claros, validação executada, Git limpo e remote HEAD verificado depois do push.
+
+|Recomendação | Por que importa|
+|--- | ---|
+|Content | Public handbook for operating Codex CLI with safer config, agents, skills, MCP, hooks and release hygiene.|
+|Links | All referenced local files must exist and resolve from the repository root.|
+|Security | Examples are stored as examples, not active secrets.|
+|Verification | Valide estrutura, links, Markdown, segredos, scripts relevantes e remote HEAD antes de afirmar que algo foi publicado.|
+|Remote | After push, compare local HEAD with origin/main and GitHub remote HEAD.|
+
+## Links importantes
+
+|Caminho | Por que importa|
+|--- | ---|
+|[Canonical README](README.md) | README.md|
+|[Codex skills guide](best-practice/codex-skills.md) | best-practice/codex-skills.md|
+|[Codex MCP guide](best-practice/codex-mcp.md) | best-practice/codex-mcp.md|
+|[Windows notes](docs/WINDOWS.md) | docs/WINDOWS.md|
+|[Release checklist](docs/RELEASE_CHECKLIST.md) | docs/RELEASE_CHECKLIST.md|
+|[Security notes](docs/AGENT_SECURITY.md) | docs/AGENT_SECURITY.md|
