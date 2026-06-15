@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.4 - Companion Handbook Positioning
+
+### Changed
+
+- Reframed the main README as a multilingual handbook gateway instead of a bilingual-only page.
+- Added the explicit companion relationship with `codex-enterprise-starter`.
+- Reworked German, Spanish, French, and Brazilian Portuguese READMEs as concise localized overview pages.
+- Clarified the Turkish guide with the enterprise starter vs handbook distinction.
+- Extended validation to catch old untranslated localized README template phrases.
+
 ## v0.1.3 - Localized README Coverage
 
 ### Added

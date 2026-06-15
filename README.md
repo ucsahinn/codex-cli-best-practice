@@ -1,9 +1,9 @@
 # Codex CLI Operator Handbook
 
-> 🚀 A bilingual, fork-first field guide for running Codex CLI with clear instructions, safer defaults, reusable skills, reviewed hooks, and repeatable release checks.
+> 🚀 A multilingual, fork-first field guide for running Codex CLI with clear instructions, safer defaults, reusable skills, reviewed hooks, and repeatable release checks.
 
 ![Codex CLI](https://img.shields.io/badge/Codex_CLI-operator_handbook-111827?style=flat&labelColor=0f172a)
-![Language](https://img.shields.io/badge/language-EN_%2B_TR-0f766e?style=flat)
+![Language](https://img.shields.io/badge/language-multilingual-0f766e?style=flat)
 ![Docs](https://img.shields.io/badge/docs-validated-2563eb?style=flat)
 ![Security](https://img.shields.io/badge/security-secret_scan_required-b91c1c?style=flat)
 
@@ -25,7 +25,7 @@
   <a href="docs/RESEARCH_NOTES.md">🔎 Research notes</a>
 </p>
 
-This public fork is maintained as an independent Codex best-practices repository. It keeps upstream MIT license attribution, but the handbook, bilingual onboarding, validation, security notes, release flow, and fork-facing identity are owned here.
+This public fork is maintained as an independent Codex best-practices repository. It keeps upstream MIT license attribution, but the handbook, multilingual onboarding, validation, security notes, release flow, and fork-facing identity are owned here.
 
 ## 🧭 Start Here
 
@@ -38,6 +38,17 @@ This public fork is maintained as an independent Codex best-practices repository
 | Release and publish gate | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
 | Public readiness checklist | [docs/PUBLIC_READINESS.md](docs/PUBLIC_READINESS.md) |
 | Local validation | `npm run validate` |
+
+## 🧭 Companion Project
+
+This repo is the companion handbook for the broader Codex setup ecosystem:
+
+| Repo | Role |
+|---|---|
+| `codex-enterprise-starter` | Installable starter kit for setting up a reusable Codex working environment |
+| `codex-cli-best-practice` | Public handbook for operating, extending, validating, and releasing Codex workflows safely |
+
+Use the starter when you want a ready setup. Use this handbook when you want to understand the surfaces, safety model, validation path, and maintenance rules behind that setup.
 
 <a id="english"></a>
 
@@ -88,7 +99,7 @@ Expected outputs:
 
 | Area | Path | Purpose |
 |---|---|---|
-| Welcome | `README.md` | English-first public entry point with Turkish bridge |
+| Welcome | `README.md` | English-first public entry point with multilingual bridge |
 | Turkish guide | `README.tr.md` | Full Turkish onboarding and maintenance guide |
 | Agent rules | `AGENTS.md`, `CLAUDE.md` | Codex and Claude-compatible operating guidance |
 | Codex config | `.codex/` | Project defaults, agents, hooks, hook scripts, examples |

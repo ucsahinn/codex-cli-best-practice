@@ -9,7 +9,7 @@
   <a href="README.fr.md">🇫🇷 French</a>
 </p>
 
-> 🚀 Codex CLI için fork-first, iki dilli, güvenli ve release'e hazır operator rehberi.
+> 🚀 Codex CLI için fork-first, çok dilli, güvenli ve release'e hazır operator rehberi.
 
 [← English README](README.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Araştırma notları](docs/RESEARCH_NOTES.md) · [Public readiness](docs/PUBLIC_READINESS.md)
 
@@ -18,6 +18,17 @@
 Bu repo, Codex CLI ile çalışan kişiler ve ekipler için pratik bir başvuru setidir. Hangi bilginin promptta kalacağını, hangisinin `AGENTS.md` dosyasına taşınacağını, ne zaman skill yazılacağını, MCP'nin nerede anlamlı olduğunu, hook'ların nasıl güvenli tutulacağını ve release öncesi nelerin doğrulanacağını tek yerde toplar.
 
 Bu bir uygulama kod tabanı değildir. Dokümantasyon, config, örnek workflow, hook ve release disiplini reposudur.
+
+## 🧭 Enterprise Starter ile farkı ne?
+
+Bu repo, `codex-enterprise-starter` ile çakışmaz; onu tamamlar.
+
+| Repo | Görev |
+|---|---|
+| `codex-enterprise-starter` | Kurulabilir başlangıç paketi; hazır Codex çalışma düzeni verir |
+| `codex-cli-best-practice` | Companion handbook; bu düzenin nasıl işletileceğini, genişletileceğini ve güvenli yayınlanacağını anlatır |
+
+Kısaca: starter kurulum içindir, bu repo doğru kullanım ve bakım içindir.
 
 ## ⚡ İlk 5 Dakika
 

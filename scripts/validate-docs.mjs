@@ -28,6 +28,7 @@ const requiredFiles = [
   "docs/RELEASE_NOTES_v0.1.1.md",
   "docs/RELEASE_NOTES_v0.1.2.md",
   "docs/RELEASE_NOTES_v0.1.3.md",
+  "docs/RELEASE_NOTES_v0.1.4.md",
   "docs/RESEARCH_NOTES.md",
   "docs/RELEASE_CHECKLIST.md",
   ".codex/config.toml",
@@ -118,6 +119,23 @@ const blockedMarkers = [
   "NotebookEdit(*)",
 ];
 
+const blockedLocalizedMarkers = [
+  "Public handbook for operating Codex CLI",
+  "A practical Codex CLI operating guide.",
+  "A repository of best-practice notes",
+  "A public reference for Windows-friendly Codex setup decisions.",
+  "A validation-backed docs repo",
+  "Not the official Codex manual.",
+  "Need durable repo instructions",
+  "Need local model, sandbox or MCP settings",
+  "Need reusable workflow",
+  "Need external live context",
+  "Need reviewed lifecycle automation",
+  "Public-safe rule:",
+  "Keep this localized README aligned",
+  "When a localized file cannot be updated fully",
+];
+
 const mojibakeMarkers = [
   "Â",
   "Ã",
@@ -142,6 +160,15 @@ for (const file of allTextFiles) {
   for (const marker of mojibakeMarkers) {
     if (content.includes(marker)) {
       failures.push(`${file} contains likely mojibake marker: ${marker}`);
+    }
+  }
+}
+
+for (const file of ["README.de.md", "README.es.md", "README.fr.md", "README.pt-BR.md"]) {
+  const content = fs.readFileSync(path.join(root, file), "utf8");
+  for (const marker of blockedLocalizedMarkers) {
+    if (content.includes(marker)) {
+      failures.push(`${file} contains untranslated localized README marker: ${marker}`);
     }
   }
 }
