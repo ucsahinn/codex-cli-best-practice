@@ -6,6 +6,10 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const requiredFiles = [
   "README.md",
+  "README.de.md",
+  "README.es.md",
+  "README.fr.md",
+  "README.pt-BR.md",
   "README.tr.md",
   "AGENTS.md",
   "CLAUDE.md",
@@ -23,6 +27,7 @@ const requiredFiles = [
   "docs/RELEASE_NOTES_v0.1.0.md",
   "docs/RELEASE_NOTES_v0.1.1.md",
   "docs/RELEASE_NOTES_v0.1.2.md",
+  "docs/RELEASE_NOTES_v0.1.3.md",
   "docs/RESEARCH_NOTES.md",
   "docs/RELEASE_CHECKLIST.md",
   ".codex/config.toml",

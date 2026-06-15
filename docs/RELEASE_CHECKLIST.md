@@ -84,20 +84,20 @@ Use explicit staging. Do not stage ignored local configs or generated logs.
 ## 6. Tag
 
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag vX.Y.Z
+git push origin vX.Y.Z
 ```
 
 If the default branch is not `main`, replace it with the real branch name.
 
 ## 7. GitHub Release
 
-Create the release from the pushed tag using the matching versioned release notes, such as [docs/RELEASE_NOTES_v0.1.2.md](RELEASE_NOTES_v0.1.2.md).
+Create the release from the pushed tag using the matching versioned release notes, such as `docs/RELEASE_NOTES_vX.Y.Z.md`.
 
 Suggested title:
 
 ```text
-v0.1.1 - Public Readiness Upgrade
+vX.Y.Z - Short Release Title
 ```
 
 ## 8. Post-Release Checks

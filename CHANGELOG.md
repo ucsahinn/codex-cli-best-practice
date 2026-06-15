@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.1.3 - Localized README Coverage
+
+### Added
+
+- Added localized README entry points for German, Spanish, French, and Brazilian Portuguese.
+- Added language navigation from the main README to every localized README.
+- Added release notes for the localized documentation release.
+
+### Changed
+
+- Extended docs validation so localized README files are required release artifacts.
+- Updated the release checklist examples away from stale version-specific text.
+
 ## v0.1.2 - Profile And Anchor Fixes
 
 ### Fixed
