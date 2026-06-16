@@ -513,9 +513,9 @@ Matchers filter which events trigger a hook. Not all hooks support matchers — 
 
 | Hook | Defined As | Received As | Status |
 |------|------------|-------------|--------|
-| PreToolUse | `PreToolUse:` | `"PreToolUse"` | ✅ Correct |
-| PostToolUse | `PostToolUse:` | `"PostToolUse"` | ✅ Correct |
-| Stop | `Stop:` | `"SubagentStop"` | ❌ Inconsistent |
+| PreToolUse | `PreToolUse:` | `"PreToolUse"` | <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/2705.svg" alt="" aria-hidden="true" width="20"> Correct |
+| PostToolUse | `PostToolUse:` | `"PostToolUse"` | <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/2705.svg" alt="" aria-hidden="true" width="20"> Correct |
+| Stop | `Stop:` | `"SubagentStop"` | <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/274c.svg" alt="" aria-hidden="true" width="20"> Inconsistent |
 
 **Status:** The [official hooks reference](https://code.claude.com/docs/en/hooks#hooks-in-skills-and-agents) now documents this as expected behavior: *"For subagents, Stop hooks are automatically converted to SubagentStop since that is the event that fires when a subagent completes."* This project handles it via the `AGENT_HOOK_SOUND_MAP` in `hooks.py`, which has a separate `SubagentStop` entry that maps to the `agent_subagentstop` sound folder.
 
