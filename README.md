@@ -26,6 +26,23 @@
   <a href="docs/RESEARCH_NOTES.md"><img alt="Research notes" src="https://img.shields.io/badge/research-notes-2563eb"></a>
 </p>
 
+<!-- bilingual-welcome:start -->
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3><img src="https://flagcdn.com/w20/gb.png" alt="English" width="20"> English welcome</h3>
+      <p>A public operator handbook for using Codex CLI with durable instructions, safer automation, reusable skills, hooks, MCPs, and repeatable release checks.</p>
+      <p><strong>Start here:</strong> [Quick start](#quick-start) gives the fastest path into the handbook.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3><img src="https://flagcdn.com/w20/tr.png" alt="Turkce" width="20"> T&#252;rk&#231;e kar&#351;&#305;lama</h3>
+      <p>Codex CLI kullanirken kalici talimatlar, guvenli otomasyon, yeniden kullanilabilir skilller, hooklar, MCPler ve release kontrolleri icin pratik operator rehberi.</p>
+      <p><strong>Buradan ba&#351;la:</strong> [README.tr.md](README.tr.md) tam Turkce rehberdir; ana sayfada da Turkce ozet akisi yer alir.</p>
+    </td>
+  </tr>
+</table>
+<!-- bilingual-welcome:end -->
+
 This public fork is maintained as an independent Codex best-practices repository. It keeps upstream MIT license attribution, but the handbook, multilingual onboarding, validation, security notes, release flow, and fork-facing identity are owned here.
 
 ## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9ed.svg" alt="" aria-hidden="true" width="20"> Start Here
