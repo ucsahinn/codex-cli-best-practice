@@ -4,6 +4,7 @@
 # Prerequisites for the optional Codex job:
 # - OPENAI_API_KEY configured as a repository secret.
 # - A constrained [profiles.ci] profile in .codex/config.toml.
+# - CODEX_CLI_VERSION below replaced with a reviewed, pinned version.
 # - Maintainer review before enabling any write-capable PR automation.
 
 name: Codex CI Example
@@ -18,15 +19,20 @@ permissions:
   contents: read
   pull-requests: read
 
+env:
+  CODEX_CLI_VERSION: "replace-with-reviewed-version"
+
 jobs:
   docs-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: "22"
 
@@ -41,17 +47,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: "22"
 
       - name: Install Codex CLI
-        run: npm install -g @openai/codex
+        run: |
+          test "$CODEX_CLI_VERSION" != "replace-with-reviewed-version"
+          npm install -g "@openai/codex@${CODEX_CLI_VERSION}"
 
       - name: Analyze diff without writing
         run: >

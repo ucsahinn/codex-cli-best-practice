@@ -53,7 +53,7 @@ approval_policy = "never"
 model = "gpt-5.5"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
-approval_policy = "never"
+approval_policy = "on-request"
 ```
 
 Set a default profile with `profile = "conservative"` at the top level.
@@ -64,7 +64,7 @@ Set a default profile with `profile = "conservative"` at the top level.
 |---|---|---|---|
 | `read-only` | Read-only project access | Blocked | Reviews, audits, CI analysis |
 | `workspace-write` | Read/write inside the workspace | Blocked | Local development and doc/code edits |
-| `danger-full-access` | Unrestricted filesystem access | Allowed | Fully trusted automation that needs network or installs |
+| `danger-full-access` | Unrestricted filesystem access | Allowed | Explicitly approved automation that truly needs network or installs |
 
 ## Approval Policies
 

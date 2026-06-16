@@ -108,3 +108,9 @@ vX.Y.Z - Short Release Title
 - Confirm Actions ran the docs guard and secret scan successfully.
 - Confirm the release points to the expected tag and commit.
 - Confirm GitHub metadata does not advertise upstream-only sponsor, podcast, or personal marketing links.
+
+## Workspace Precondition
+
+Push and release require a real git checkout with the intended fork remote
+configured. If `.git` is missing, clone the fork first or configure the remote
+intentionally before tagging or publishing.
