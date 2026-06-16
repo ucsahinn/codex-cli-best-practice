@@ -10,17 +10,17 @@
   <a href="README.fr.md"><img src="https://flagcdn.com/w20/fr.png" alt="Fran&#231;ais" width="20"></a>
 </p>
 
-> 🚀 Codex CLI için fork-first, çok dilli, güvenli ve release'e hazır operator rehberi.
+> <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f680.svg" alt="" aria-hidden="true" width="20"> Codex CLI için fork-first, çok dilli, güvenli ve release'e hazır operator rehberi.
 
 [← English README](README.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Araştırma notları](docs/RESEARCH_NOTES.md) · [Public readiness](docs/PUBLIC_READINESS.md)
 
-## 🎯 Bu Repo Ne?
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f3af.svg" alt="" aria-hidden="true" width="20"> Bu Repo Ne?
 
 Bu repo, Codex CLI ile çalışan kişiler ve ekipler için pratik bir başvuru setidir. Hangi bilginin promptta kalacağını, hangisinin `AGENTS.md` dosyasına taşınacağını, ne zaman skill yazılacağını, MCP'nin nerede anlamlı olduğunu, hook'ların nasıl güvenli tutulacağını ve release öncesi nelerin doğrulanacağını tek yerde toplar.
 
 Bu bir uygulama kod tabanı değildir. Dokümantasyon, config, örnek workflow, hook ve release disiplini reposudur.
 
-## 🧭 Enterprise Starter ile farkı ne?
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9ed.svg" alt="" aria-hidden="true" width="20"> Enterprise Starter ile farkı ne?
 
 Bu repo, `codex-enterprise-starter` ile çakışmaz; onu tamamlar.
 
@@ -31,7 +31,7 @@ Bu repo, `codex-enterprise-starter` ile çakışmaz; onu tamamlar.
 
 Kısaca: starter kurulum içindir, bu repo doğru kullanım ve bakım içindir.
 
-## ⚡ İlk 5 Dakika
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/26a1.svg" alt="" aria-hidden="true" width="20"> İlk 5 Dakika
 
 ```bash
 npm run validate
@@ -49,7 +49,7 @@ Beklenen çıktı:
 - `orchestration-workflow/weather.svg`
 - `orchestration-workflow/output.md` (üretilen dosya olduğu için ignore edilir)
 
-## 🧩 Codex Yüzeyleri
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9e9.svg" alt="" aria-hidden="true" width="20"> Codex Yüzeyleri
 
 | Yüzey | Ne zaman kullanılır? | Bu repodaki örnek |
 |---|---|---|
@@ -62,7 +62,7 @@ Beklenen çıktı:
 | Hook | İncelenmiş lifecycle otomasyonu | [best-practice/codex-hooks.md](best-practice/codex-hooks.md) |
 | Release checklist | Yayına çıkmadan önceki kapılar | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
 
-## 📁 Repo Haritası
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4c1.svg" alt="" aria-hidden="true" width="20"> Repo Haritası
 
 | Alan | Yol | Amaç |
 |---|---|---|
@@ -77,7 +77,7 @@ Beklenen çıktı:
 | Validasyon | `scripts/validate-docs.mjs` | Bağımlılıksız repo kontrolü |
 | GitHub | `.github/` | Workflow, issue template, PR template ve release formu |
 
-## 🛡️ Güvenlik İlkeleri
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f6e1.svg" alt="" aria-hidden="true" width="20"> Güvenlik İlkeleri
 
 - Token, cookie, private key, lokal auth dosyası ve environment dump commitlenmez.
 - Kişisel override dosyaları repo dışında veya ignore edilen dosyalarda kalır.
@@ -86,7 +86,7 @@ Beklenen çıktı:
 - `danger-full-access` ve `approval_policy = "never"` birlikte public örneklerde normal varsayılan gibi sunulmaz.
 - Release öncesi `npm run validate`, `git diff --check` ve Gitleaks çalıştırılır.
 
-## ✅ Doğrulama
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/2705.svg" alt="" aria-hidden="true" width="20"> Doğrulama
 
 ```bash
 npm run validate
@@ -102,7 +102,7 @@ Validator şunları kontrol eder:
 - JSON dosyaları parse ediliyor mu?
 - Mojibake, lokal path, stale Codex key veya hook log sızıntısı var mı?
 
-## 🚢 Release Akışı
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f6a2.svg" alt="" aria-hidden="true" width="20"> Release Akışı
 
 1. `docs/RELEASE_CHECKLIST.md` dosyasını uygula.
 2. `CHANGELOG.md` ve ilgili `docs/RELEASE_NOTES_*.md` dosyasını güncelle.
@@ -111,10 +111,10 @@ Validator şunları kontrol eder:
 5. Commit, push, tag ve GitHub Release adımlarını aynı tag üzerinden doğrula.
 6. Public README, release sayfası, Actions sonucu ve linkleri tarayıcıdan kontrol et.
 
-## 🤝 Katkı
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f91d.svg" alt="" aria-hidden="true" width="20"> Katkı
 
 Katkı yaparken yeni iddiaları kaynaksız ekleme. Codex davranışı sürüme göre değişebildiği için resmi OpenAI/Codex dokümanlarını veya repo içindeki güncel araştırma notlarını esas al. Türkçe ve İngilizce rehberlerin niyeti aynı kalmalı; birebir çeviri şart değil, kullanıcı akışı aynı olmalı.
 
-## ⚖️ Lisans
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/2696.svg" alt="" aria-hidden="true" width="20"> Lisans
 
 Bu bağımsız fork sürümü upstream MIT lisans çizgisini korur. Fork'a özgü rehber, Türkçe içerik, validasyon, güvenlik ve release dokümanları bu repoda sürdürülür.

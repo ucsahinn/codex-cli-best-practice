@@ -1,6 +1,6 @@
 # Codex CLI Operator Handbook
 
-> 🚀 A multilingual, fork-first field guide for running Codex CLI with clear instructions, safer defaults, reusable skills, reviewed hooks, and repeatable release checks.
+> <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f680.svg" alt="" aria-hidden="true" width="20"> A multilingual, fork-first field guide for running Codex CLI with clear instructions, safer defaults, reusable skills, reviewed hooks, and repeatable release checks.
 
 ![Codex CLI](https://img.shields.io/badge/Codex_CLI-operator_handbook-111827?style=flat&labelColor=0f172a)
 ![Language](https://img.shields.io/badge/language-multilingual-0f766e?style=flat)
@@ -28,7 +28,7 @@
 
 This public fork is maintained as an independent Codex best-practices repository. It keeps upstream MIT license attribution, but the handbook, multilingual onboarding, validation, security notes, release flow, and fork-facing identity are owned here.
 
-## 🧭 Start Here
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9ed.svg" alt="" aria-hidden="true" width="20"> Start Here
 
 | Need | Open |
 |---|---|
@@ -40,7 +40,7 @@ This public fork is maintained as an independent Codex best-practices repository
 | Public readiness checklist | [docs/PUBLIC_READINESS.md](docs/PUBLIC_READINESS.md) |
 | Local validation | `npm run validate` |
 
-## 🧭 Companion Project
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9ed.svg" alt="" aria-hidden="true" width="20"> Companion Project
 
 This repo is the companion handbook for the broader Codex setup ecosystem:
 
@@ -55,7 +55,7 @@ Use the starter when you want a ready setup. Use this handbook when you want to 
 
 ## <img src="https://flagcdn.com/w20/gb.png" alt="English" width="20"> English
 
-### 🎯 What This Repository Is
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f3af.svg" alt="" aria-hidden="true" width="20"> What This Repository Is
 
 This repo is a practical operating handbook for Codex CLI users who want repeatable engineering workflows instead of one-off prompts. It explains where to put durable instructions, how to keep automation reviewable, how to package reusable skills, and how to verify a public release without leaking local state.
 
@@ -63,7 +63,7 @@ It is intentionally a documentation and configuration reference, not an applicat
 
 <a id="quick-start"></a>
 
-### ⚡ Quick Start
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/26a1.svg" alt="" aria-hidden="true" width="20"> Quick Start
 
 ```bash
 npm run validate
@@ -83,7 +83,7 @@ Expected outputs:
 
 <a id="codex-surface-map"></a>
 
-### 🧩 Codex Surface Map
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9e9.svg" alt="" aria-hidden="true" width="20"> Codex Surface Map
 
 | Surface | Use it for | Repo example |
 |---|---|---|
@@ -96,7 +96,7 @@ Expected outputs:
 | Hook | Reviewed lifecycle automation, never the only security boundary | [best-practice/codex-hooks.md](best-practice/codex-hooks.md) |
 | Release checklist | Manual publish gates | [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) |
 
-### 📁 Repository Map
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4c1.svg" alt="" aria-hidden="true" width="20"> Repository Map
 
 | Area | Path | Purpose |
 |---|---|---|
@@ -111,7 +111,7 @@ Expected outputs:
 | Validation | `scripts/validate-docs.mjs` | Dependency-free repository guard |
 | GitHub | `.github/` | Docs guard workflow, issue template, release form, PR template |
 
-### 🛡️ Safety Defaults
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f6e1.svg" alt="" aria-hidden="true" width="20"> Safety Defaults
 
 - Keep secrets in environment variables or trusted local config, never in repo docs.
 - Treat sandboxing and approvals as separate controls.
@@ -120,7 +120,7 @@ Expected outputs:
 - Keep local overrides in ignored files such as `AGENTS.override.md`, `.codex/config.local.toml`, and `.codex/hooks/config/*.local.json`.
 - Run `gitleaks detect --redact --no-banner --verbose` before tags and releases.
 
-### ✅ Validation
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/2705.svg" alt="" aria-hidden="true" width="20"> Validation
 
 ```bash
 npm run validate
@@ -130,7 +130,7 @@ gitleaks detect --redact --no-banner --verbose
 
 The validator checks required files, README identity markers, local markdown links, common mojibake sequences, JSON syntax, committed local-only paths, stale Codex keys, and generated hook-log leaks.
 
-### 🚢 Release Flow
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f6a2.svg" alt="" aria-hidden="true" width="20"> Release Flow
 
 Use [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) before publishing. The short version:
 
@@ -147,11 +147,11 @@ Then commit intentionally, push the branch, tag the release, create the GitHub R
 
 ## <img src="https://flagcdn.com/w20/tr.png" alt="Turkce" width="20"> Turkce
 
-### 🎯 Bu Repo Ne?
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f3af.svg" alt="" aria-hidden="true" width="20"> Bu Repo Ne?
 
 Bu fork, Codex CLI kullananlar için iki dilli bir operator rehberi. Amacı sadece ayar dosyası örneği vermek değil; prompt, `AGENTS.md`, config, skill, subagent, MCP, hook ve release checklist arasında doğru kararı vermeyi öğretmek.
 
-### ⚡ Hızlı Başlangıç
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/26a1.svg" alt="" aria-hidden="true" width="20"> Hızlı Başlangıç
 
 ```bash
 npm run validate
@@ -164,7 +164,7 @@ Demo için Codex'e şunu yaz:
 Istanbul icin guncel hava durumunu Celsius olarak getir ve repo icindeki SVG hava kartini olustur.
 ```
 
-### 🧩 Nereden Başlamalı?
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9e9.svg" alt="" aria-hidden="true" width="20"> Nereden Başlamalı?
 
 | İş | Dosya |
 |---|---|
@@ -178,10 +178,10 @@ Istanbul icin guncel hava durumunu Celsius olarak getir ve repo icindeki SVG hav
 | Release hazırlığı | `docs/RELEASE_CHECKLIST.md` |
 | Public hazır mı? | `docs/PUBLIC_READINESS.md` |
 
-### 🛡️ Kısa Güvenlik Notu
+### <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f6e1.svg" alt="" aria-hidden="true" width="20"> Kısa Güvenlik Notu
 
 Token, cookie, private key, lokal auth dosyası, kişisel hook config'i veya log dosyası commitlenmez. Release öncesi validation, diff check ve Gitleaks birlikte çalıştırılır.
 
-## ⚖️ Credits And License
+## <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/2696.svg" alt="" aria-hidden="true" width="20"> Credits And License
 
 This is an independent fork edition. The original MIT license lineage is preserved in [LICENSE](LICENSE). Fork-specific handbook content, Turkish onboarding, release discipline, validation workflow, and public-readiness docs are maintained in this repository.
