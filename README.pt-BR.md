@@ -1,6 +1,6 @@
 # Codex CLI Operator Handbook - Português do Brasil
 
-[English](README.md) | [Deutsch](README.de.md) | [Español](README.es.md) | [Português (Brasil)](README.pt-BR.md) | [Türkçe](README.tr.md) | [Français](README.fr.md)
+[🇬🇧](README.md) | [🇩🇪](README.de.md) | [🇪🇸](README.es.md) | [🇧🇷](README.pt-BR.md) | [🇹🇷](README.tr.md) | [🇫🇷](README.fr.md)
 
 > Visão geral em português do Brasil do handbook público para Codex CLI. A [README.md](README.md) em inglês continua sendo a fonte canônica; esta página resume o mesmo contrato operacional em português.
 

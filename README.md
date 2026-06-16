@@ -13,14 +13,14 @@
 
 <p align="center">
   🌐 <strong>Languages:</strong>
-  <a href="README.de.md">🇩🇪 Deutsch</a> ·
-  <a href="README.es.md">🇪🇸 Español</a> ·
-  <a href="#english">🇬🇧 English</a> ·
-  <a href="README.pt-BR.md">🇧🇷 Português (Brasil)</a> ·
-  <a href="#turkce">🇹🇷 Türkçe</a> ·
-  <a href="README.fr.md">🇫🇷 French</a>
+  <a href="README.de.md">🇩🇪</a> ·
+  <a href="README.es.md">🇪🇸</a> ·
+  <a href="#english">🇬🇧</a> ·
+  <a href="README.pt-BR.md">🇧🇷</a> ·
+  <a href="#turkce">🇹🇷</a> ·
+  <a href="README.fr.md">🇫🇷</a>
   <br>
-  <a href="README.tr.md">📘 TR full guide</a> ·
+  <a href="README.tr.md">📘 🇹🇷</a> ·
   <a href="docs/RELEASE_CHECKLIST.md">🚢 Release checklist</a> ·
   <a href="docs/RESEARCH_NOTES.md">🔎 Research notes</a>
 </p>
