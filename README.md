@@ -5,6 +5,7 @@
 ![Codex CLI](https://img.shields.io/badge/Codex_CLI-operator_handbook-111827?style=flat&labelColor=0f172a)
 ![Language](https://img.shields.io/badge/language-multilingual-0f766e?style=flat)
 ![Docs](https://img.shields.io/badge/docs-validated-2563eb?style=flat)
+[![README languages](https://img.shields.io/badge/README-6%20languages-0f766e?style=flat)](README.md)
 ![Security](https://img.shields.io/badge/security-secret_scan_required-b91c1c?style=flat)
 
 <p align="center">
@@ -12,17 +13,17 @@
 </p>
 
 <p align="center">
-  🌐 <strong>Languages:</strong>
-  <a href="README.de.md"><img src="https://flagcdn.com/w20/de.png" alt="Deutsch" width="20"></a> ·
-  <a href="README.es.md"><img src="https://flagcdn.com/w20/es.png" alt="Español" width="20"></a> ·
-  <a href="#english"><img src="https://flagcdn.com/w20/gb.png" alt="English" width="20"></a> ·
-  <a href="README.pt-BR.md"><img src="https://flagcdn.com/w20/br.png" alt="Português (Brasil)" width="20"></a> ·
-  <a href="#turkce"><img src="https://flagcdn.com/w20/tr.png" alt="Türkçe" width="20"></a> ·
-  <a href="README.fr.md"><img src="https://flagcdn.com/w20/fr.png" alt="Français" width="20"></a>
+  &#127760; <strong>Languages:</strong>
+  <a href="README.de.md"><img src="https://flagcdn.com/w20/de.png" alt="Deutsch" width="20"></a> |
+  <a href="README.es.md"><img src="https://flagcdn.com/w20/es.png" alt="Espa&#241;ol" width="20"></a> |
+  <a href="#english"><img src="https://flagcdn.com/w20/gb.png" alt="English" width="20"></a> |
+  <a href="README.pt-BR.md"><img src="https://flagcdn.com/w20/br.png" alt="Portugu&#234;s (Brasil)" width="20"></a> |
+  <a href="#turkce"><img src="https://flagcdn.com/w20/tr.png" alt="T&#252;rk&#231;e" width="20"></a> |
+  <a href="README.fr.md"><img src="https://flagcdn.com/w20/fr.png" alt="Fran&#231;ais" width="20"></a>
   <br>
-  <a href="README.tr.md">📘 <img src="https://flagcdn.com/w20/tr.png" alt="Türkçe" width="20"></a> ·
-  <a href="docs/RELEASE_CHECKLIST.md">🚢 Release checklist</a> ·
-  <a href="docs/RESEARCH_NOTES.md">🔎 Research notes</a>
+  <a href="README.tr.md"><img src="https://flagcdn.com/w20/tr.png" alt="T&#252;rk&#231;e" width="20"> full guide</a> |
+  <a href="docs/RELEASE_CHECKLIST.md"><img alt="Release checklist" src="https://img.shields.io/badge/release-checklist-111827"></a> |
+  <a href="docs/RESEARCH_NOTES.md"><img alt="Research notes" src="https://img.shields.io/badge/research-notes-2563eb"></a>
 </p>
 
 This public fork is maintained as an independent Codex best-practices repository. It keeps upstream MIT license attribution, but the handbook, multilingual onboarding, validation, security notes, release flow, and fork-facing identity are owned here.
@@ -52,7 +53,7 @@ Use the starter when you want a ready setup. Use this handbook when you want to 
 
 <a id="english"></a>
 
-## 🇬🇧 English
+## <img src="https://flagcdn.com/w20/gb.png" alt="English" width="20"> English
 
 ### 🎯 What This Repository Is
 
@@ -144,7 +145,7 @@ Then commit intentionally, push the branch, tag the release, create the GitHub R
 
 <a id="turkce"></a>
 
-## 🇹🇷 Turkce
+## <img src="https://flagcdn.com/w20/tr.png" alt="Turkce" width="20"> Turkce
 
 ### 🎯 Bu Repo Ne?
 
