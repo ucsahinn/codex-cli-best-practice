@@ -1,6 +1,13 @@
 # Codex CLI Operator Handbook - Español
 
-[🇬🇧](README.md) | [🇩🇪](README.de.md) | [🇪🇸](README.es.md) | [🇧🇷](README.pt-BR.md) | [🇹🇷](README.tr.md) | [🇫🇷](README.fr.md)
+<p align="center">
+  <a href="README.md"><img src="https://flagcdn.com/w20/gb.png" alt="English" width="20"></a> ·
+  <a href="README.de.md"><img src="https://flagcdn.com/w20/de.png" alt="Deutsch" width="20"></a> ·
+  <a href="README.es.md"><img src="https://flagcdn.com/w20/es.png" alt="Español" width="20"></a> ·
+  <a href="README.pt-BR.md"><img src="https://flagcdn.com/w20/br.png" alt="Português (Brasil)" width="20"></a> ·
+  <a href="README.tr.md"><img src="https://flagcdn.com/w20/tr.png" alt="Türkçe" width="20"></a> ·
+  <a href="README.fr.md"><img src="https://flagcdn.com/w20/fr.png" alt="Français" width="20"></a>
+</p>
 
 > Vista general en español del handbook público para Codex CLI. La [README.md](README.md) en inglés sigue siendo la fuente canónica; esta página resume el mismo contrato operativo en español.
 
