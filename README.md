@@ -32,12 +32,12 @@
     <td width="50%" valign="top">
       <h3><img src="https://flagcdn.com/w20/gb.png" alt="English" width="20"> English welcome</h3>
       <p>A public operator handbook for using Codex CLI with durable instructions, safer automation, reusable skills, hooks, MCPs, and repeatable release checks.</p>
-      <p><strong>Start here:</strong> [Quick start](#quick-start) gives the fastest path into the handbook.</p>
+      <p><strong>Start here:</strong> <a href="#quick-start">Quick start</a> gives the fastest path into the handbook.</p>
     </td>
     <td width="50%" valign="top">
-      <h3><img src="https://flagcdn.com/w20/tr.png" alt="Turkce" width="20"> T&#252;rk&#231;e kar&#351;&#305;lama</h3>
-      <p>Codex CLI kullanirken kalici talimatlar, guvenli otomasyon, yeniden kullanilabilir skilller, hooklar, MCPler ve release kontrolleri icin pratik operator rehberi.</p>
-      <p><strong>Buradan ba&#351;la:</strong> [README.tr.md](README.tr.md) tam Turkce rehberdir; ana sayfada da Turkce ozet akisi yer alir.</p>
+      <h3><img src="https://flagcdn.com/w20/tr.png" alt="Türkçe" width="20"> Türkçe karşılama</h3>
+      <p>Codex CLI'yi rastgele komutlarla değil, daha kontrollü ve tekrar edilebilir bir çalışma düzeniyle kullanmak isteyenler için topladığım saha notları. Prompt, skill, hook, MCP ve release tarafında işime yarayan pratikleri tek yerde tutuyor.</p>
+      <p><strong>Buradan başla:</strong> Türkçe rehber <a href="README.tr.md">README.tr.md</a>; hızlı genel bakış için bu sayfadaki özet yeterli.</p>
     </td>
   </tr>
 </table>
