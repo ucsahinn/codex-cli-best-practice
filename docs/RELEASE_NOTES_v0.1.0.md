@@ -24,7 +24,7 @@ This release preserves the MIT license lineage while replacing the fork-facing d
 Before publishing:
 
 - Confirm `git status --short --branch` is clean.
-- Confirm the target remote is `https://github.com/ucsahinn/codex-cli-best-practice.git`.
+- Confirm the target remote is `https://github.com/vaultekbilisim/codex-cli-best-practice.git`.
 - Push `main`.
 - Tag `v0.1.0`.
 - Create a GitHub Release using this file as the release body.
